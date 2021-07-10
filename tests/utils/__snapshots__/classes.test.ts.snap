@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`classes produces classnames of the Datepicker 1`] = `
+Object {
+  "logo": "better-datepicker",
+}
+`;
