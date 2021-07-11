@@ -1,4 +1,4 @@
-import {DateComponentsType} from '../../../types/components'
+import {DateComponentsType, HeaderChildrenOptions} from '../../../types/components'
 import {visible} from '../../../utils/element'
 import {nextMonth, nextYear, preMonth, preYear, isDayPage, toMonthPage, toYearPage} from '../utils'
 import {pageName, State, RangeType} from '../../../types/store'
@@ -83,16 +83,16 @@ function month(state: State): CreateElementPartOptions {
     }
 }
 
-export function getTextType(state: State): DateComponentsType<[string[],(...arg: any)=> string | number]> {
-   return {
-       date: [['month', 'year'],(idx: number, year: string) => format(year, state) + ' ' + state.locale.months[idx - 1]],
-       month: [['year'],(year: number) => year],
-       year: [['year', '_date'],(year: number) => getRange(year)],
-   }
+export function getTextType(state: State): DateComponentsType<[string[], (...arg: any) => string]> {
+    return {
+        date: [['month', 'year'], (idx: number, year: string) => format(year, state) + ' ' + state.locale.months[idx - 1]],
+        month: [['year'], (year: number) => String(year)],
+        year: [['year', '_date'], (year: number) => getRange(year)],
+    }
 }
 
-function date(state: State) {
-    const [childKey,cb] = getTextType(state)[state._type]
+function date(state: State): CreateElementPartOptions {
+    const [childKey, cb] = getTextType(state)[state._type]
     return {
         name: 'span',
         text: {
@@ -119,7 +119,7 @@ function preYearIcon(): CreateElementPartOptions {
     }
 }
 
-function preMonthIcon() {
+function preMonthIcon(): CreateElementPartOptions {
     return {
         name: 'svg',
         text: 'month',
@@ -134,7 +134,7 @@ function preMonthIcon() {
     }
 }
 
-function nextYearIcon() {
+function nextYearIcon(): CreateElementPartOptions {
     return {
         name: 'svg',
         text: 'year',
@@ -149,7 +149,7 @@ function nextYearIcon() {
     }
 }
 
-function nextMonthIcon() {
+function nextMonthIcon(): CreateElementPartOptions {
     return {
         name: 'svg',
         text: 'month',
@@ -165,7 +165,7 @@ function nextMonthIcon() {
     }
 }
 
-const headerChildren: any = {
+const headerChildren: HeaderChildrenOptions = {
     start: [preYearIcon, preMonthIcon, date],
     main: [preYearIcon, preMonthIcon, yearRange, year, month, nextYearIcon, nextMonthIcon],
     end: [date, nextYearIcon, nextMonthIcon]

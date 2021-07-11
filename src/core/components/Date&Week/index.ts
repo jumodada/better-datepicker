@@ -1,6 +1,6 @@
-import {State, RangeType} from '../../../types/store'
+import {State, RangeType, DateComponents} from '../../../types/store'
 import {isDayPage, utilStyle} from '../utils'
-import {CreateElementPartOptions} from '../../../types/utils'
+import {CreateElementPartOptions, updateOptions} from '../../../types/utils'
 import {dayEvent} from "./event"
 import _for from "../../../utils/for"
 import {getWeeks} from "../../../utils/date"
@@ -16,7 +16,7 @@ const tableStyle = {
     padding: '3px 0'
 }
 
-function config(child: any, name: 'text' | 'status' = 'status') {
+function config(child: DateComponents, name: 'text' | 'status' = 'status'): updateOptions {
     return {
         key: {
             name: [name],

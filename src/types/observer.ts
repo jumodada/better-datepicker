@@ -1,4 +1,4 @@
-import {State} from './store'
+import {DateComponents, State} from './store'
 
 export interface Dep {
     depend: () => void
@@ -15,7 +15,7 @@ export interface ChildKey {
 
 export interface ChildKeyPad {
     name: string[]
-    child: any
+    child:DateComponents
 }
 
 export type SubKey = ChildKeyPad | ChildKey | string[]

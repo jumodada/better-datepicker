@@ -1,5 +1,5 @@
 import {MonthOrYearComponents, RangeType, State} from './store'
-import {CreateElement, CreateElementOptions, eventHandler} from './utils'
+import {CreateElement, CreateElementOptions, CreateElementPartOptions, eventHandler} from './utils'
 import {_EventListener} from "./utils"
 import {DatepickerType, DateType, MonthType, YearType} from "./options"
 import {Sub} from "./observer"
@@ -7,7 +7,6 @@ import {Sub} from "./observer"
 export interface createMonthOrYearComponentsFunction {
     (state: State, t: keyof RangeType): Partial<CreateElementOptions>
 }
-
 
 export interface UpdateCbType {
     text: (res: string) => void
@@ -41,7 +40,6 @@ interface CreateComponentsOptions {
     children: (idx: number, months: string[]) => (Partial<CreateElementOptions> | CreateElement)[]
 }
 
-
 export interface DateComponentsType<S = Sub<string>> {
     date: S
     year: S
@@ -55,3 +53,9 @@ export interface ComponentsType<C = never> {
 }
 
 export type CreateMonthOrYearComponentsOptions = ComponentsType<CreateComponentsOptions>
+
+export interface HeaderChildrenOptions<F = ((state: State) => CreateElementPartOptions)[]> {
+    start: F
+    main: F
+    end: F
+}
