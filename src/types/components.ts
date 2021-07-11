@@ -8,10 +8,10 @@ export interface createMonthOrYearComponentsFunction {
     (state: State, t: keyof RangeType): Partial<CreateElementOptions>
 }
 
-export interface UpdateCbType {
-    text: (res: string) => void
-    cls: (res: string) => void
-    style: (res: string) => void
+export interface UpdateCbType<F = (res: string) => void> {
+    text:F
+    cls: F
+    style: F
 }
 
 export type PopoverType = DatepickerType<(CreateElementOptions | CreateElement)[]>
