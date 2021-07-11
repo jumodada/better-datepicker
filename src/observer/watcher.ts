@@ -1,5 +1,5 @@
 import {clearTarget, setTarget} from './deps'
-import {ReWriteSub, Dep, SubKey, Sub, ChildKey} from '../types/observer'
+import {ReWriteSub, Dep, SubKey, Sub, ChildKey, thisOrChild} from '../types/observer'
 import {getState} from '../store'
 import {isArray, isNumber} from '../utils/typeOf'
 import {State} from '../types/store'
@@ -36,8 +36,8 @@ export default class Watcher {
     }
 }
 
-function deepSearch<T>(state: State, sub: Sub<T>): ReWriteSub {
-    function search(child: any, key: SubKey): ReWriteSub {
+function deepSearch<T>(state: State, sub: Sub<T>): thisOrChild<State> {
+    function search(child: any, key: SubKey): thisOrChild<State> {
         if (isArray(key)) {
             sub.key = key
             return child
@@ -56,9 +56,12 @@ function deepSearch<T>(state: State, sub: Sub<T>): ReWriteSub {
     return search(state, sub.key)
 }
 
+``
+
 function watch<T>(sub: Sub<T>, state: State) {
     const _sub = Object.assign({}, sub) as ReWriteSub
-    new Watcher(_sub, state, deepSearch(state, _sub))
+    const xx = deepSearch(state, _sub)
+    new Watcher(_sub, state, xx)
 }
 
 export function addWatch<T>(subs: Sub<T> | Sub<T>[]): void {
@@ -69,4 +72,3 @@ export function addWatch<T>(subs: Sub<T> | Sub<T>[]): void {
         watch(subs, state)
     }
 }
-

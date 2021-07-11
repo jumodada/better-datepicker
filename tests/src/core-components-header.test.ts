@@ -30,7 +30,7 @@ describe('getTextType', () => {
 
         const [monthArguments, monthFn] = result.month
         expect(monthArguments).toEqual(['year'])
-        expect(monthFn(2021)).toBe(2021)
+        expect(monthFn(2021)).toBe('2021')
 
         const [yearArguments, yearFn] = result.year
         expect(yearArguments).toEqual(['year', '_date'])

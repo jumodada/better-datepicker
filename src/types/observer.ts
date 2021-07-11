@@ -1,11 +1,18 @@
 import {DateComponents, State} from './store'
 
+export type DeepChildrenKey<T> = {
+    [P in keyof T]:DeepChildrenKey<T[keyof T]>
+}
+
+export type DeepChildrenValue<T> = T | T[keyof T]
+
+export type thisOrChild<P> = DeepChildrenValue<DeepChildrenKey<P>>
+
 export interface Dep {
     depend: () => void
     addSub: (sub: any) => void
     updateView: () => void
 }
-
 
 export interface ChildKey {
     name: string
@@ -15,7 +22,7 @@ export interface ChildKey {
 
 export interface ChildKeyPad {
     name: string[]
-    child:DateComponents
+    child: thisOrChild<State>
 }
 
 export type SubKey = ChildKeyPad | ChildKey | string[]
