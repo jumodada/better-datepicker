@@ -1,4 +1,4 @@
 export interface SvgName {
-    month: string[]
-    year: string[]
+  month: string[]
+  year: string[]
 }

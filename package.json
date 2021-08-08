@@ -75,5 +75,8 @@
   "bugs": {
     "url": "https://github.com/jumodada/better-datepicker/issues"
   },
-  "homepage": "https://github.com/jumodada/better-datepicker#readme"
+  "homepage": "https://github.com/jumodada/better-datepicker#readme",
+  "dependencies": {
+    "prettier": "^2.3.2"
+  }
 }
