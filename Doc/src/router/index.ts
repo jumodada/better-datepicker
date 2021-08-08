@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Enter from '../components/Enter'
 import Document from '../components/Document'
 import NProgress from 'nprogress'
+import { routeConfig } from './config'
 
 const history = createWebHashHistory()
 
@@ -43,50 +44,8 @@ const router = createRouter({
         },
       ],
     },
-    createRoute('en', [
-      {
-        name: 'start',
-        path: 'start',
-      },
-      {
-        name: 'theme',
-        path: 'theme',
-      },
-      {
-        name: 'options',
-        path: 'options',
-      },
-      {
-        name: 'locale',
-        path: 'locale',
-      },
-      {
-        name: 'API',
-        path: 'api',
-      },
-    ]),
-    createRoute('zh', [
-      {
-        name: '开始',
-        path: 'start',
-      },
-      {
-        name: '主题',
-        path: 'theme',
-      },
-      {
-        name: '配置',
-        path: 'options',
-      },
-      {
-        name: '地区设置',
-        path: 'locale',
-      },
-      {
-        name: '其他接口',
-        path: 'api',
-      },
-    ]),
+    createRoute('en', routeConfig('en')),
+    createRoute('zh', routeConfig('zh')),
   ],
 })
 
