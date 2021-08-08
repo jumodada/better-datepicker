@@ -1,5 +1,5 @@
 import {visible} from '../../../utils/element'
-import {utilStyle} from '../utils'
+import {canIShow, utilStyle} from '../utils'
 import {State, RangeType} from '../../../types/store'
 import {
     ComponentsType,
@@ -84,12 +84,7 @@ export function YM(componentName: keyof ComponentsType = 'month'): createMonthOr
             children: [tBody()],
             class: [componentName],
             style: utilStyle,
-            $style: {
-                display: {
-                    key: ['page'],
-                    cb: (page: string) => visible(page === componentName)
-                }
-            }
+            $style:canIShow((page: string) => visible(page === componentName))
         }
     }
 }

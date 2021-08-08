@@ -1,8 +1,9 @@
 import {MonthOrYearComponents, pageName, RangeStatus, RangeType} from '../../types/store'
 import {RangeClickEvent} from '../../types/components'
-import {_EventListener} from "../../types/utils"
+import {_EventListener, DynamicStyle} from "../../types/utils"
 import {getNext, getPre, transformDateToArray} from "../../utils/date"
 import {visible} from "../../utils/element"
+import {Sub} from "../../types/observer";
 
 export const utilStyle = {
     'text-align': 'center',
@@ -89,4 +90,13 @@ export function toYearPage(): void {
 
 export function isDayPage(page: pageName): 'none' | 'inline-block' {
     return visible(page === 'date')
+}
+
+export function canIShow(cb: Sub<string>['cb']): DynamicStyle {
+    return {
+        display: {
+            key: ['page'],
+            cb
+        }
+    }
 }

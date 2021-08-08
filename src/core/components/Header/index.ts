@@ -1,6 +1,6 @@
 import {DateComponentsType, HeaderChildrenOptions} from '../../../types/components'
 import {visible} from '../../../utils/element'
-import {nextMonth, nextYear, preMonth, preYear, isDayPage, toMonthPage, toYearPage} from '../utils'
+import {nextMonth, nextYear, preMonth, preYear, isDayPage, toMonthPage, toYearPage, canIShow} from '../utils'
 import {pageName, State, RangeType} from '../../../types/store'
 import {getTenRange} from '../../../utils/date'
 import {CreateElementPartOptions} from '../../../types/utils'
@@ -9,13 +9,6 @@ import {getFormatDate} from "../../util/format"
 import {SVGStyle} from "./type"
 
 let name: keyof RangeType = 'start'
-
-const togglePage = {
-    display: {
-        key: ['page'],
-        cb: isDayPage
-    }
-}
 
 function SVGStyleGenerator(style: Partial<SVGStyle>): SVGStyle {
     return Object.assign(style, {
@@ -45,12 +38,7 @@ function yearRange(): CreateElementPartOptions {
             },
             cb: (year: number) => getRange(year)
         },
-        $style: {
-            display: {
-                key: ['page'],
-                cb: (page: pageName) => visible(page === 'year')
-            }
-        },
+        $style: canIShow((page: pageName) => visible(page === 'year')),
         event: toYearPage
     }
 }
@@ -67,12 +55,7 @@ function year(state: State): CreateElementPartOptions {
         },
         class: ['pointerCursor'],
         event: toYearPage,
-        $style: {
-            display: {
-                key: ['page'],
-                cb: (page: pageName) => visible(page !== 'year')
-            }
-        }
+        $style: canIShow((page: pageName) => visible(page !== 'year'))
     }
 }
 
@@ -88,7 +71,7 @@ function month(state: State): CreateElementPartOptions {
         },
         class: ['pointerCursor'],
         event: toMonthPage,
-        $style: togglePage
+        $style: canIShow(isDayPage)
     }
 }
 
@@ -131,7 +114,7 @@ function preMonthIcon(): CreateElementPartOptions {
             left: '50px'
         }),
         event: preMonth,
-        $style: togglePage
+        $style: canIShow(isDayPage)
     }
 }
 
@@ -156,7 +139,7 @@ function nextMonthIcon(): CreateElementPartOptions {
             transform: 'rotate(180deg)',
         }),
         event: Bind(nextMonth, name),
-        $style: togglePage
+        $style: canIShow(isDayPage)
     }
 }
 

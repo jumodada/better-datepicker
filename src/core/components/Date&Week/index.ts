@@ -1,5 +1,5 @@
 import {State, RangeType, DateComponents} from '../../../types/store'
-import {isDayPage, utilStyle} from '../utils'
+import {canIShow, isDayPage, utilStyle} from '../utils'
 import {CreateElementPartOptions, updateOptions} from '../../../types/utils'
 import {dayEvent} from "./event"
 import _for from "../../../utils/for"
@@ -83,12 +83,7 @@ export function Day(state: State, t: keyof RangeType = 'start'): CreateElementPa
         children: [bar, tBody],
         class: classes,
         style: utilStyle,
-        $style: {
-            display: {
-                key: ['page'],
-                cb: isDayPage
-            }
-        }
+        $style: canIShow(isDayPage)
     }
 }
 
