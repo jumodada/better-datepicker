@@ -15,7 +15,7 @@ const tableStyle = {
   padding: '3px 0',
 }
 
-function config(
+function classOptionsGenerator(
   child: DateComponents,
   name: 'text' | 'status' = 'status'
 ): updateOptions {
@@ -46,11 +46,11 @@ function tBody(state: State): CreateElementPartOptions {
         name: 'td',
         children: [
           {
-            text: config(child, 'text'),
+            text: classOptionsGenerator(child, 'text'),
           },
         ],
         style: tableStyle,
-        class: config(child),
+        class: classOptionsGenerator(child),
         event: {
           listener: dayEvent(child)[state.type as 'date'],
           arg: child,
