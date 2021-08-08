@@ -26,7 +26,14 @@
       "git add"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@types/gulp-dart-sass": "^1.0.0",
     "@types/gulp-rename": "^2.0.0",
     "@types/jest": "^25.2.1",
@@ -47,11 +54,13 @@
     "gulp-rename": "^2.0.0",
     "gulp-uglify": "^3.0.2",
     "highlight.js": "^9.16.2",
+    "husky": "^7.0.1",
     "jest": "^25.0.0",
     "jest-config": "^25.0.0",
     "markdown-it": "^12.0.4",
     "markdown-it-anchor": "^7.0.2",
     "nprogress": "^0.2.0",
+    "prettier": "^2.3.2",
     "rollup": "^2.37.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^3.1.0",
@@ -75,8 +84,5 @@
   "bugs": {
     "url": "https://github.com/jumodada/better-datepicker/issues"
   },
-  "homepage": "https://github.com/jumodada/better-datepicker#readme",
-  "dependencies": {
-    "prettier": "^2.3.2"
-  }
+  "homepage": "https://github.com/jumodada/better-datepicker#readme"
 }
