@@ -6,6 +6,7 @@ import {getTenRange} from '../../../utils/date'
 import {CreateElementPartOptions} from '../../../types/utils'
 import {Bind} from "../../../utils/bind"
 import {getFormatDate} from "../../util/format"
+import {SVGStyle} from "./type"
 
 let name: keyof RangeType = 'start'
 
@@ -14,6 +15,14 @@ const togglePage = {
         key: ['page'],
         cb: isDayPage
     }
+}
+
+function SVGStyleGenerator(style: Partial<SVGStyle>): SVGStyle {
+    return Object.assign(style, {
+        position: 'absolute',
+        width: '14px',
+        height: '14px'
+    })
 }
 
 const getRange = (year: number) => {
@@ -109,12 +118,7 @@ function preYearIcon(): CreateElementPartOptions {
     return {
         name: 'svg',
         text: 'year',
-        style: {
-            position: 'absolute',
-            left: '30px',
-            width: '14px',
-            height: '14px',
-        },
+        style: SVGStyleGenerator({left: '30px'}),
         event: preYear
     }
 }
@@ -123,12 +127,9 @@ function preMonthIcon(): CreateElementPartOptions {
     return {
         name: 'svg',
         text: 'month',
-        style: {
-            position: 'absolute',
-            left: '50px',
-            width: '14px',
-            height: '14px',
-        },
+        style: SVGStyleGenerator({
+            left: '50px'
+        }),
         event: preMonth,
         $style: togglePage
     }
@@ -138,13 +139,10 @@ function nextYearIcon(): CreateElementPartOptions {
     return {
         name: 'svg',
         text: 'year',
-        style: {
-            position: 'absolute',
+        style: SVGStyleGenerator({
             right: '30px',
             transform: 'rotate(180deg)',
-            width: '14px',
-            height: '14px',
-        },
+        }),
         event: Bind(nextYear, name)
     }
 }
@@ -153,13 +151,10 @@ function nextMonthIcon(): CreateElementPartOptions {
     return {
         name: 'svg',
         text: 'month',
-        style: {
-            position: 'absolute',
+        style: SVGStyleGenerator({
             right: '50px',
             transform: 'rotate(180deg)',
-            width: '14px',
-            height: '14px',
-        },
+        }),
         event: Bind(nextMonth, name),
         $style: togglePage
     }
