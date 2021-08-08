@@ -45,8 +45,7 @@ export default {
   width: 210px;
   height: calc(100vh - 66px);
   // background: #FF3643;
-  background: #011629;
-  box-shadow: $shadow-left;
+  background: #112232;
   z-index: 1000;
   overflow-y: auto;
   color: #ffffff;

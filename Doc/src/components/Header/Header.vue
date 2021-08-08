@@ -61,7 +61,6 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "../../assets/style/global";
 
-$header-bg: $black;
 $header-height: 66px;
 .header {
   z-index: 2001;
@@ -70,7 +69,7 @@ $header-height: 66px;
   display: flex;
   align-items: center;
   padding: $padding-left-more;
-  background: $header-bg;
+  background: #112232;
 
   &-logo {
     cursor: pointer;
