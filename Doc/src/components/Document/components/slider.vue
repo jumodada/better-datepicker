@@ -1,8 +1,8 @@
 <template>
-  <div class="slider">
+  <div class='slider'>
     <ul>
-      <li :class="{secondLevel: list.isSecondLevel}" @click="toRoute(list.name)" v-for="list in routeLists">
-        <span v-if="list.metaName" class="metaName">{{ list.metaName }}</span>
+      <li :class='{secondLevel: list.isSecondLevel}' @click='toRoute(list.name)' v-for='list in routeLists'>
+        <span v-if='list.metaName' class='metaName'>{{ list.metaName }}</span>
         <span v-else>{{ list.name }}</span>
       </li>
     </ul>
@@ -12,11 +12,11 @@
 <script>
 
 export default {
-  name: "slider",
+  name: 'slider',
   props: {
     route: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   inject: ['bus'],
   computed: {
@@ -27,18 +27,18 @@ export default {
       } else {
         return documentList.routes[2].children
       }
-    }
+    },
   },
 
   methods: {
     toRoute(name) {
-      this.$router.push({name})
+      this.$router.push({ name })
     },
-  }
+  },
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
 @import "./Doc/src/assets/style/global";
 
 .slider {
@@ -54,21 +54,47 @@ export default {
 
   ul {
     list-style: none;
+    margin-left: 25px;
+    padding: 0;
 
     li {
-      margin-top: 10px;
+      padding-top: 6px;
+      padding-bottom: 6px;
       cursor: pointer;
       transition: .23s color;
       font-size: 16px;
+      border-left: 1px solid #e84c3b;
+      padding-left: 40px;
+      position: relative;
 
-      &:hover {
-        color: #ffb311;
+      &:after {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        background: #e84c3b;
+        content: '';
+        display: inline-block;
+        width: 30px;
+        height: 1px;
       }
 
-      .metaName {
-        margin-left: 6px;
-        color: #efeedd;
-        font-size: 13px;
+      &:hover {
+        color: #e84c3b;
+      }
+
+      &:last-child {
+        border-left: none;
+
+        &:before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: #e84c3b;
+          content: '';
+          display: inline-block;
+          width: 1px;
+          height: 50%;
+        }
       }
     }
 
