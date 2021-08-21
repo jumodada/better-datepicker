@@ -81,6 +81,20 @@ export default {
       &:hover {
         color: #e84c3b;
       }
+      &:first-child {
+        border-left: none;
+
+        &:before {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          background: #e84c3b;
+          content: '';
+          display: inline-block;
+          width: 1px;
+          height: 50%;
+        }
+      }
 
       &:last-child {
         border-left: none;
