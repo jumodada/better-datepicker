@@ -9,7 +9,7 @@ export default {
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id: any) {
+        manualChunks: function (id: any) {
           if (id.includes('node_modules')) {
             return id
               .toString()
