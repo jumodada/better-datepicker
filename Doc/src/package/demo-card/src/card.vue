@@ -1,53 +1,56 @@
 <template>
-  <div class="demo-card">
-    <div class="demo-card-codeBox-wrapper">
+  <div class='demo-card'>
+    <div class='demo-card-codeBox-wrapper'>
       <slot></slot>
-      <div class="demo-card-codeBox-button">
-        <span :class="{active:index ===activeIndex}" @click="openActive(index)"
-              v-for="(item,index) in buttonGroup">{{ item }}</span>
+      <div class='demo-card-codeBox-button'>
+        <span :class='{active:index ===activeIndex}' @click='openActive(index)'
+              v-for='(item,index) in buttonGroup'>{{ item }}</span>
       </div>
-      <div :class="{fixedHeight: buttonGroup.length>1}" class="demo-card-codeBox">
-        <div ref="code" v-show="activeIndex===0">
-          <slot name="JS"></slot>
-        </div>
-        <div v-show="activeIndex===1" class="demo-card-result">
-          <slot name="Result"></slot>
-        </div>
+      <!--      <div :class="{fixedHeight: buttonGroup.length>1}" class="demo-card-codeBox">-->
+      <!--&lt;!&ndash;        <div ref="code" v-show="activeIndex===0">&ndash;&gt;-->
+      <!--&lt;!&ndash;          <slot name="JS"></slot>&ndash;&gt;-->
+      <!--&lt;!&ndash;        </div>&ndash;&gt;-->
+      <!--        <div class="demo-card-result">-->
+      <!--          <slot name="Result"></slot>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <div class='demo-card-result'>
+        <slot name='Result'></slot>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import '../../../assets/svg/svg'
-import {defineComponent, toRefs, ref} from 'vue'
+import { defineComponent, toRefs, ref } from 'vue'
 
 export default defineComponent({
   name: 'demo-card',
   props: {
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     fontSize: {
       type: [String, Number],
-      default: 20
+      default: 20,
     },
     fill: {
       type: String,
-      default: '#ffffff'
-    }
+      default: '#ffffff',
+    },
   },
   data() {
     return {
       buttonGroup: [
+        'Result',
         'JS',
-        'Result'
-      ]
+      ],
     }
   },
   setup(props) {
-    let {fontSize} = toRefs(props)
+    let { fontSize } = toRefs(props)
     const activeIndex = ref(0)
     const openActive = (idx: number) => activeIndex.value = idx
     return {
@@ -61,11 +64,11 @@ export default defineComponent({
       this.buttonGroup = []
     }
 
-  }
+  },
 })
 </script>
 
-<style lang="scss">
+<style lang='scss'>
 @import "./Doc/src/assets/style/color";
 
 .demo {
@@ -105,7 +108,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     color: #ccf5e5;
-    border: 1px dashed #2f3460;
+    border: 1px dashed #818eff;
     border-radius: 8px;
 
     h2 {
@@ -113,14 +116,8 @@ export default defineComponent({
     }
 
     &-result {
-      overflow: auto;
-      height: 300px;
-      border: 1px dashed;
-      border-radius: 6px;
-      background: #131b2e;
-      display: flex;
-      justify-content: center;
-      padding: 30px;
+      padding-top: 20px;
+      padding-bottom: 20px;
     }
 
     &-description {
