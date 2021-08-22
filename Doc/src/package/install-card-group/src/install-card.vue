@@ -71,5 +71,8 @@ export default {
   background: #ffb311a6;
   display: inline-flex;
   border-radius: 5px;
+  :global(.el-form-item__label){
+    color: #ccf5e5 !important;
+  }
 }
 </style>

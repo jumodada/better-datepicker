@@ -6,31 +6,38 @@ Examples
 
 ```html
 
-<el-form>
-  <el-form-item label='Props'>
-    <Input width='20vw' id='dateInput'>
+<el-form label-position="top">
+  <el-form-item label='type'>
+    <el-select  v-model='value' placeholder='请选择'>
+      <el-option
+        v-for="item in datepickerTypesList"
+        :key='item.value'
+        :label='item.label'
+        :value='item.value'>
+      </el-option>
+    </el-select>
   </el-form-item>
-  <el-form-item label='Props'>
-  <el-select value='1' v-model='value' placeholder='请选择'>
-    <el-option
-      v-for="item in [{value:1,label:'xx'}]"
-      :key='item.value'
-      :label='item.label'
-      :value='item.value'>
-    </el-option>
-  </el-select>
+  <el-form-item label='datepicker'>
+    <datepicker :type="value"></datepicker>
   </el-form-item>
+  
 </el-form>
 
 <script>
-  data(){
+  data()
+  {
     return {
+      datepickerTypesList:[
+        {value: 'date', label:'date'},
+        {value: 'date-range', label:'date-range'},
+        {value: 'week', label:'week'},
+        {value: 'year', label:'year'},
+        {value: 'year-range', label:'year-range'},
+        {value: 'month', label:'month'},
+        {value: 'month-range', label:'month'},
+      ],
       value: ''
     }
-  },
-  mounted(){
-    const input = document.querySelector('#dateInput')
-    const picker = this.createDatePicker(input)
   }
 </script>
 

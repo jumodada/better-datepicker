@@ -8,6 +8,7 @@ import datepickerDemo from './datepicker-demo'
 import cardGroup from './install-card-group'
 import Logo from './logo'
 import { App } from 'vue'
+import datepicker from './datepicker'
 
 export function useComponent(app: App): void {
   app.use(Button)
@@ -17,6 +18,7 @@ export function useComponent(app: App): void {
   app.use(demoCard)
   app.use(themeCard)
   app.use(datepickerDemo)
+  app.use(datepicker)
   app.use(cardGroup)
   app.use(Logo)
 }
