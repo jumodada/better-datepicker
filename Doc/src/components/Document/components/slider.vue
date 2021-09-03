@@ -1,7 +1,7 @@
 <template>
   <div class='slider'>
     <ul>
-      <li :class='{secondLevel: list.isSecondLevel}' @click='toRoute(list.name)' v-for='list in routeLists'>
+      <li :class='{secondLevel: list.isSecondLevel}' @click='toRoute(list.path)' v-for='list in routeLists'>
         <span v-if='list.metaName' class='metaName'>{{ list.metaName }}</span>
         <span v-else>{{ list.name }}</span>
       </li>
@@ -32,7 +32,7 @@ export default {
 
   methods: {
     toRoute(name) {
-      this.$router.push({ name })
+      this.$router.push({ path:name })
     },
   },
 }
@@ -66,7 +66,6 @@ export default {
       border-left: 1px solid #e84c3b;
       padding-left: 40px;
       position: relative;
-
       &:after {
         position: absolute;
         top: 50%;
@@ -80,6 +79,9 @@ export default {
 
       &:hover {
         color: #e84c3b;
+        &:after {
+          background: #e84c3b;
+        }
       }
       &:first-child {
         border-left: none;
@@ -113,8 +115,19 @@ export default {
     }
 
     .secondLevel {
-      padding-left: 20px;
+      padding-left: 60px;
       font-size: 15px;
+      &:after {
+        position: absolute;
+        top: calc(50% - 1px);
+        left: 40px;
+        background: #e8c53b;
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
     }
   }
 }
