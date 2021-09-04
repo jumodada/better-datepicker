@@ -1,5 +1,36 @@
 EXAMPLE-OPTIONS
 
+## Placeholder
+
+::: placeholder
+
+```html
+
+<el-form label-position="top">
+  <el-form-item label='type'>
+    <el-input placeholder='请输入' v-model='value' />
+  </el-form-item>
+  <el-form-item label='datepicker'>
+    <datepicker :placeholder="value"></datepicker>
+  </el-form-item>
+
+</el-form>
+
+<script>
+  data()
+  {
+    return {
+      value: ''
+    }
+  }
+</script>
+
+```
+
+:::
+
+
+
 
 ## Type
 
@@ -21,7 +52,7 @@ EXAMPLE-OPTIONS
   <el-form-item label='datepicker'>
     <datepicker :type="value"></datepicker>
   </el-form-item>
-  
+
 </el-form>
 
 <script>
@@ -69,7 +100,7 @@ EXAMPLE-OPTIONS
   <el-form-item label='datepicker'>
     <datepicker :type="value"></datepicker>
   </el-form-item>
-  
+
 </el-form>
 
 <script>
@@ -116,7 +147,7 @@ EXAMPLE-OPTIONS
   <el-form-item label='datepicker'>
     <datepicker :type="value"></datepicker>
   </el-form-item>
-  
+
 </el-form>
 
 <script>
@@ -165,7 +196,7 @@ EXAMPLE-OPTIONS
   <el-form-item label='datepicker'>
     <datepicker :type="value"></datepicker>
   </el-form-item>
-  
+
 </el-form>
 
 <script>
@@ -217,7 +248,7 @@ EXAMPLE-OPTIONS
   <el-form-item label='datepicker'>
     <datepicker :type="value"></datepicker>
   </el-form-item>
-  
+
 </el-form>
 
 <script>
@@ -267,7 +298,7 @@ EXAMPLE-OPTIONS
   <el-form-item label='datepicker'>
     <datepicker :type="value"></datepicker>
   </el-form-item>
-  
+
 </el-form>
 
 <script>

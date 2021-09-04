@@ -6,6 +6,12 @@ const options = {
     this.page = this._type.replace('week', 'date')
   },
 }
+const cc = {
+  key: [],
+  cb() {
+    this.page = this._type.replace('week', 'date')
+  },
+}
 
 const visible = {
   key: ['visible'],
@@ -22,5 +28,5 @@ const visible = {
 }
 
 export function watchOptions(): void {
-  addWatch([options, visible])
+  addWatch([options, visible, cc])
 }

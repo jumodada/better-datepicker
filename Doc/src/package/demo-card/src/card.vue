@@ -3,8 +3,8 @@
     <div class='demo-card-codeBox-wrapper'>
       <slot></slot>
       <div class='demo-card-codeBox-button'>
-        <span :class='{active:index ===activeIndex}' @click='openActive(index)'
-              v-for='(item,index) in buttonGroup'>{{ item }}</span>
+<!--        <span :class='{active:index ===activeIndex}' @click='openActive(index)'-->
+<!--              v-for='(item,index) in buttonGroup'>{{ item }}</span>-->
       </div>
       <!--      <div :class="{fixedHeight: buttonGroup.length>1}" class="demo-card-codeBox">-->
       <!--&lt;!&ndash;        <div ref="code" v-show="activeIndex===0">&ndash;&gt;-->
@@ -43,10 +43,7 @@ export default defineComponent({
   },
   data() {
     return {
-      buttonGroup: [
-        'Result',
-        'JS',
-      ],
+
     }
   },
   setup(props) {
@@ -107,10 +104,10 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #ccf5e5;
+    color: #ecf2f3;
     border: 1px dashed #818eff;
     border-radius: 8px;
-    background: #58585c4f;
+    background: rgba(55, 55, 56, 0.31);
     h2 {
       color: #ffb311;
     }

@@ -69,8 +69,7 @@ function deepSearch<T>(state: State, sub: Sub<T>): thisOrChild<State> {
 
 function watch<T>(sub: Sub<T>, state: State) {
   const _sub = Object.assign({}, sub) as ReWriteSub
-  const xx = deepSearch(state, _sub)
-  new Watcher(_sub, state, xx)
+  new Watcher(_sub, state, deepSearch(state, _sub))
 }
 
 export function addWatch<T>(subs: Sub<T> | Sub<T>[]): void {

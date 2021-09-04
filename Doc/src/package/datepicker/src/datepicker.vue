@@ -15,11 +15,14 @@ export default defineComponent({
       type: String,
       default: 'date',
     },
-    format: String
+    placeholder: {
+      type: String,
+      default: '',
+    },
   },
-  data(){
+  data() {
     return {
-      datepickerInstance: null
+      datepickerInstance: null,
     }
   },
   mounted() {
@@ -28,8 +31,12 @@ export default defineComponent({
   },
   watch: {
     type() {
-        this.datepickerInstance.update(this.$props)
+      this.datepickerInstance.update(this.$props)
     },
+    placeholder(){
+      this.datepickerInstance.update(this.$props)
+
+    }
   },
 })
 </script>

@@ -14,6 +14,7 @@ const bool = isBoolean
 const num = isNumber
 const acceptOptions: CheckOptions = {
   placement: ['top', 'left', 'bottom', 'right'],
+  placeholder: str,
   type: [
     'date',
     'date-range',

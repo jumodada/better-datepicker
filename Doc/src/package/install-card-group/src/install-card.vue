@@ -72,7 +72,7 @@ export default {
   display: inline-flex;
   border-radius: 5px;
   :global(.el-form-item__label){
-    color: #ccf5e5 !important;
+    color: #ecf2f3 !important;
   }
 }
 </style>

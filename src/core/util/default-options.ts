@@ -3,6 +3,7 @@ import { mergeOptions } from '../../utils/merge'
 
 const opt: Options = {
   placement: 'bottom',
+  placeholder: '',
   type: 'date',
   zIndex: 2000,
   unlinkPanels: false,

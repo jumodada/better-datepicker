@@ -37,6 +37,7 @@ export type PickerOptions = Partial<Options>
 
 export default interface Options {
   placement: Placement
+  placeholder: string
   style: Style
   classes: string[]
   type: keyof DatepickerType
@@ -56,6 +57,7 @@ export default interface Options {
 
 export interface CheckOptions<T = (val: unknown) => boolean> {
   placement: Placement[]
+  placeholder: T
   style: T
   classes: T
   type: (keyof DatepickerType)[]
