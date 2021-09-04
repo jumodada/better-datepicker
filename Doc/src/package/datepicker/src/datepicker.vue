@@ -15,6 +15,7 @@ export default defineComponent({
       type: String,
       default: 'date',
     },
+    format: String
   },
   data(){
     return {

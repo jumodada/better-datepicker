@@ -110,7 +110,7 @@ export default defineComponent({
     color: #ccf5e5;
     border: 1px dashed #818eff;
     border-radius: 8px;
-
+    background: #58585c4f;
     h2 {
       color: #ffb311;
     }
