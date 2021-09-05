@@ -121,7 +121,9 @@ export function getStatus(
     return Date.parse(self.today) === Date.parse(date) ? 'today' : ''
   }
 
-  const method = has(self.type, 'range') ? rangeStatus : typeStatus[type]
+  const method = has(self.options.type, 'range')
+    ? rangeStatus
+    : typeStatus[type]
   return mergeClasses(
     method?.call(self, date, idx),
     isDisabledDate(self, date),

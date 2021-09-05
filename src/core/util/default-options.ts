@@ -1,32 +1,34 @@
 import Options, { PickerOptions } from '../../types/options'
 import { mergeOptions } from '../../utils/merge'
 
-const opt: Options = {
-  placement: 'bottom',
-  placeholder: '',
-  type: 'date',
-  zIndex: 2000,
-  unlinkPanels: false,
-  format: 'yyyy/MM/dd',
-  offset: 12,
-  insertTo: 'body',
-  binding: true,
-  disabled: false,
-  disabledDate: null,
-  themeColor: '',
-  rangeBgColor: '',
-  tdColor: '',
-  thColor: '',
-  style: {},
-  classes: [],
+function createOptions(): Options {
+  return {
+    placement: 'bottom',
+    placeholder: '',
+    type: 'date',
+    zIndex: 2000,
+    unlinkPanels: false,
+    format: 'yyyy/MM/dd',
+    offset: 12,
+    insertTo: 'body',
+    binding: true,
+    disabled: false,
+    disabledDate: null,
+    themeColor: '',
+    rangeBgColor: '',
+    tdColor: '',
+    thColor: '',
+    style: {},
+    classes: [],
+  }
 }
 
 export function changeOpt(target: PickerOptions): void {
-  mergeOptions(opt, target)
+  mergeOptions(createOptions(), target)
 }
 
 function defaultOptions(): Options {
-  return Object.create(opt)
+  return createOptions()
 }
 
 export default defaultOptions

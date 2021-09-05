@@ -6,9 +6,6 @@ const options = {
   key: ['options'],
   cb() {
     this.page = this._type.replace('week', 'date')
-    return () => {
-      console.log(1)
-    }
   },
 }
 
@@ -17,7 +14,10 @@ const optionsChildrenCb = {
     this.reference && (this.reference.placeholder = val)
   },
   type() {
-    console.log(2)
+    return () => this.update()
+  },
+  zIndex() {
+    return () => this.update()
   },
 }
 

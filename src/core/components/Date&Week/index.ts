@@ -52,7 +52,7 @@ function tBody(state: State): CreateElementPartOptions {
         style: tableStyle,
         class: classOptionsGenerator(child),
         event: {
-          listener: dayEvent(child)[state.type as 'date'],
+          listener: dayEvent(child)[state.options.type as 'date'],
           arg: child,
         },
       }
@@ -82,7 +82,7 @@ export function Day(
 ): CreateElementPartOptions {
   type = t
   const classes = ['date']
-  if (state.type === 'week') classes.push('week')
+  if (state.options.type === 'week') classes.push('week')
   return {
     name: 'table',
     children: [bar, tBody],

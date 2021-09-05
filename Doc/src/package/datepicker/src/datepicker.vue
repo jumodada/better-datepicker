@@ -28,7 +28,7 @@ export default defineComponent({
   mounted() {
     const input = this.$refs.input
     this.datepicker = createDatePicker(input.$el, this.$props)
-  },
+  }
 })
 </script>
 

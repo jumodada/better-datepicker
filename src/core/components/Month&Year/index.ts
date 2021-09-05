@@ -17,11 +17,11 @@ const cols = 4
 
 const components: CreateMonthOrYearComponentsOptions = {
   month: {
-    listener: (child, state) => monthEvent(child)[state.type as 'date'],
+    listener: (child, state) => monthEvent(child)[state.options.type as 'date'],
     children: (idx, months) => [{ text: months[idx] }],
   },
   year: {
-    listener: (child, state) => yearEvent(child)[state.type as 'date'],
+    listener: (child, state) => yearEvent(child)[state.options.type as 'date'],
     children: (idx: number) => [
       {
         text: {
