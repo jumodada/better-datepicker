@@ -10,16 +10,6 @@ import { createDatePicker } from '../../../../../src'
 
 export default defineComponent({
   name: 'datepicker',
-  props: {
-    type: {
-      type: String,
-      default: 'date',
-    },
-    placeholder: {
-      type: String,
-      default: '',
-    },
-  },
   data() {
     return {
       datepicker: null,
