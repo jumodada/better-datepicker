@@ -58,12 +58,12 @@ export default function Picker(): BetterPicker {
 
   function create(options?: Partial<Options>): void {
     state = createState(opt)
+    state.reference = reference
     state.destroyed = destroyed
     state.update = update
     changeWeekFormat(options)
     watch(opt)
     addListener()
-    state.reference = reference
     state.popover = createPopover(state)
   }
 
@@ -85,7 +85,7 @@ export default function Picker(): BetterPicker {
   }
 
   function changeWeekFormat(opt?: Partial<Options>) {
-    if (state?.options.type === 'week' && (!opt || !opt.format)) {
+    if (state.options.type === 'week' && (!opt || !opt.format)) {
       state.hasWW = true
       state.options.format = state.locale.weekFormat
     }

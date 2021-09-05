@@ -78,8 +78,8 @@ export interface stateUtil {
   visible: boolean
   page: pageName
   locale: LocaleConfig
-  destroyed?: Callback
-  update?: Callback
+  destroyed: Callback
+  update: Callback
 }
 
 export interface componentsWatchers<T = componentWatcher> {
