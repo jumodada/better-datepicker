@@ -17,7 +17,7 @@ const optionsChildren: Sub[] = Object.keys(defaultOptions()).map((opt) => {
     key: { name: 'options', childKey: [opt] },
     cb() {
       return () => {
-        this.update()
+        this.update?.()
       }
     },
   }

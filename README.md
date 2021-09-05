@@ -18,7 +18,7 @@ https://jumodada.github.io/better-datepicker/
 
 ## CDN
 
-https://cdn.jsdelivr.net/npm/better-datepicker@0.2.0/
+https://cdn.jsdelivr.net/npm/better-datepicker@0.2.2/
 
 ## Installing
 
@@ -36,7 +36,7 @@ $ yarn add better-datepicker
 
 ## Usage
 
-es6
+es5
 ```js
 import  {createDatePicker} from 'better-datepicker'
 import 'better-datepicker/dist/index.css'
@@ -93,6 +93,7 @@ If the format is illegal, it will use default value
 
 | Options | Description | Type | Accepted Values | Default |
 |---------|------------ |---------- |-------------  |-------- |
+| placeholder | To set placeholder | string | - | - |
 | type | Type of datepicker | string | date/date-range/month/month-range/year/year-range/week | date |
 | format | To set the date format | string | - | yyyy/MM/dd |
 | classes | To set the picker wrapper classes(**It will have a logo prefix: better-datepicker**) | string[] | - | - |
@@ -231,6 +232,40 @@ or configure your own region
   destroy([picker1,picker2]) // destroyed picker1 and picker 2
   destroy() //destroyed all 
 ```
+
+
+## USE IN VUE
+Reactive updates have been supported since version [0.2.2](https://www.npmjs.com/package/better-datepicker/v/0.2.2)
+
+When a property of props is changed, the datepicker is also updated
+
+```vue
+<template>
+  <el-input ref='input'></el-input>
+</template>
+
+<script lang='ts'>
+import '../../../assets/svg/svg'
+import { defineComponent, toRefs } from 'vue'
+
+import { createDatePicker } from '../../../../../src'
+
+export default defineComponent({
+  name: 'datepicker',
+  data() {
+    return {
+      datepicker: null,
+    }
+  },
+  mounted() {
+    const input = this.$refs.input
+    this.datepicker = createDatePicker(input.$el, this.$props)
+  }
+})
+</script>
+
+```
+
 
 
 ## TODO LIST
