@@ -17,8 +17,7 @@ const Store = (function () {
 
   function createState(options: Options): State {
     const state = initState(options)
-    state.type = options.type
-    state._type = state.type.split('-').shift() as 'date'
+    state._type = options.type.split('-').shift() as 'date'
     state.hasWW = has(state.options.format, 'w')
     state.id = ++id
     states[id] = state

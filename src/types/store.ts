@@ -78,8 +78,8 @@ export interface stateUtil {
   visible: boolean
   page: pageName
   locale: LocaleConfig
-  destroyed?: Callback
-  update?: Callback
+  destroyed: Callback
+  update: Callback
 }
 
 export interface componentsWatchers<T = componentWatcher> {
@@ -99,7 +99,6 @@ export interface utilWatchers<T = utilWatcher> {
 
 export interface State extends stateComponent, stateUtil, stateDate {
   id: number
-  type: keyof DatepickerType
   _type: pageName
   hasWW: boolean
 }

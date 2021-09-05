@@ -83,7 +83,7 @@ export function createPopover(state: State): HTMLElement {
   const pop = createElement(
     {
       class: state.options.classes.concat(['wrapper']),
-      children: popoverType[state.type],
+      children: popoverType[state.options.type],
       hidden: true,
       style: state.options.style,
     },

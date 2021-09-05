@@ -1,33 +1,28 @@
 import { addWatch } from '../../../observer/watcher'
 import { Sub } from '../../../types/observer'
 import { concat } from '../../../utils/concat'
+import Options from '../../../types/options'
+import defaultOptions from '../../util/default-options'
 
 const options = {
   key: ['options'],
-  cb() {
+  cb(val: Options) {
     this.page = this._type.replace('week', 'date')
-    return () => {
-      console.log(1)
-    }
+    this.reference && (this.reference.placeholder = val.placeholder)
   },
 }
 
-const optionsChildrenCb = {
-  placeholder(val: string) {
-    this.reference && (this.reference.placeholder = val)
-  },
-  type() {
-    console.log(2)
-  },
-}
-
-const optionsChildren: Sub[] = Object.keys(optionsChildrenCb).map((opt) => {
+const optionsChildren: Sub[] = Object.keys(defaultOptions()).map((opt) => {
   return {
     key: { name: 'options', childKey: [opt] },
-    cb: optionsChildrenCb[opt as never],
+    cb() {
+      return () => {
+        this.update()
+      }
+    },
   }
 })
 
 export function watchOptions(): void {
-  addWatch(concat([options], optionsChildren))
+  addWatch(concat(optionsChildren, [options]))
 }
