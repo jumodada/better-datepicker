@@ -235,7 +235,7 @@ or configure your own region
 
 
 ## USE IN VUE
-Reactive updates have been supported since version [0.2.2](https://www.npmjs.com/package/better-datepicker/v/0.2.2)
+Reactive updates have been supported since version [0.2.2](https://www.npmjs.com/package/better-datepicker/v/0.2.3)
 
 When a property of props is changed, the datepicker is also updated
 

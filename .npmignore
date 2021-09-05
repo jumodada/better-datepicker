@@ -22,3 +22,7 @@ tests/*
 .editorconfig
 vite.config.ts
 dist/lib
+locale/*
+.prettierrc
+.commitlint.config.js
+.yarn-error.log
