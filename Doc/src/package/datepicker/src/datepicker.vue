@@ -22,21 +22,12 @@ export default defineComponent({
   },
   data() {
     return {
-      datepickerInstance: null,
+      datepicker: null,
     }
   },
   mounted() {
     const input = this.$refs.input
-    this.datepickerInstance = createDatePicker(input.$el, this.$props)
-  },
-  watch: {
-    type() {
-      this.datepickerInstance.update(this.$props)
-    },
-    placeholder(){
-      this.datepickerInstance.update(this.$props)
-
-    }
+    this.datepicker = createDatePicker(input.$el, this.$props)
   },
 })
 </script>

@@ -1,32 +1,33 @@
 import { addWatch } from '../../../observer/watcher'
+import { Sub } from '../../../types/observer'
+import { concat } from '../../../utils/concat'
 
 const options = {
   key: ['options'],
   cb() {
     this.page = this._type.replace('week', 'date')
-  },
-}
-const cc = {
-  key: [],
-  cb() {
-    this.page = this._type.replace('week', 'date')
-  },
-}
-
-const visible = {
-  key: ['visible'],
-  cb() {
-    const { range, start, end } = this
-    range.status = 'complete'
-    if (start.date && start.date) {
-      range.start = start.date
-      range.end = end.date
-    } else {
-      range.start = range.end = null
+    return () => {
+      console.log(1)
     }
   },
 }
 
+const optionsChildrenCb = {
+  placeholder(val: string) {
+    this.reference && (this.reference.placeholder = val)
+  },
+  type() {
+    console.log(2)
+  },
+}
+
+const optionsChildren: Sub[] = Object.keys(optionsChildrenCb).map((opt) => {
+  return {
+    key: { name: 'options', childKey: [opt] },
+    cb: optionsChildrenCb[opt as never],
+  }
+})
+
 export function watchOptions(): void {
-  addWatch([options, visible, cc])
+  addWatch(concat([options], optionsChildren))
 }

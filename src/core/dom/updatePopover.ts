@@ -3,6 +3,7 @@ import { addAttr } from '../../utils/attribute'
 import { isInBody } from '../../utils/isInBody'
 import { deleteRules } from './create-popover'
 import { canIUseAnimation } from '../../utils/env'
+import { State } from '../../types/store'
 
 function transform(offset: number | string): Transform {
   offset = offset + 'px'
@@ -39,6 +40,18 @@ export function updatePopover(vis: boolean): void {
     el.style.animation = animation
   } else {
     el.style.display = vis ? 'inline-block' : 'none'
+  }
+  resetRangStatus(this)
+}
+
+function resetRangStatus(self: State) {
+  const { range, start, end } = self
+  range.status = 'complete'
+  if (start.date && start.date) {
+    range.start = start.date
+    range.end = end.date
+  } else {
+    range.start = range.end = null
   }
 }
 

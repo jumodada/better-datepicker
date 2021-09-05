@@ -32,7 +32,7 @@ export interface Sub<T = void> {
   cb: (this: State, ...arg: any) => T
 }
 
-export interface ReWriteSub<T = void> {
+export interface ReWriteSub<T = unknown> {
   key: string[]
   cb: (...arg: any) => T
 }

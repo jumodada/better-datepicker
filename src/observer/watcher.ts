@@ -8,7 +8,7 @@ import {
   thisOrChild,
 } from '../types/observer'
 import { getState } from '../store'
-import { isArray, isNumber } from '../utils/typeOf'
+import { isArray, isFunc, isNumber } from '../utils/typeOf'
 import { State } from '../types/store'
 import { queueWatcher } from './scheduler'
 
@@ -33,7 +33,10 @@ export default class Watcher {
       .map((key) => this.child[key])
       .concat(this.child)
     clearTarget()
-    this.watcher.cb.apply(this.state, params)
+    const res = this.watcher.cb.apply(this.state, params)
+    if (isFunc(res)) {
+      this.watcher.cb = res
+    }
   }
 
   update(): void {
@@ -64,8 +67,6 @@ function deepSearch<T>(state: State, sub: Sub<T>): thisOrChild<State> {
 
   return search(state, sub.key)
 }
-
-;``
 
 function watch<T>(sub: Sub<T>, state: State) {
   const _sub = Object.assign({}, sub) as ReWriteSub

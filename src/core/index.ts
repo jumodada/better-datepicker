@@ -59,6 +59,7 @@ export default function Picker(): BetterPicker {
   function create(options?: Partial<Options>): void {
     state = createState(opt)
     state.destroyed = destroyed
+    state.update = update
     changeWeekFormat(options)
     watch(opt)
     addListener()

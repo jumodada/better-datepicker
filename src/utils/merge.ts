@@ -2,6 +2,7 @@ import Options from '../types/options'
 import { checkOptions } from './checkOptions'
 import { logo } from './classes'
 import { isArray, has } from './typeOf'
+import { reactive } from '../observer'
 
 export function mergeOptions(
   source: any,
@@ -13,6 +14,7 @@ export function mergeOptions(
       source[key] = val
     }
   }
+  reactive(target, source)
   return source
 }
 

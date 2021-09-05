@@ -79,6 +79,7 @@ export interface stateUtil {
   page: pageName
   locale: LocaleConfig
   destroyed?: Callback
+  update?: Callback
 }
 
 export interface componentsWatchers<T = componentWatcher> {

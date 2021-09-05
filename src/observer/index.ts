@@ -1,8 +1,22 @@
 import Dep from './deps'
 import { State } from '../types/store'
 import { isArray, isObject } from '../utils/typeOf'
+import { Callback } from '../types/core'
 
 export default function ObserveState(state: State): State {
+  const get = (dep: Dep) => {
+    if (Dep.target) dep.depend()
+  }
+  const set = (dep: Dep) => dep.notify()
+  return reactive(state, {}, set, get)
+}
+
+export function reactive(
+  state: State,
+  target: any,
+  setCb?: Callback,
+  getCb?: Callback
+): State {
   function observe<T = State>(obj: T): T {
     Object.keys(obj).forEach((key) => {
       const val = obj[key as keyof T]
@@ -25,13 +39,13 @@ export default function ObserveState(state: State): State {
       enumerable: true,
       configurable: true,
       get() {
-        if (Dep.target) dep.depend()
+        getCb?.(dep)
         return val
       },
       set(newVal) {
         if (newVal === val) return
-        val = newVal
-        dep.notify()
+        target[key] = val = newVal
+        setCb?.(dep)
       },
     })
   }
