@@ -1,0 +1,1 @@
+import{aB as s,Z as t,_ as a}from"./@vue.78dd21e6.js";import"./highlight.js.02565251.js";const o={class:"markdown-body"},e=[a("h1",null,"EXAMPLE-METHODS",-1)],r={setup:(a,{expose:r})=>(r({frontmatter:{}}),(a,r)=>(s(),t("div",o,e)))};export{r as default};
