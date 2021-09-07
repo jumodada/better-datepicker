@@ -15,6 +15,7 @@ createDatePicker(input,options)
 
 | Property     | Description | Type   | Accepted Values | Default |
 | ----------------- | -------------------------------- | --------------- | ------ | ------ |
+| placeholder | 设置输入框的placeholder | string | - | - |
 | type              |    选择器类型      |   string     |   date/date-range/month/month-range/year/year-range/week     | date
 | format              |    格式  |   string     |   -     | yyyy/MM/d
 | classes | 设置弹出框的classes，**注意，这会携带logo前缀 better-datepicker** | string[] | - | - |

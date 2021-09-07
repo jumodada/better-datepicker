@@ -1,6 +1,6 @@
 # Theme 主题
 
-提供三种方式用于修改*主题*
+提供三种方式用于修改**主题**
 
 ## SCSS Variables
 
@@ -8,7 +8,7 @@
 downloading  <a href="https://github.com/jumodada/better-datepicker/blob/master/src/assets/date-picker.scss" target="_blank">
 scss code</a> directly.
 
-Of course, you need to use *loader* to parse the code.
+Of course, you need to use **loader** to parse the code.
 
 ```scss
 $theme-color: #2ECC71;

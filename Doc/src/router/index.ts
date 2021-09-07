@@ -11,6 +11,7 @@ const history = createWebHashHistory()
 function createRoute(lang: string, lists: any[]) {
   const createChild = (list: any) => {
     const isSecondLevel = has(list.path, '-')
+    console.log(list.name, import(`../views/${lang}/${list.path}.md`))
     return {
       path: list.path,
       name: list.name,

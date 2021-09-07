@@ -7,20 +7,19 @@ EXAMPLE-OPTIONS
 ```html
 
 <el-form label-position="top">
-  <el-form-item label='type'>
-    <el-input v-model='value' />
+  <el-form-item label='props'>
+    <el-input :placeholder='value' v-model='value' />
   </el-form-item>
   <el-form-item label='datepicker'>
     <datepicker :placeholder="value"></datepicker>
   </el-form-item>
-  
+
 </el-form>
 
 <script>
-  data()
-  {
+  data(){
     return {
-      value: ''
+      value: '请输入placeholder'
     }
   }
 </script>
@@ -28,19 +27,17 @@ EXAMPLE-OPTIONS
 ```
 
 :::
-
-
 
 
 ## Type
 
-::: 默认值是*date*, 单位是[**日**]
+:::
 
 ```html
 
 <el-form label-position="top">
-  <el-form-item label='type'>
-    <el-select  v-model='value' placeholder='请选择'>
+  <el-form-item label='props'>
+    <el-select  v-model='value' placeholder='Select type'>
       <el-option
         v-for="item in datepickerTypesList"
         :key='item.value'
@@ -50,9 +47,9 @@ EXAMPLE-OPTIONS
     </el-select>
   </el-form-item>
   <el-form-item label='datepicker'>
-    <datepicker :type="value"></datepicker>
+    <datepicker placeholder='Select date' :type="value"></datepicker>
   </el-form-item>
-  
+
 </el-form>
 
 <script>
@@ -66,7 +63,7 @@ EXAMPLE-OPTIONS
         {value: 'year', label:'year'},
         {value: 'year-range', label:'year-range'},
         {value: 'month', label:'month'},
-        {value: 'month-range', label:'month'},
+        {value: 'month-range', label:'month-range'},
       ],
       value: ''
     }
@@ -76,252 +73,5 @@ EXAMPLE-OPTIONS
 ```
 
 :::
-
-
-
-
-## Format
-
-::: 默认值是*date*, 单位是[**日**]
-
-```html
-
-<el-form label-position="top">
-  <el-form-item label='type'>
-    <el-select  v-model='value' placeholder='请选择'>
-      <el-option
-        v-for="item in datepickerTypesList"
-        :key='item.value'
-        :label='item.label'
-        :value='item.value'>
-      </el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label='datepicker'>
-    <datepicker :type="value"></datepicker>
-  </el-form-item>
-  
-</el-form>
-
-<script>
-  data()
-  {
-    return {
-      datepickerTypesList:[
-        {value: 'date', label:'date'},
-        {value: 'date-range', label:'date-range'},
-        {value: 'week', label:'week'},
-        {value: 'year', label:'year'},
-        {value: 'year-range', label:'year-range'},
-        {value: 'month', label:'month'},
-        {value: 'month-range', label:'month'},
-      ],
-      value: ''
-    }
-  }
-</script>
-
-```
-
-:::
-
-
-
-## placement
-
-::: 默认值是*date*, 单位是[**日**]
-
-```html
-
-<el-form label-position="top">
-  <el-form-item label='type'>
-    <el-select  v-model='value' placeholder='请选择'>
-      <el-option
-        v-for="item in datepickerTypesList"
-        :key='item.value'
-        :label='item.label'
-        :value='item.value'>
-      </el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label='datepicker'>
-    <datepicker :type="value"></datepicker>
-  </el-form-item>
-  
-</el-form>
-
-<script>
-  data()
-  {
-    return {
-      datepickerTypesList:[
-        {value: 'date', label:'date'},
-        {value: 'date-range', label:'date-range'},
-        {value: 'week', label:'week'},
-        {value: 'year', label:'year'},
-        {value: 'year-range', label:'year-range'},
-        {value: 'month', label:'month'},
-        {value: 'month-range', label:'month'},
-      ],
-      value: ''
-    }
-  }
-</script>
-
-```
-
-:::
-
-
-
-
-
-## disabledDate
-
-::: 默认值是*date*, 单位是[**日**]
-
-```html
-
-<el-form label-position="top">
-  <el-form-item label='type'>
-    <el-select  v-model='value' placeholder='请选择'>
-      <el-option
-        v-for="item in datepickerTypesList"
-        :key='item.value'
-        :label='item.label'
-        :value='item.value'>
-      </el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label='datepicker'>
-    <datepicker :type="value"></datepicker>
-  </el-form-item>
-  
-</el-form>
-
-<script>
-  data()
-  {
-    return {
-      datepickerTypesList:[
-        {value: 'date', label:'date'},
-        {value: 'date-range', label:'date-range'},
-        {value: 'week', label:'week'},
-        {value: 'year', label:'year'},
-        {value: 'year-range', label:'year-range'},
-        {value: 'month', label:'month'},
-        {value: 'month-range', label:'month'},
-      ],
-      value: ''
-    }
-  }
-</script>
-
-```
-
-:::
-
-
-
-
-
-
-
-
-## offset
-
-::: 默认值是*date*, 单位是[**日**]
-
-```html
-
-<el-form label-position="top">
-  <el-form-item label='type'>
-    <el-select  v-model='value' placeholder='请选择'>
-      <el-option
-        v-for="item in datepickerTypesList"
-        :key='item.value'
-        :label='item.label'
-        :value='item.value'>
-      </el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label='datepicker'>
-    <datepicker :type="value"></datepicker>
-  </el-form-item>
-  
-</el-form>
-
-<script>
-  data()
-  {
-    return {
-      datepickerTypesList:[
-        {value: 'date', label:'date'},
-        {value: 'date-range', label:'date-range'},
-        {value: 'week', label:'week'},
-        {value: 'year', label:'year'},
-        {value: 'year-range', label:'year-range'},
-        {value: 'month', label:'month'},
-        {value: 'month-range', label:'month'},
-      ],
-      value: ''
-    }
-  }
-</script>
-
-```
-
-:::
-
-
-
-
-
-
-## insertTo
-
-::: 默认值是*date*, 单位是[**日**]
-
-```html
-
-<el-form label-position="top">
-  <el-form-item label='type'>
-    <el-select  v-model='value' placeholder='请选择'>
-      <el-option
-        v-for="item in datepickerTypesList"
-        :key='item.value'
-        :label='item.label'
-        :value='item.value'>
-      </el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label='datepicker'>
-    <datepicker :type="value"></datepicker>
-  </el-form-item>
-  
-</el-form>
-
-<script>
-  data()
-  {
-    return {
-      datepickerTypesList:[
-        {value: 'date', label:'date'},
-        {value: 'date-range', label:'date-range'},
-        {value: 'week', label:'week'},
-        {value: 'year', label:'year'},
-        {value: 'year-range', label:'year-range'},
-        {value: 'month', label:'month'},
-        {value: 'month-range', label:'month'},
-      ],
-      value: ''
-    }
-  }
-</script>
-
-```
-
-:::
-
 
 
