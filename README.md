@@ -272,7 +272,8 @@ export default defineComponent({
 
 | versions | Description|
 |---------|------------ |
-| 0.5.0 | support unlinkPanels、zIndex、readonly、default-value、className、style、size .... |
+| 0.2.9 | monorepo | 
+| 0.3.0 | support unlinkPanels、zIndex、readonly、default-value、className、style、size .... |
 | 0.7.0 | support extends plugins |
 | 0.9.0 | support time picker |
 
