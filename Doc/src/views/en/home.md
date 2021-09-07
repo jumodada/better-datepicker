@@ -28,8 +28,10 @@ you can also
 
 ## OPTIONS
 
-*createDatePicker* accepts two parameters. The first is the **InputElement**, and the second is the **configuration
+**createDatePicker** accepts two parameters. The first is the **InputElement**, and the second is the **configuration
 item**. For more details [Here](#/en/doc/options)
+
+When you change options property, it will be automatically updated on the datepicker
 
 ```js
   const input = document.querySelector('#input')
@@ -104,10 +106,11 @@ or
   destroy() //destroyed all 
 ```
 
-## TODOLIST
+## TODO LIST
 
 | versions | Description|
 |---------|------------ |
-| 0.5.0 | support unlinkPanels、zIndex、readonly、default-value、className、style、size .... |
+| 0.2.9 | monorepo | 
+| 0.3.0 | support unlinkPanels、zIndex、readonly、default-value、className、style、size .... |
 | 0.7.0 | support extends plugins |
 | 0.9.0 | support time picker |

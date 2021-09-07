@@ -2033,10 +2033,10 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-better-datepicker@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/better-datepicker/-/better-datepicker-0.2.1.tgz#943f9376666fce067ab4c81d26800e712826cc4f"
-  integrity sha512-r2PKdSgSozqK1JkdsNYnpocGUAiBzV6F9NENyqVD8i4OVSn00TvvxnHI8jkHLLo8s37zRvnE0exbEjcf4/KF1Q==
+better-datepicker@0.2.3:
+  version "0.2.3"
+  resolved "https://registry.nlark.com/better-datepicker/download/better-datepicker-0.2.3.tgz#34ce3457f85ff8cd65c6a546d212da052d1c34e1"
+  integrity sha1-NM40V/hf+M1lxqVG0hLaBS0cNOE=
 
 big.js@^5.2.2:
   version "5.2.2"

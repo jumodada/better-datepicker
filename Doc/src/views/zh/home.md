@@ -30,7 +30,9 @@
 
 ## OPTIONS
 
-*createDatePicker* 接受两个参数 第一个是需要绑定的**输入框节点**, 第二个是选择器局部配置[更多详情](#/en/doc/options)
+**createDatePicker** 接受两个参数 第一个是需要绑定的**输入框节点**, 第二个是选择器局部配置[更多详情](#/en/doc/options)
+
+当你修改`Options` 对象的某个属性的时候，会自动更新到选择器上面，无需手动更新
 
 ```js
   const input = document.querySelector('#input')
@@ -105,10 +107,11 @@
   destroy() // 如果不传参，则默认是删除所有实例
 ```
 
-## TODOLIST
+## TODO LIST
 
 | versions | Description|
 |---------|------------ |
-| 0.5.0 | support unlinkPanels、zIndex、readonly、default-value、className、style、size .... |
+| 0.2.9 | monorepo | 
+| 0.3.0 | support unlinkPanels、zIndex、readonly、default-value、className、style、size .... |
 | 0.7.0 | support extends plugins |
 | 0.9.0 | support time picker |

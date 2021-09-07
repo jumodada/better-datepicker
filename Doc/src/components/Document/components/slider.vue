@@ -1,7 +1,7 @@
 <template>
   <div class='slider'>
     <ul>
-      <li :class='{secondLevel: list.isSecondLevel}' @click='toRoute(list.path)' v-for='list in routeLists'>
+      <li :class='{secondLevel: list.isSecondLevel}' @click='toRoute(list.name)' v-for='list in routeLists'>
         <span v-if='list.metaName' class='metaName'>{{ list.metaName }}</span>
         <span v-else>{{ list.name }}</span>
       </li>
@@ -32,7 +32,7 @@ export default {
 
   methods: {
     toRoute(name) {
-      this.$router.push({ path:name })
+      this.$router.push({ name })
     },
   },
 }

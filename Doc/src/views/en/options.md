@@ -27,6 +27,7 @@ defaultOptions({
 
 | Property     | Description | Type   | Accepted Values | Default |
 | ----------------- | -------------------------------- | --------------- | ------ | ------ |
+| placeholder | To set placeholder | string | - | - |
 | type | Type of datepicker | string | date/date-range/month/month-range/year/year-range/week | date |
 | format | To set the date format | string | - | yyyy/MM/dd |
 | classes | To set the picker wrapper classes(**It will have a logo prefix: better-datepicker**) | string[] | - | - |

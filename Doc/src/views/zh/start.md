@@ -1,13 +1,13 @@
 # START
 
-首先使用 **npm** 或者 **yarn** 安装  *better-datepicker*
+首先使用 **npm** 或者 **yarn** 安装  **better-datepicker**
 
 ```shell script
 npm install better-datepicker
 yarn add better-datepicker
 ```
 
-然后引入 *better-datepicker* 和 *css文件*
+然后引入 **better-datepicker** 和 **css文件**
 
 ```js
 import {createDatePicker} from 'better-datepicker'
@@ -16,7 +16,7 @@ import 'better-datepicker/dist/index.css'
 
 ## CreateDatePicker 创建日期选择器
 
-*createDatePicker*接受两个参数 **输出框节点**和**局部配置**
+**createDatePicker**接受两个参数 **输出框节点**和**局部配置**
 
 ```
     const input = document.querySelector('#input')

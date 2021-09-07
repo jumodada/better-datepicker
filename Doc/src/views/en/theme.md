@@ -8,7 +8,7 @@ We provide 3 ways for custom theme. For now we only support custom of **color**,
 downloading  <a href="https://github.com/jumodada/better-datepicker/blob/master/src/assets/date-picker.scss" target="_blank">
 scss code</a> directly.
 
-Of course, you need to use *loader* to parse the code.
+Of course, you need to use **loader** to parse the code.
 
 ```scss
 $theme-color: #2ECC71;

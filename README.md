@@ -91,6 +91,8 @@ If the format is illegal, it will use default value
 
 ## Options
 
+When you change options property, it will be automatically updated on the datepicker
+
 | Options | Description | Type | Accepted Values | Default |
 |---------|------------ |---------- |-------------  |-------- |
 | placeholder | To set placeholder | string | - | - |
@@ -252,6 +254,10 @@ import { createDatePicker } from '../../../../../src'
 
 export default defineComponent({
   name: 'datepicker',
+  props:{
+    placeholder: String,
+    //....
+  },
   data() {
     return {
       datepicker: null,
@@ -260,6 +266,9 @@ export default defineComponent({
   mounted() {
     const input = this.$refs.input
     this.datepicker = createDatePicker(input.$el, this.$props)
+  },
+  beforeUnmount() {
+    this.datepicker.destroyed()
   }
 })
 </script>
