@@ -5,23 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20ed3d7f-b119-4ad8-befe-6fe7395c4119" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/example-options.1a52d493.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/example-options.d746ede5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/highlightjs-vue.288ed10b.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/index.6acdcbff.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/better-datepicker.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/example-options.7d431657.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/example-options.98ce0807.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/example.e01dbd27.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/example.f448e100.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/index.59db3fe0.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/index.e1246a54.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/index.b7fde325.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/example-options.0756791b.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/example-options.9ed3eb77.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/index.9e1a6e67.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/api.c555fab4.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/API.f8abd5e1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/api.e14e86cb.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/API.0de8e340.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/example-options.1a52d493.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/example-options.d746ede5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/example.f448e100.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/example.e821b4e5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/highlightjs-vue.288ed10b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/index.6acdcbff.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
