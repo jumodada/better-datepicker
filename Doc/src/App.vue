@@ -1,21 +1,23 @@
 <template>
-  <Header/>
-  <router-view/>
+  <div>
+    <Header />
+    <router-view />
+  </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive} from 'vue'
+import { defineComponent, reactive } from 'vue'
 import Header from './components/Header/Header.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    Header
+    Header,
   },
   setup() {
     const lang = localStorage.getItem('lang') || 'en'
     const target = reactive({
-      lang
+      lang,
     })
     if (!lang) {
       localStorage.setItem('lang', 'en')
@@ -28,12 +30,12 @@ export default defineComponent({
 
     return {
       toggleLang,
-      target
+      target,
     }
   },
   provide() {
     return {
-      bus: this
+      bus: this,
     }
   },
 })
@@ -62,6 +64,5 @@ body {
 }
 
 #app {
-
 }
 </style>

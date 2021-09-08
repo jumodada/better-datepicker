@@ -1,0 +1,7 @@
+
+src/index.ts → dist/betterDatePicker.umd.js, dist/betterDatePicker.es5.js...
+(!) Circular dependencies
+src/core/watch/date/type/public.ts -> src/core/watch/date/type/month&year/public.ts -> src/core/watch/date/type/public.ts
+src/core/watch/date/type/date&week/public.ts -> src/core/watch/date/type/public.ts -> src/core/watch/date/type/date&week/public.ts
+created dist/betterDatePicker.umd.js, dist/betterDatePicker.es5.js in 3s
+Killed

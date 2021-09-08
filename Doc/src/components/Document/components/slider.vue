@@ -1,8 +1,12 @@
 <template>
-  <div class='slider'>
+  <div class="slider">
     <ul>
-      <li :class='{secondLevel: list.isSecondLevel}' @click='toRoute(list.name)' v-for='list in routeLists'>
-        <span v-if='list.metaName' class='metaName'>{{ list.metaName }}</span>
+      <li
+        :class="{ secondLevel: list.isSecondLevel }"
+        @click="toRoute(list.name)"
+        v-for="list in routeLists"
+      >
+        <span v-if="list.metaName" class="metaName">{{ list.metaName }}</span>
         <span v-else>{{ list.name }}</span>
       </li>
     </ul>
@@ -10,7 +14,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'slider',
   props: {
@@ -38,8 +41,8 @@ export default {
 }
 </script>
 
-<style scoped lang='scss'>
-@import "./Doc/src/assets/style/global";
+<style scoped lang="scss">
+@import './src/assets/style/global';
 
 .slider {
   width: 210px;
@@ -50,7 +53,9 @@ export default {
   overflow-y: auto;
   color: #ffffff;
   font-size: 20px;
-  font-family: Futura, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-family: Futura, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 
   ul {
     list-style: none;
@@ -61,7 +66,7 @@ export default {
       padding-top: 6px;
       padding-bottom: 6px;
       cursor: pointer;
-      transition: .23s color;
+      transition: 0.23s color;
       font-size: 16px;
       border-left: 1px solid #e84c3b;
       padding-left: 40px;

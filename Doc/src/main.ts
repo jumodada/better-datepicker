@@ -7,7 +7,12 @@ import './assets/style/index.scss'
 import 'element-plus/lib/theme-chalk/index.css'
 
 import './assets/style/el-message.css'
-import { createDatePicker, locale, defaultOptions, destroy } from '../../src'
+import {
+  createDatePicker,
+  locale,
+  defaultOptions,
+  destroy,
+} from 'better-datepicker'
 import NProgress from 'nprogress'
 import { useElementComponent } from './useElementComponent'
 // import xx from '../../dist/locale_es/zh-cn'

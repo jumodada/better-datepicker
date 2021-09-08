@@ -28,7 +28,7 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
 }
 
 export default function nextTick(cb: Callback): void {
-    callbacks.push(cb)
+    callbacks.push(cb)     
     if (!pending) {
         pending = true
         timerFunc()

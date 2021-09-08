@@ -1,18 +1,18 @@
 <template>
-  <el-input ref='input'></el-input>
+  <el-input ref="input"></el-input>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import '../../../assets/svg/svg'
 import { defineComponent, toRefs } from 'vue'
 
-import { createDatePicker } from '../../../../../src'
+import { createDatePicker } from 'better-datepicker'
 
 export default defineComponent({
   name: 'datepicker',
-  props:{
+  props: {
     placeholder: String,
-    type: String
+    type: String,
   },
   data() {
     return {
@@ -25,11 +25,11 @@ export default defineComponent({
   },
   beforeUnmount() {
     this.datepicker.destroyed()
-  }
+  },
 })
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 @keyframes spin {
   0% {
     transform: rotate(0deg);

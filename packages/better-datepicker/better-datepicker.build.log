@@ -1,0 +1,13 @@
+Invoking: tsc --module commonjs && rollup -c build/rollup.config.ts && npm run build:locale && npm run build:css &&  rm -rf .rpt2_cache 
+
+
+src/index.ts → dist/betterDatePicker.umd.js, dist/betterDatePicker.es5.js...
+(!) Circular dependencies
+src/core/watch/date/type/public.ts -> src/core/watch/date/type/month&year/public.ts -> src/core/watch/date/type/public.ts
+src/core/watch/date/type/date&week/public.ts -> src/core/watch/date/type/public.ts -> src/core/watch/date/type/date&week/public.ts
+created dist/betterDatePicker.umd.js, dist/betterDatePicker.es5.js in 3s
+
+> better-datepicker@0.2.3 build:locale
+> tsc build/locales.ts && node build/locales.js && rm -rf build/locales.js
+
+Killed

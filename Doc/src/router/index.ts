@@ -3,8 +3,7 @@ import Enter from '../components/Enter'
 import Document from '../components/Document'
 import NProgress from 'nprogress'
 import { routeConfig } from './config'
-import { isObject } from '../../../src/utils/typeOf'
-import { has } from '../../../src/utils/typeOf'
+import { has } from 'better-datepicker/src/utils/typeOf'
 
 const history = createWebHashHistory()
 

@@ -1,36 +1,36 @@
 <template>
-  <svg class="b-icon" :style="{'font-size':fontSize + 'px',fill}">
+  <svg class="b-icon" :style="{ 'font-size': fontSize + 'px', fill }">
     <use :xlink:href="`#icon-${name}`"></use>
   </svg>
 </template>
 
 <script lang="ts">
 import '../../../assets/svg/svg'
-import {defineComponent, toRefs} from 'vue'
-import {isNumber} from "../../../../../src/utils/typeOf"
+import { defineComponent, toRefs } from 'vue'
+import { isNumber } from 'better-datepicker/src/utils/typeOf'
 
 export default defineComponent({
   name: 'b-icon',
   props: {
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     fontSize: {
       type: [String, Number],
-      default: 20
+      default: 20,
     },
     fill: {
       type: String,
-      default: '#ffffff'
-    }
+      default: '#ffffff',
+    },
   },
   setup(props) {
-    let {fontSize} = toRefs(props)
+    let { fontSize } = toRefs(props)
     return {
-      fontSize
+      fontSize,
     }
-  }
+  },
 })
 </script>
 

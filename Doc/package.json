@@ -1,0 +1,29 @@
+{
+  "name": "better-datepicker-doc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "vite": "^2.1.2",
+    "vite-plugin-md": "^0.11.0",
+    "vue": "^3.0.5",
+    "vue-router": "4.0.4",
+    "better-datepicker": "~0.2.3",
+    "element-plus": "^1.0.2-beta.35",
+    "nprogress": "^0.2.0",
+    "highlight.js": "^9.16.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.1.4",
+    "@vue/compiler-sfc": "^3.0.5"
+  },
+  "keywords": [],
+  "author": "jacket",
+  "license": "ISC"
+}

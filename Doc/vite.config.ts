@@ -1,8 +1,8 @@
 import Vue from '@vitejs/plugin-vue'
-import md from './Doc/src/plugins/md-loader'
+import md from './src/plugins/md-loader'
 
 export default {
-  root: './Doc',
+  root: './',
   server: {
     port: 8848,
   },

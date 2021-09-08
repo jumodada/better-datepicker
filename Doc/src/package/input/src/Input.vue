@@ -1,29 +1,30 @@
 <template>
   <div class="b-input" :for="id">
     <input
-        class="f-form-placeholder"
-        :id="id"
-        :style="style"
-        :autocomplete="autocomplete"
-        :spellcheck="spellcheck"
-        :wrap="wrap"
-        :value="value"
-        :disabled="disabled"
-        :readonly="readonly"
-        :maxlength="maxLength"
-        :placeholder="placeholder"
-        @input="handleInput"
-        @change="$emit('change',$event.target.value)"
-        @blur="$emit('blur',$event.target.value)"
-        @focus="$emit('focus',$event.target.value)"
-        type="text">
+      class="f-form-placeholder"
+      :id="id"
+      :style="style"
+      :autocomplete="autocomplete"
+      :spellcheck="spellcheck"
+      :wrap="wrap"
+      :value="value"
+      :disabled="disabled"
+      :readonly="readonly"
+      :maxlength="maxLength"
+      :placeholder="placeholder"
+      @input="handleInput"
+      @change="$emit('change', $event.target.value)"
+      @blur="$emit('blur', $event.target.value)"
+      @focus="$emit('focus', $event.target.value)"
+      type="text"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import '../../../assets/svg/svg'
-import {defineComponent, toRefs} from 'vue'
-import {isNumber} from "../../../../../src/utils/typeOf"
+import { defineComponent, toRefs } from 'vue'
+import { isNumber } from 'better-datepicker/dist/lib/utils/typeOf'
 
 export default defineComponent({
   name: 'Input',
@@ -32,7 +33,7 @@ export default defineComponent({
     name: String,
     width: {
       type: [Number, String],
-      default: 200
+      default: 200,
     },
     value: String,
     maxLength: Number,
@@ -40,74 +41,75 @@ export default defineComponent({
     size: {
       type: String,
       default: 'normal',
-      validator: (val: string) => ['normal', 'large', 'small'].indexOf(val) > -1
+      validator: (val: string) =>
+        ['normal', 'large', 'small'].indexOf(val) > -1,
     },
     rows: {
       type: Number,
-      default: 2
+      default: 2,
     },
     clearable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     spellcheck: {
       type: Boolean,
-      default: false
+      default: false,
     },
     wrap: {
-      default: 'soft'
+      default: 'soft',
     },
     autocomplete: {
       type: String,
-      default: 'off'
+      default: 'off',
     },
     showLimit: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showLimitOutside: {
       type: Boolean,
-      default: false
+      default: false,
     },
     type: {
       type: String,
-      default: 'text'
+      default: 'text',
     },
     icon: String,
     iconPosition: {
       type: String,
-      default: 'left'
+      default: 'left',
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     readonly: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
   setup(props) {
-    const {width} = toRefs(props)
+    const { width } = toRefs(props)
     let computedWidth = width.value
     if (isNumber(width.value)) computedWidth += 'px'
     return {
       style: {
-        width: computedWidth
-      }
+        width: computedWidth,
+      },
     }
   },
   methods: {
     handleInput(e: any) {
-      let {value} = e.target
+      let { value } = e.target
       this.$emit('input', value)
-    }
-  }
+    },
+  },
 })
 </script>
 
 <style scoped lang="scss">
-@import "./Doc/src/assets/style/global";
+@import './src/assets/style/global';
 
 $input-height: 27px;
 $input-large-height: 30px;
@@ -119,7 +121,7 @@ $input-small-height: 24px;
   position: relative;
 
   > :not(:last-child) {
-    margin-right: .3em;
+    margin-right: 0.3em;
   }
 
   .cloak {
@@ -157,7 +159,7 @@ $input-small-height: 24px;
     padding: 0 8px;
     letter-spacing: 1px;
     font-size: inherit;
-    transition: .23s box-shadow ease;
+    transition: 0.23s box-shadow ease;
 
     &::-webkit-input-placeholder {
       color: $grey-3;
@@ -189,9 +191,7 @@ $input-small-height: 24px;
 
     &.error {
       border-color: $error-1;
-
     }
-
   }
 
   textarea {
@@ -201,14 +201,16 @@ $input-small-height: 24px;
   }
 
   &-large {
-    input, textarea {
+    input,
+    textarea {
       height: $input-large-height;
       font-size: $font-size-large;
     }
   }
 
   &-small {
-    input, textarea {
+    input,
+    textarea {
       height: $input-small-height;
       font-size: $font-size-small;
     }
@@ -258,7 +260,8 @@ $input-small-height: 24px;
     -ms-user-select: none;
     user-select: none;
 
-    input, textarea {
+    input,
+    textarea {
       background-color: $grey-2;
     }
   }
@@ -267,5 +270,4 @@ $input-small-height: 24px;
     color: $red;
   }
 }
-
 </style>

@@ -5,14 +5,20 @@
     <div class="theme-color-picker">
       <datepicker-demo :cssLists="cssLists"></datepicker-demo>
       <div class="theme-ul">
-        <li v-for="(list,idx) in cssLists">
-          <div class="color-card" @click="selectColor(idx)" :style="{background: list.value}">
+        <li v-for="(list, idx) in cssLists">
+          <div
+            class="color-card"
+            @click="selectColor(idx)"
+            :style="{ background: list.value }"
+          >
             <div class="cloak">
               {{ list.label }}
             </div>
           </div>
-          <el-color-picker style="visibility: hidden;position: relative;width: 0;height: 0"
-                           v-model="list.value"></el-color-picker>
+          <el-color-picker
+            style="visibility: hidden; position: relative; width: 0; height: 0"
+            v-model="list.value"
+          ></el-color-picker>
         </li>
       </div>
     </div>
@@ -21,7 +27,7 @@
 
 <script lang="ts">
 import '../../../assets/svg/svg'
-import {defineComponent, reactive} from 'vue'
+import { defineComponent, reactive } from 'vue'
 
 export default defineComponent({
   name: 'theme-card',
@@ -30,32 +36,32 @@ export default defineComponent({
       {
         value: '#2ECC71',
         originVal: '#2ECC71',
-        label: 'theme'
+        label: 'theme',
       },
       {
         value: '#eafaf1',
         originVal: '#eafaf1',
-        label: 'range'
+        label: 'range',
       },
       {
         value: '#858585',
         originVal: '#858585',
-        label: 'header'
+        label: 'header',
       },
       {
         value: '#969595',
         originVal: '#969595',
-        label: 'th'
+        label: 'th',
       },
       {
         value: '#5f5f5f',
         originVal: '#5f5f5f',
-        label: 'tbody'
+        label: 'tbody',
       },
     ])
 
     function reset() {
-      cssLists.forEach(item => item.value = item.originVal)
+      cssLists.forEach((item) => (item.value = item.originVal))
     }
 
     function transform(source: any) {
@@ -66,7 +72,7 @@ export default defineComponent({
 
     function download(res: any) {
       const source = transform(res.default)
-      const blob = new Blob([source], {type: 'text/css'})
+      const blob = new Blob([source], { type: 'text/css' })
       const a = document.createElement('a')
       a.href = URL.createObjectURL(blob)
       a.setAttribute('download', 'datepicker.css')
@@ -76,23 +82,28 @@ export default defineComponent({
     }
 
     function downloadCss() {
-      import('../../../../../src/assets/date-picker.scss').then(res => {
+      import(
+        '../../../../../packages/better-datepicker/src/assets/date-picker.scss'
+      ).then((res) => {
         download(res)
       })
-
     }
 
     return {
       reset,
       cssLists,
-      downloadCss
+      downloadCss,
     }
   },
   methods: {
     selectColor(idx: number) {
-      (document.querySelectorAll('.el-color-picker__trigger')[idx] as HTMLElement).click()
-    }
-  }
+      ;(
+        document.querySelectorAll('.el-color-picker__trigger')[
+          idx
+        ] as HTMLElement
+      ).click()
+    },
+  },
 })
 </script>
 
@@ -154,12 +165,11 @@ $width: 60px;
             position: absolute;
             left: 0;
             bottom: 0;
-            opacity: .3;
+            opacity: 0.3;
             border-bottom-left-radius: 8px;
             border-bottom-right-radius: 8px;
           }
         }
-
       }
     }
   }

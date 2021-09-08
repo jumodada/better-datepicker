@@ -1,10 +1,10 @@
 <template>
-  <div class='demo-card'>
-    <div class='demo-card-codeBox-wrapper'>
+  <div class="demo-card">
+    <div class="demo-card-codeBox-wrapper">
       <slot></slot>
-      <div class='demo-card-codeBox-button'>
-<!--        <span :class='{active:index ===activeIndex}' @click='openActive(index)'-->
-<!--              v-for='(item,index) in buttonGroup'>{{ item }}</span>-->
+      <div class="demo-card-codeBox-button">
+        <!--        <span :class='{active:index ===activeIndex}' @click='openActive(index)'-->
+        <!--              v-for='(item,index) in buttonGroup'>{{ item }}</span>-->
       </div>
       <!--      <div :class="{fixedHeight: buttonGroup.length>1}" class="demo-card-codeBox">-->
       <!--&lt;!&ndash;        <div ref="code" v-show="activeIndex===0">&ndash;&gt;-->
@@ -14,14 +14,14 @@
       <!--          <slot name="Result"></slot>-->
       <!--        </div>-->
       <!--      </div>-->
-      <div class='demo-card-result'>
-        <slot name='Result'></slot>
+      <div class="demo-card-result">
+        <slot name="Result"></slot>
       </div>
     </div>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import '../../../assets/svg/svg'
 import { defineComponent, toRefs, ref } from 'vue'
 
@@ -42,14 +42,12 @@ export default defineComponent({
     },
   },
   data() {
-    return {
-
-    }
+    return {}
   },
   setup(props) {
     let { fontSize } = toRefs(props)
     const activeIndex = ref(0)
-    const openActive = (idx: number) => activeIndex.value = idx
+    const openActive = (idx: number) => (activeIndex.value = idx)
     return {
       fontSize,
       activeIndex,
@@ -60,13 +58,12 @@ export default defineComponent({
     if (!this.$slots.Result()[0].children) {
       this.buttonGroup = []
     }
-
   },
 })
 </script>
 
-<style lang='scss'>
-@import "./Doc/src/assets/style/color";
+<style lang="scss">
+@import './src/assets/style/color';
 
 .demo {
   width: 100%;
@@ -131,7 +128,7 @@ export default defineComponent({
       }
     }
 
-    &-codeBox {;
+    &-codeBox {
       overflow-y: auto;
       overflow-x: hidden;
       position: relative;
@@ -166,5 +163,4 @@ export default defineComponent({
     display: inline-block;
   }
 }
-
 </style>
