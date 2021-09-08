@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="20ed3d7f-b119-4ad8-befe-6fe7395c4119" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/example-options.1a52d493.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/example-options.d746ede5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/highlightjs-vue.288ed10b.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/index.6acdcbff.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/better-datepicker.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/example-options.7d431657.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/example-options.98ce0807.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/example.e01dbd27.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/example.f448e100.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/index.59db3fe0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/index.e1246a54.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/index.b7fde325.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="gh-pages" />
+                    <option name="lastUsedInstant" value="1631062639" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1631010538" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="ProjectId" id="1wRPCqZ5obkhHMYr6KFYMhzfUle" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="Push.Settings">
+    <force-push-targets>
+      <force-push-target remote-path="origin" branch="main" />
+    </force-push-targets>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Doc/src/views/zh" />
+      <recent name="$PROJECT_DIR$/Doc/src/package/my-dem-preview" />
+      <recent name="$PROJECT_DIR$/Doc/src/package/datepicker" />
+      <recent name="$PROJECT_DIR$/Doc/src/views/en" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.build:demo">
+    <configuration name="build:demo" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build:demo" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.build:demo" />
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="20ed3d7f-b119-4ad8-befe-6fe7395c4119" name="Default Changelist" comment="" />
+      <created>1628418305954</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1628418305954</updated>
+      <workItem from="1628418310055" duration="3190000" />
+      <workItem from="1628471104599" duration="641000" />
+      <workItem from="1628509898191" duration="6635000" />
+      <workItem from="1628684913187" duration="218000" />
+      <workItem from="1628685171715" duration="561000" />
+      <workItem from="1628729150722" duration="367000" />
+      <workItem from="1628732190579" duration="360000" />
+      <workItem from="1628855383496" duration="14032000" />
+      <workItem from="1629031046055" duration="3268000" />
+      <workItem from="1629034774799" duration="1511000" />
+      <workItem from="1629037785022" duration="2021000" />
+      <workItem from="1629075874320" duration="1849000" />
+      <workItem from="1629087925998" duration="765000" />
+      <workItem from="1629101397597" duration="4001000" />
+      <workItem from="1629106612953" duration="33000" />
+      <workItem from="1629106691299" duration="635000" />
+      <workItem from="1629107678161" duration="583000" />
+      <workItem from="1629525115426" duration="11904000" />
+      <workItem from="1629555176307" duration="3235000" />
+      <workItem from="1629601855906" duration="8736000" />
+      <workItem from="1629679489837" duration="778000" />
+      <workItem from="1629693829111" duration="4014000" />
+      <workItem from="1629776188107" duration="389000" />
+      <workItem from="1629947695478" duration="1507000" />
+      <workItem from="1630025145586" duration="119000" />
+      <workItem from="1630237634613" duration="8283000" />
+      <workItem from="1630284977003" duration="642000" />
+      <workItem from="1630378805268" duration="35000" />
+      <workItem from="1630629671759" duration="5741000" />
+      <workItem from="1630722752738" duration="42166000" />
+      <workItem from="1630887860856" duration="799000" />
+      <workItem from="1630893179990" duration="253000" />
+      <workItem from="1630908254751" duration="1000" />
+      <workItem from="1630908327344" duration="27000" />
+      <workItem from="1630993932204" duration="14529000" />
+      <workItem from="1631061637139" duration="1003000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/build/locales.js" />
+        <option value="$PROJECT_DIR$/build/locales.js" />
+        <option value="$PROJECT_DIR$/build/locales.js" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/store/modules/options.ts</url>
+          <line>28</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
