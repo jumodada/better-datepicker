@@ -5,7 +5,6 @@ import { useComponent } from './package'
 import highlightJs from 'highlight.js'
 import './assets/style/index.scss'
 import 'element-plus/lib/theme-chalk/index.css'
-
 import './assets/style/el-message.css'
 import { createDatePicker, locale, defaultOptions, destroy } from '../../src'
 import NProgress from 'nprogress'
@@ -24,6 +23,9 @@ NProgress.configure({
   showSpinner: true,
   trickleSpeed: 200,
 })
+
+
+highlightJs.initHighlightingOnLoad();
 
 const app = createApp(App)
 useComponent(app)
