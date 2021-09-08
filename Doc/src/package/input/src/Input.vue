@@ -24,7 +24,7 @@
 <script lang="ts">
 import '../../../assets/svg/svg'
 import { defineComponent, toRefs } from 'vue'
-import { isNumber } from 'better-datepicker/dist/lib/utils/typeOf'
+import { isNumber } from 'better-datepicker/src/utils/typeOf'
 
 export default defineComponent({
   name: 'Input',

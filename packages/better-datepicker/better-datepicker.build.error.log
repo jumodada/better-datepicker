@@ -3,5 +3,14 @@ src/index.ts → dist/betterDatePicker.umd.js, dist/betterDatePicker.es5.js...
 (!) Circular dependencies
 src/core/watch/date/type/public.ts -> src/core/watch/date/type/month&year/public.ts -> src/core/watch/date/type/public.ts
 src/core/watch/date/type/date&week/public.ts -> src/core/watch/date/type/public.ts -> src/core/watch/date/type/date&week/public.ts
-created dist/betterDatePicker.umd.js, dist/betterDatePicker.es5.js in 3s
-Killed
+created dist/betterDatePicker.umd.js, dist/betterDatePicker.es5.js in 5.9s
+/home/xiaomu/code/github/js-monkey/better-datepicker/packages/better-datepicker/build/locales.js:114
+                                throw error;
+                                ^
+
+[Error: ENOENT: no such file or directory, open '../dist/index.d.ts'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../dist/index.d.ts'
+}

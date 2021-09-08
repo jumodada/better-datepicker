@@ -4,7 +4,7 @@
   "description": "better-datepicker",
   "main": "dist/betterDatePicker.umd.js",
   "module": "dist/betterDatePicker.es5.js",
-  "typings": "dist/types",
+  "types": "dist/types",
   "scripts": {
     "build:css": "tsc  build/gulpfile.ts && gulp build --gulpfile build/gulpfile.js && rm -rf build/gulpfile.js",
     "prebp": "rimraf dist",
@@ -65,7 +65,8 @@
     "tslib": "^2.3.1",
     "typescript": "^4.3.5",
     "@types/node": "~16.7.13",
-    "lodash.camelcase": "~4.3.0"
+    "lodash.camelcase": "~4.3.0",
+    "ts-node": "~10.2.1"
   },
   "repository": {
     "type": "git",
