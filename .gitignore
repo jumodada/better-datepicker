@@ -12,6 +12,7 @@ dist
 
 # Logs
 
+packages/**/*.log
 _.log
 npm-debug.log_
 yarn-debug.log*

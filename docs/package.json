@@ -17,7 +17,8 @@
     "better-datepicker": "~0.2.3",
     "element-plus": "^1.0.2-beta.35",
     "nprogress": "^0.2.0",
-    "highlight.js": "^9.16.2"
+    "highlight.js": "^9.16.2",
+    "@better-datepicker/utils": "~0.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.1.4",

@@ -382,13 +382,27 @@
   "projects": [
     {
       "packageName": "better-datepicker-doc",
-      "projectFolder": "Doc",
-      "shouldPublish": false
+      "projectFolder": "docs"
     },
     {
       "packageName": "better-datepicker",
-      "projectFolder": "packages/better-datepicker",
-      "shouldPublish": true
+      "projectFolder": "packages/better-datepicker"
+    },
+    {
+      "packageName": "@better-datepicker/core",
+      "projectFolder": "packages/core"
+    },
+    {
+      "packageName": "@better-datepicker/utils",
+      "projectFolder": "packages/utils"
+    },
+    {
+      "packageName": "@better-datepicker/observer",
+      "projectFolder": "packages/observer"
+    },
+    {
+      "packageName": "@better-datepicker/store",
+      "projectFolder": "packages/store"
     }
     // {
     //   /**
