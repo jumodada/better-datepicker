@@ -52,7 +52,7 @@
     "typescript": "^4.4.2"
   },
   "dependencies": {
-    "@better-datepicker/observer": "~0.1.0",
-    "@better-datepicker/store": "~0.1.0"
+    "@better-datepicker/observer": "workspace:~0.1.0",
+    "@better-datepicker/store": "workspace:~0.1.0"
   }
 }

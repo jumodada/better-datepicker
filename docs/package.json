@@ -14,11 +14,11 @@
     "vite-plugin-md": "^0.11.0",
     "vue": "^3.0.5",
     "vue-router": "4.0.4",
-    "better-datepicker": "~0.2.3",
+    "better-datepicker": "workspace:~0.2.3",
     "element-plus": "^1.0.2-beta.35",
     "nprogress": "^0.2.0",
     "highlight.js": "^9.16.2",
-    "@better-datepicker/utils": "~0.1.0"
+    "@better-datepicker/utils": "workspace:~0.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.1.4",
