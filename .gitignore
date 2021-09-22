@@ -17,6 +17,7 @@ _.log
 npm-debug.log_
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
 # Runtime data
 
