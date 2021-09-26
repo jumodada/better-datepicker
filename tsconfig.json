@@ -19,6 +19,6 @@
     ]
   },
   "include": [
-    "./src"
+    "./packages"
   ]
 }

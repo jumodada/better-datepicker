@@ -1,0 +1,22 @@
+{
+  "name": "better-datepicker",
+  "version": "0.2.3",
+  "description": "better-datepicker",
+  "main": "dist/core.js",
+  "module": "dist/core.esm.js",
+  "typings": "dist/types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumodada/better-datepicker.git",
+    "directory": "packages/better-datepicker"
+  },
+  "author": "jumodada",
+  "license": "MIT",
+  "dependencies": {
+    "@better-datepicker/core": "^0.2.3"
+  },
+  "bugs": {
+    "url": "https://github.com/jumodada/better-datepicker/issues"
+  },
+  "homepage": "https://github.com/jumodada/better-datepicker#readme"
+}

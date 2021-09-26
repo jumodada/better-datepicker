@@ -1,0 +1,46 @@
+{
+  "name": "@better-datepicker/core",
+  "version": "0.2.3",
+  "description": "better-datepicker",
+  "main": "dist/core.umd.js",
+  "module": "dist/core.es5.js",
+  "typings": "dist/types/index.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build:demo": "vite build",
+    "serve": "vite preview",
+    "build:css": "tsc  build/gulpfile.ts && gulp build --gulpfile build/gulpfile.js && rm -rf build/gulpfile.js",
+    "prebp": "rimraf dist",
+    "build": "tsc --module commonjs && rollup -c build/rollup.config.ts && npm run build:locale && npm run build:css &&  rm -rf .rpt2_cache",
+    "build:locale": "tsc build/locales.ts && node build/locales.js && rm -rf build/locales.js",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch",
+    "test:prod": "npm run lint && npm run test -- --no-cache",
+    "lint": "eslint src --fix --ext .ts,.tsx"
+  },
+  "jest": {
+    "preset": "./build/jest.config.ts"
+  },
+  "lint-staged": {
+    "{src,test}/**/*.ts": [
+      "eslint",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumodada/better-datepicker.git",
+    "directory": "packages/core"
+  },
+  "author": "jumodada",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jumodada/better-datepicker/issues"
+  },
+  "homepage": "https://github.com/jumodada/better-datepicker#readme"
+}
