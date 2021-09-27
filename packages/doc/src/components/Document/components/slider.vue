@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import "./Doc/src/assets/style/global";
+@import "./src/assets/style/global";
 
 .slider {
   width: 210px;

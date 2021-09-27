@@ -2,8 +2,8 @@
   "name": "@better-datepicker/core",
   "version": "0.2.3",
   "description": "better-datepicker",
-  "main": "dist/core.umd.js",
-  "module": "dist/core.es5.js",
+  "main": "dist/core.esm.js",
+  "module": "dist/core.esm.js",
   "typings": "dist/types/index.d.ts",
   "scripts": {
     "dev": "vite",

@@ -3,14 +3,12 @@ import Enter from '../components/Enter'
 import Document from '../components/Document'
 import NProgress from 'nprogress'
 import { routeConfig } from './config'
-import { isObject } from '../../../../src/utils/typeOf'
-import { has } from '../../../../src/utils/typeOf'
 
 const history = createWebHashHistory()
 
 function createRoute(lang: string, lists: any[]) {
   const createChild = (list: any) => {
-    const isSecondLevel = has(list.path, '-')
+    const isSecondLevel =  list.path.indexOf('-') > -1
     console.log(list.name, import(`../views/${lang}/${list.path}.md`))
     return {
       path: list.path,

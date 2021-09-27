@@ -23,7 +23,6 @@
 <script lang="ts">
 import '../../../assets/svg/svg'
 import {defineComponent, toRefs} from 'vue'
-import {isNumber} from "../../../../../../src/utils/typeOf"
 
 export default defineComponent({
   name: 'Input',
@@ -90,7 +89,7 @@ export default defineComponent({
   setup(props) {
     const {width} = toRefs(props)
     let computedWidth = width.value
-    if (isNumber(width.value)) computedWidth += 'px'
+    if (typeof width.value ==='number') computedWidth += 'px'
     return {
       style: {
         width: computedWidth

@@ -6,7 +6,7 @@
 import '../../../assets/svg/svg'
 import { defineComponent, toRefs } from 'vue'
 
-import { createDatePicker } from '../../../../../../src'
+ import { createDatePicker } from 'better-datepicker'
 
 export default defineComponent({
   name: 'datepicker',

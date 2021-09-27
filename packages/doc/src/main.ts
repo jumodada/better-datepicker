@@ -6,7 +6,7 @@ import highlightJs from 'highlight.js'
 import './assets/style/index.scss'
 import 'element-plus/lib/theme-chalk/index.css'
 import './assets/style/el-message.css'
-import { createDatePicker, locale, defaultOptions, destroy } from '../../../src'
+import {createDatePicker} from 'better-datepicker'
 import NProgress from 'nprogress'
 import { useElementComponent } from './useElementComponent'
 // import xx from '../../dist/locale_es/zh-cn'
@@ -41,7 +41,7 @@ Router.afterEach((event) => {
   nextTick(() =>
     document
       .querySelectorAll('pre code')
-      .forEach((block) => highlightJs.highlightBlock(block))
+      .forEach((block) => highlightJs.highlightBlock(block as any))
   )
 })
 app.use(Router)

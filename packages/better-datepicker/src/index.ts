@@ -1,2 +1,6 @@
-import * as BD from '@better-datepicker/core'
-export default BD
+export {
+  createDatePicker,
+  defaultOptions,
+  destroy,
+  locale
+} from '@better-datepicker/core'

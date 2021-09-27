@@ -17,7 +17,7 @@ const getConfig = (name) => {
         format: 'umd',
         sourcemap: false,
       },
-      { file: `${dir}/dist/${name}.esm.js`, sourcemap: false,format: 'esm' },
+      { file: `${dir}/dist/${name}.esm.js`, sourcemap: false,format: 'es' },
     ],
     external: [],
     plugins: [

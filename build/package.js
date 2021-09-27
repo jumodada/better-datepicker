@@ -1,4 +1,5 @@
 const fs = require('fs')
+const fsExtra = require('fs-extra')
 const path = require('path')
 const { rollup } = require('rollup')
 const getConfig = require('./rollup.config')
@@ -11,16 +12,10 @@ function getFilesName() {
   return fs.readdirSync(resolve('packages'))
 }
 
-// const cc = {
-//   file: resolve(`packages/${name}/dist/${name}${type.ext}`),
-//   name,
-//   format: type.format,
-// }
-
 function build() {
   const filesName = getFilesName()
   // test
-  filesName.filter((_, idx) => idx === 1).forEach(name => {
+  filesName.filter((_, idx) => idx !== filesName.length-1).forEach(name => {
     const config = getConfig(name)
     config.output.forEach(item=>{
       rollup(config).then((bundle) => {
@@ -29,12 +24,23 @@ function build() {
         })
       })
     })
-
   })
 }
 
 function copyTypingFile(name) {
-  fs.copyFileSync(`./dist/types/${name}`, `./packages/${name}/dist/types` )
+  fsExtra.remove('./packages/${name}/dist', err => {
+    if (err) return console.error(err)
+  })
+  fsExtra.copy(`./dist/types/${name}/src`,`./packages/${name}/dist/types`, function (err) {
+    if (err)  console.error(err)
+  });
+}
+
+function removeDistFolder(){
+  fsExtra.remove('./dist', err => {
+    if (err) return console.error(err)
+    console.log('success!')
+  })
 }
 
 build()

@@ -2,8 +2,8 @@
   "name": "better-datepicker",
   "version": "0.2.3",
   "description": "better-datepicker",
-  "main": "dist/core.js",
-  "module": "dist/core.esm.js",
+  "main": "dist/better-datepicker.esm.js",
+  "module": "dist/better-datepicker.esm.js",
   "typings": "dist/types/index.d.ts",
   "repository": {
     "type": "git",
