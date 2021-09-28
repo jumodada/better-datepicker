@@ -6,6 +6,11 @@ export default {
   server: {
     port: 8848,
   },
+  // resolve:{
+  //     alias: [
+  //       { find: '@better-datepicker/core', replacement: '../core/src' }
+  //     ],
+  // },
   build: {
     rollupOptions: {
       output: {

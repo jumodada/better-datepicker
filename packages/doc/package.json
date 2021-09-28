@@ -10,7 +10,6 @@
     "doc-serve": "vite preview"
   },
   "devDependencies": {
-    "better-datepicker": "^0.2.3",
     "@types/gulp-dart-sass": "^1.0.0",
     "@types/gulp-rename": "^2.0.0",
     "@types/jest": "^25.2.1",

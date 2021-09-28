@@ -7,9 +7,10 @@ import './assets/style/index.scss'
 import 'element-plus/lib/theme-chalk/index.css'
 import './assets/style/el-message.css'
 import {createDatePicker} from 'better-datepicker'
+console.log(createDatePicker)
 import NProgress from 'nprogress'
 import { useElementComponent } from './useElementComponent'
-// import xx from '../../dist/locale_es/zh-cn'
+//import xx from '../../dist/locale_es/zh-cn'
 // locale(xx)
 // defaultOptions({
 //     themeColor: '#1890ff',
@@ -17,13 +18,14 @@ import { useElementComponent } from './useElementComponent'
 //     tdColor: '#5f5f5f',
 //     thColor: '#5f5f5f',
 // })
+// import * as xxxx from 'xx'
+
 NProgress.configure({
   easing: 'ease',
   speed: 200,
   showSpinner: true,
   trickleSpeed: 200,
 })
-
 
 highlightJs.initHighlightingOnLoad();
 

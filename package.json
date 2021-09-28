@@ -21,15 +21,9 @@
   "jest": {
     "preset": "./build/jest.config.ts"
   },
-  "lint-staged": {
-    "{src,test}/**/*.ts": [
-      "eslint",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
     }
   },
   "devDependencies": {
@@ -49,9 +43,13 @@
     "gulp-dart-sass": "^1.0.2",
     "gulp-rename": "^2.0.0",
     "gulp-uglify": "^3.0.2",
-    "husky": "^7.0.1",
+    "husky": "^7.0.2",
+    "inquirer": "^8.1.5",
     "jest": "^25.0.0",
     "jest-config": "^25.0.0",
+    "lerna": "^3.20.2",
+    "lint-staged": ">=10",
+    "log-symbols": "^5.0.0",
     "nprogress": "^0.2.0",
     "prettier": "^2.3.2",
     "rollup": "^2.37.1",
@@ -65,11 +63,8 @@
     "ts-jest": "^25.4.0",
     "tslib": "^2.3.1",
     "typescript": "^4.3.5",
-    "lerna": "^3.20.2",
-    "inquirer": "^8.1.5",
     "ora": "^6.0.1",
     "rimraf": "^3.0.2",
-    "log-symbols": "^5.0.0",
     "fs-extra": "^9.1.0"
   },
   "repository": {
@@ -81,5 +76,8 @@
   "bugs": {
     "url": "https://github.com/jumodada/better-datepicker/issues"
   },
-  "homepage": "https://github.com/jumodada/better-datepicker#readme"
+  "homepage": "https://github.com/jumodada/better-datepicker#readme",
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --cache --fix"
+  }
 }

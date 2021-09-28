@@ -13,6 +13,7 @@ function getFilesName() {
 }
 
 function build() {
+
   const filesName = getFilesName()
   // test
   filesName.filter((_, idx) => idx !== filesName.length-1).forEach(name => {
@@ -28,9 +29,9 @@ function build() {
 }
 
 function copyTypingFile(name) {
-  fsExtra.remove('./packages/${name}/dist', err => {
-    if (err) return console.error(err)
-  })
+  // fsExtra.remove(`./packages/${name}/dist`, err => {
+  //   if (err) return console.error(err)
+  // })
   fsExtra.copy(`./dist/types/${name}/src`,`./packages/${name}/dist/types`, function (err) {
     if (err)  console.error(err)
   });
