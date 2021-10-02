@@ -18,7 +18,6 @@ import { useElementComponent } from './useElementComponent'
 //     tdColor: '#5f5f5f',
 //     thColor: '#5f5f5f',
 // })
-// import * as xxxx from 'xx'
 
 NProgress.configure({
   easing: 'ease',
