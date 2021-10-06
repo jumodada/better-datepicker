@@ -15,7 +15,8 @@
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
     "test:prod": "npm run lint && npm run test -- --no-cache",
-    "lint": "eslint src --fix --ext .ts,.tsx"
+    "lint": "eslint src --fix --ext .ts,.tsx",
+    "commit": "git cz"
   },
   "jest": {
     "preset": "./build/jest.config.js"
@@ -75,8 +76,5 @@
   "bugs": {
     "url": "https://github.com/jumodada/better-datepicker/issues"
   },
-  "homepage": "https://github.com/jumodada/better-datepicker#readme",
-  "lint-staged": {
-    "*.{ts,tsx}": "eslint --cache --fix"
-  }
+  "homepage": "https://github.com/jumodada/better-datepicker#readme"
 }
