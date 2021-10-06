@@ -10,6 +10,7 @@ import {createDatePicker} from 'better-datepicker'
 console.log(createDatePicker)
 import NProgress from 'nprogress'
 import { useElementComponent } from './useElementComponent'
+import '../../core/src/assets/date-picker.scss'
 //import xx from '../../dist/locale_es/zh-cn'
 // locale(xx)
 // defaultOptions({
