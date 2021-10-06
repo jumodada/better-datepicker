@@ -8,7 +8,7 @@ import {
     transformDate, transformDateToArray, isSame, getPre, getNext, isInRange, getYearWeek
 } from '../../src/utils/date'
 import {createDatePicker,locale} from '../../src'
-import zhCN from '../../locale/zh-cn'
+import zhCN from '../../../../locale/zh-cn'
 describe('Date', () => {
     const date = new Date('1999-9-1')
     const today = new Date()

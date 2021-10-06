@@ -19,7 +19,7 @@
     "lint": "eslint src --fix --ext .ts,.tsx"
   },
   "jest": {
-    "preset": "./build/jest.config.ts"
+    "preset": "./build/jest.config.js"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [

@@ -3,14 +3,7 @@ const fsExtra = require('fs-extra')
 const path = require('path')
 const { rollup } = require('rollup')
 const getConfig = require('./rollup.config')
-
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
-
-function getPackagesFilesName() {
-  return fs.readdirSync(resolve('packages'))
-}
+const {getPackagesFilesName} = require('./utils')
 
 function build() {
 

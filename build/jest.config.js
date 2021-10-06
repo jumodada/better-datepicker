@@ -1,3 +1,6 @@
+const {getPackagesFilesName} = require('./utils')
+const packagesName = getPackagesFilesName().filter((name)=>name !== 'doc' &&  name.indexOf('better') === -1)
+
 module.exports = {
     transform: {
         '.(ts|tsx)': 'ts-jest'
@@ -13,5 +16,9 @@ module.exports = {
             statements: 1
         }
     },
-    collectCoverageFrom: ['src/*.{ts}', 'src/**/*.{js,ts}']
+    collectCoverageFrom:packagesName.reduce(
+      (acc,name)=> {
+          return acc.concat([`packages/${name}/src/**/*.{ts,js}`,`packages/${name}/src/*.{ts,js}`])
+      }
+    ,[])
 }
