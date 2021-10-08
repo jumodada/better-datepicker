@@ -18,10 +18,5 @@ Object {
     "date",
   ],
   "name": "table",
-  "style": Object {
-    "padding": "5px 20px",
-    "text-align": "center",
-    "width": "320px",
-  },
 }
 `;

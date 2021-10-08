@@ -7,39 +7,31 @@ import { PopoverType, DateComponentsType } from '../../types/components'
 import { has } from '../../utils/typeOf'
 import { canIUseAnimation } from '../../utils/env'
 
+const componentType = {
+  date: {
+    start: [HeaderLeft, Day],
+    end: [HeaderRight, endDay],
+  },
+  month: {
+    start: [HeaderLeft, Month],
+    end: [HeaderRight, endMonth],
+  },
+  year: {
+    start: [HeaderLeft, Year],
+    end: [HeaderRight, endYear],
+  },
+}
 function rangeComponent(type: keyof DateComponentsType = 'month') {
-  const componentType = {
-    date: {
-      start: [HeaderLeft, Day],
-      end: [HeaderRight, endDay],
-    },
-    month: {
-      start: [HeaderLeft, Month],
-      end: [HeaderRight, endMonth],
-    },
-    year: {
-      start: [HeaderLeft, Year],
-      end: [HeaderRight, endYear],
-    },
-  }
+  const comp = componentType[type]
   return [
     {
-      style: {
-        width: '646px',
-      },
+      class: ['range-wrapper'],
       children: [
         {
-          style: {
-            display: 'inline-block',
-            'border-right': '1px solid #e4e4e4',
-          },
-          children: componentType[type].start,
+          children: comp.start,
         },
         {
-          style: {
-            display: 'inline-block',
-          },
-          children: componentType[type].end,
+          children: comp.end,
         },
       ],
     },
@@ -74,7 +66,7 @@ function listenToAnimation(pop: HTMLElement) {
   pop.style.display = 'none'
   if (canIUseAnimation()) {
     pop.addEventListener('animationend', (e) => {
-      pop.style.display = e.animationName === 'hidden' ? 'none' : 'inline-block'
+      pop.style.display = e.animationName === 'hidden' ? 'none' : ''
     })
   }
 }

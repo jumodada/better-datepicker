@@ -9,54 +9,55 @@ $border-color: #f1f0f0;
 $shadow-color: #737373;
 $shadow: 0 1px 6px $shadow-color;
 $transition: .3s all ease;
+
 .better-datepicker {
-  * {
-    box-sizing: border-box;
-    font-family: Futura, sans-serif;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
   &-wrapper {
     margin: 0;
     padding: 0;
     font-size: 14px;
-    list-style: none;
-    min-height: 200px;
     background-color: #ffffff;
     box-shadow: $shadow;
-    position: absolute;
-
     svg {
       fill: #858585;
       cursor: pointer;
       transition: $transition;
     }
+    table{
+      padding: 5px 20px;
+      text-align: center;
+      width: 320px;
+      table-layout: fixed;
+    }
+  }
+
+  &-range-wrapper{
+    display: inline-flex;
+    flex-wrap: nowrap;
+  }
+
+  &-cell{
+    width: 40px;
+    height: 40px;
+    padding: 2px 0;
   }
 
   &-header {
     height: 50px;
-    line-height: 26px;
-    padding: 12px 0;
-    margin: 0 12px;
-    text-align: center;
     font-weight: 500;
     font-size: 16px;
     color: $text-header-color;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
     span {
       transition: $transition;
       margin: 0 4px;
     }
 
-    svg {
-      margin-top: 5px;
-    }
   }
 
   &-date, &-month, &-year {
-    span {
+    span, td {
       cursor: pointer;
       color: $text-tbody-color;
 
@@ -65,13 +66,12 @@ $transition: .3s all ease;
       }
     }
 
-    td {
-      color: $text-tbody-color;
-      border-radius: 5px;
+    span {
+      cursor: pointer;
+    }
 
-      &:hover {
-        color: $theme-color;
-      }
+    td {
+      border-radius: 5px;
     }
   }
 
@@ -99,7 +99,6 @@ $transition: .3s all ease;
   }
 
   &-date {
-
     td, th {
       border: none;
       cursor: pointer;
@@ -185,7 +184,6 @@ $transition: .3s all ease;
     }
   }
 
-
   &-date &-pre, &-date &-next {
     color: $text-tbody-light-color;
 
@@ -194,7 +192,6 @@ $transition: .3s all ease;
       background: #ffffff;
     }
   }
-
 
   &-month, &-year {
     td {
@@ -274,21 +271,24 @@ $transition: .3s all ease;
     }
   }
 
-  &-date &-weekStart {
+  &-date &-weekStart, &-date &-weekEnd {
     > div {
       background: $theme-color;
+      color: white !important;
+    }
+  }
+
+  &-date &-weekStart {
+    > div {
       border-top-left-radius: 30px;
       border-bottom-left-radius: 30px;
-      color: white !important;
     }
   }
 
   &-date &-weekEnd {
     > div {
-      background: $theme-color;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
-      color: white !important;
     }
   }
 
@@ -297,5 +297,4 @@ $transition: .3s all ease;
       background: $range-color;
     }
   }
-
 }

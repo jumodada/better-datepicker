@@ -39,7 +39,7 @@ export function updatePopover(vis: boolean): void {
     sheetRule.forEach((r, idx) => ss.insertRule(r(el.style.transform), idx))
     el.style.animation = animation
   } else {
-    el.style.display = vis ? 'inline-block' : 'none'
+    el.style.display = vis ? '' : 'none'
   }
   resetRangStatus(this)
 }

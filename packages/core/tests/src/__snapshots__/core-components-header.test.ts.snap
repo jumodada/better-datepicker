@@ -10,10 +10,6 @@ Object {
   "class": Array [
     "header",
   ],
-  "style": Object {
-    "text-align": "center",
-    "width": "298px",
-  },
 }
 `;
 
@@ -27,10 +23,6 @@ Object {
   "class": Array [
     "header",
   ],
-  "style": Object {
-    "text-align": "center",
-    "width": "298px",
-  },
 }
 `;
 

@@ -10,12 +10,6 @@ import { getNext, getPre, transformDateToArray } from '../../utils/date'
 import { visible } from '../../utils/element'
 import { Sub } from '../../types/observer'
 
-export const utilStyle = {
-  'text-align': 'center',
-  padding: '5px 20px',
-  width: '320px',
-}
-
 const rangeClickEvent: RangeClickEvent = {
   complete: {
     plt: 'start',

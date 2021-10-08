@@ -183,10 +183,6 @@ export function Header(
   return {
     class: ['header'],
     children: headerChildren[t || 'main'],
-    style: {
-      width: '298px',
-      'text-align': 'center',
-    },
   }
 }
 

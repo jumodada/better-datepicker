@@ -1,5 +1,5 @@
 import { visible } from '../../../utils/element'
-import { canIShow, utilStyle } from '../utils'
+import { canIShow } from '../utils'
 import { State, RangeType } from '../../../types/store'
 import {
   ComponentsType,
@@ -88,7 +88,6 @@ export function YM(
       name: 'table',
       children: [tBody()],
       class: [componentName],
-      style: utilStyle,
       $style: canIShow((page: string) => visible(page === componentName)),
     }
   }
