@@ -3,8 +3,8 @@ import md from './src/plugins/md-loader'
 import fs from 'fs'
 import path from 'path'
 
-function resolve(dir: string){
-  return path.join(__dirname, '../..', dir)
+function resolve(dir: string) {
+  return path.join(__dirname, '..', dir)
 }
 
 function getPackagesFilesName() {
@@ -12,8 +12,9 @@ function getPackagesFilesName() {
 }
 
 function getAlias() {
-  return getPackagesFilesName().map(item=>{
-    const find = item.indexOf('better') > -1 ? item : `@better-datepicker/${item}`
+  return getPackagesFilesName().map((item) => {
+    const find =
+      item.indexOf('better') > -1 ? item : `@better-datepicker/${item}`
     return { find, replacement: find + '/src' }
   })
 }
@@ -23,8 +24,8 @@ export default {
   server: {
     port: 8848,
   },
-  resolve:{
-      alias: getAlias(),
+  resolve: {
+    alias: getAlias(),
   },
   build: {
     rollupOptions: {

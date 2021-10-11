@@ -16,7 +16,10 @@
     "outDir": "./dist/lib",
     "typeRoots": [
       "./node_modules/@types"
-    ]
+    ],
+    "paths": {
+      "@better-datepicker/*": ["packages/*/src"]
+    }
   },
   "include": [
     "./packages"

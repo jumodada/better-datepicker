@@ -6,11 +6,11 @@ import highlightJs from 'highlight.js'
 import './assets/style/index.scss'
 import 'element-plus/lib/theme-chalk/index.css'
 import './assets/style/el-message.css'
-import {createDatePicker} from 'better-datepicker'
+import { createDatePicker } from '../../packages/better-datepicker/src'
 console.log(createDatePicker)
 import NProgress from 'nprogress'
 import { useElementComponent } from './useElementComponent'
-import '../../core/src/assets/date-picker.scss'
+import '../../packages/core/src/assets/date-picker.scss'
 //import xx from '../../dist/locale_es/zh-cn'
 // locale(xx)
 // defaultOptions({
@@ -27,7 +27,7 @@ NProgress.configure({
   trickleSpeed: 200,
 })
 
-highlightJs.initHighlightingOnLoad();
+highlightJs.initHighlightingOnLoad()
 
 const app = createApp(App)
 useComponent(app)
