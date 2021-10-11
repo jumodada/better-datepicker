@@ -8,9 +8,9 @@
     "bootstrap": "lerna bootstrap",
     "start": "lerna run --stream --scope doc doc-dev",
     "docs:build": "lerna run --stream --scope doc doc-build",
-    "build": "node ./build/package.js",
-    "build:css": "gulp build --gulpfile build/gulpfile.js && rm -rf build/gulpfile.js",
-    "build:locale": "tsc build/locales.ts && node build/locales.js && rm -rf build/locales.js",
+    "build": "node ./scripts/package.js",
+    "build:css": "gulp build --gulpfile scripts/gulpfile.js && rm -rf scripts/gulpfile.js",
+    "build:locale": "tsc scripts/locales.ts && node scripts/locales.js && rm -rf scripts/locales.js",
     "prebp": "rimraf dist",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
@@ -19,7 +19,7 @@
     "commit": "git cz"
   },
   "jest": {
-    "preset": "./build/jest.config.js"
+    "preset": "./scripts/jest.config.js"
   },
   "config": {
     "commitizen": {
