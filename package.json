@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "start": "lerna run --stream --scope doc doc-dev",
+    "start": "cd ./doc && yarn run doc-dev",
     "docs:build": "lerna run --stream --scope doc doc-build",
     "build": "node ./scripts/package.js",
     "build:css": "gulp build --gulpfile scripts/gulpfile.js && rm -rf scripts/gulpfile.js",

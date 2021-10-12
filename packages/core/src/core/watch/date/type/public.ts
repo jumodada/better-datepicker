@@ -4,14 +4,13 @@ import {
   transformDateToArray,
   rangeSort,
   isDisabledDate,
-  isSame,
+  isSame, getWeekRange,
 } from '../../../../utils/date'
 import { Sub } from '../../../../types/observer'
 import { dispatchDateChange, getDate } from '../../../util/method'
 import { mergeClasses } from '../../../../utils/merge'
 import { DateComponentsType } from '../../../../types/components'
 import { has, not } from '../../../../utils/typeOf'
-import { dateStatus, weekStatus } from './date&week/public'
 import { GetStatusFunctionsType } from '../../../../types/core'
 
 export function rangeStatus(date: string): ComponentStatus {
@@ -47,6 +46,20 @@ export function yearStatus(date: string, idx: number): ComponentStatus {
     ? 'selected'
     : ''
 }
+
+export function dateStatus(date: string): ComponentStatus {
+  return this.start.date === date ? 'selected' : ''
+}
+
+export function weekStatus(curDate: Date): ComponentStatus {
+  const { date } = this.start
+  if (!date) return ''
+  const { start, end } = getWeekRange(this.start.date, this.locale.weekStart)
+  if (isSame(curDate, start, 3)) return 'weekStart'
+  if (isSame(curDate, end, 3)) return 'weekEnd'
+  return isAfter(curDate, start) && isAfter(end, curDate) ? 'inRangeWeek' : ''
+}
+
 
 export const startDate: Sub = {
   key: { name: 'start', childKey: ['date'] },
