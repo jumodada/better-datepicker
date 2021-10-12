@@ -15,5 +15,6 @@ module.exports = {
     'prefer-rest-params': 'off',
     semi: [0],
     'no-extra-semi': 2,
+    '@typescript-eslint/no-var-requires': 0
   },
 }
