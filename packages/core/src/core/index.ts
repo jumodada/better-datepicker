@@ -57,23 +57,26 @@ export default function Picker(): BetterPicker {
   }
 
   function create(options?: Partial<Options>): void {
-    state = createState(opt)
-    state.reference = reference
-    state.destroyed = destroyed
-    state.update = update
+    state = Object.assign(createState(opt), {
+      update,
+      destroyed,
+      reference,
+    })
     changeWeekFormat(options)
     watch(opt)
     addListener()
-    state.popover = createPopover(state)
+    createPopover(state)
   }
 
   function clear(): void {
-    if (state.reference) state.reference.value = ''
-    state.range.start =
-      state.range.end =
-      state.start.date =
-      state.end.date =
-        null
+    if (state.reference) {
+      state.reference.value = ''
+      state.range.start =
+        state.range.end =
+        state.start.date =
+        state.end.date =
+          null
+    }
   }
 
   function open(): void {
