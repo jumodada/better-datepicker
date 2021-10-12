@@ -4,13 +4,13 @@ import {
   transformDateToArray,
   rangeSort,
   isDisabledDate,
+  isSame,
 } from '../../../../utils/date'
 import { Sub } from '../../../../types/observer'
 import { dispatchDateChange, getDate } from '../../../util/method'
 import { mergeClasses } from '../../../../utils/merge'
 import { DateComponentsType } from '../../../../types/components'
 import { has, not } from '../../../../utils/typeOf'
-import { monthStatus, yearStatus } from './month&year/public'
 import { dateStatus, weekStatus } from './date&week/public'
 import { GetStatusFunctionsType } from '../../../../types/core'
 
@@ -32,6 +32,20 @@ export function rangeStatus(date: string): ComponentStatus {
   } else {
     return ''
   }
+}
+
+export function monthStatus(date: string): ComponentStatus {
+  return isSame(this.start.date, date) ? 'selected' : ''
+}
+
+export function yearStatus(date: string, idx: number): ComponentStatus {
+  return idx === 0
+    ? 'pre'
+    : idx === 11
+    ? 'next'
+    : isSame(this.start.date, date, 1)
+    ? 'selected'
+    : ''
 }
 
 export const startDate: Sub = {

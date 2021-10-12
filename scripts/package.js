@@ -3,35 +3,38 @@ const fsExtra = require('fs-extra')
 const path = require('path')
 const { rollup } = require('rollup')
 const getConfig = require('./rollup.config')
-const {getPackagesFilesName} = require('./utils')
+const { getPackagesFilesName } = require('./utils')
 
 function build() {
-
   const filesName = getPackagesFilesName()
-  // test
-  filesName.filter((_, idx) => idx !== filesName.length - 1).forEach(name => {
+  filesName.map((name) => {
     const config = getConfig(name)
-    config.output.forEach(item => {
-      rollup(config).then((bundle) => {
-        bundle.write(item).then(() => {
-          copyTypingFile(name)
+    return config.output.map((item) => {
+      return rollup(config)
+        .then((bundle) => {
+          return bundle.write(item).then(() => {
+            copyTypingFile(name)
+          })
         })
-      })
+        .catch((err) => {
+          console.log(err)
+        })
     })
   })
 }
 
 function copyTypingFile(name) {
-  // fsExtra.remove(`./packages/${name}/dist`, err => {
-  //   if (err) return console.error(err)
-  // })
-  fsExtra.copy(`./dist/types/${name}/src`, `./packages/${name}/dist/types`, function(err) {
-    if (err) console.error(err)
-  })
+  fsExtra.copy(
+    `./dist/types/packages/${name}/src`,
+    `./packages/${name}/dist/types`,
+    function (err) {
+      if (err && err.code === 'EEXIST') console.error(err)
+    }
+  )
 }
 
 function removeDistFolder() {
-  fsExtra.remove('./dist', err => {
+  fsExtra.remove('./dist', (err) => {
     if (err) return console.error(err)
     console.log('success!')
   })
