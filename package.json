@@ -2,11 +2,13 @@
   "name": "better-datepicker",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "doc"
   ],
   "scripts": {
+    "prepare": "husky install",
     "bootstrap": "lerna bootstrap",
-    "start": "cd ./doc && yarn run doc-dev",
+    "start": "lerna run --stream --scope doc doc-dev",
     "docs:build": "lerna run --stream --scope doc doc-build",
     "build": "node ./scripts/package.js",
     "build:css": "gulp build --gulpfile scripts/gulpfile.js && rm -rf scripts/gulpfile.js",
