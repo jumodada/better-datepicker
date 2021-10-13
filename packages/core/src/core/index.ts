@@ -16,7 +16,10 @@ import defaultOptions from './util/default-options'
 import { Bind } from '../utils/bind'
 
 export default function Picker(): BetterPicker {
-  let state: State, reference: HTMLInputElement, opt: Options
+  let state: State,
+    reference: HTMLInputElement,
+    opt: Options,
+    userConfig: Partial<Options> | undefined
   let onRef, offRef: Off, onBody, offBody: Off
 
   function openPopover() {
@@ -44,9 +47,10 @@ export default function Picker(): BetterPicker {
   }
 
   function update(options: Partial<Options>) {
+    if (options) userConfig = options
     opt = mergeOptions(opt, options)
     destroyed()
-    create(opt)
+    create()
   }
 
   function destroyed() {
@@ -56,13 +60,13 @@ export default function Picker(): BetterPicker {
     removeState(state.id)
   }
 
-  function create(options?: Partial<Options>): void {
+  function create(): void {
     state = Object.assign(createState(opt), {
       update,
       destroyed,
       reference,
     })
-    changeWeekFormat(options)
+    changeWeekFormat()
     watch(opt)
     addListener()
     createPopover(state)
@@ -87,8 +91,8 @@ export default function Picker(): BetterPicker {
     state.visible = false
   }
 
-  function changeWeekFormat(opt?: Partial<Options>) {
-    if (state.options.type === 'week' && (!opt || !opt.format)) {
+  function changeWeekFormat() {
+    if (state.options.type === 'week' && (!userConfig || !userConfig.format)) {
       state.hasWW = true
       state.options.format = state.locale.weekFormat
     }
@@ -100,7 +104,8 @@ export default function Picker(): BetterPicker {
   ): BetterPickerInstance {
     reference = findInputElement(el)
     opt = mergeOptions(defaultOptions(), options)
-    create(options)
+    userConfig = options
+    create()
     return {
       id: state.id,
       state,
