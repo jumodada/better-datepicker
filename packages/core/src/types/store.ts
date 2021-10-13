@@ -100,7 +100,6 @@ export interface utilWatchers<T = utilWatcher> {
 export interface State extends stateComponent, stateUtil, stateDate {
   id: number
   _type: pageName
-  hasWW: boolean
 }
 
 export interface States {

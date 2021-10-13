@@ -1,5 +1,5 @@
 import { Formats } from '../../types/core'
-import { isArray, isDate } from '../../utils/typeOf'
+import { has, isArray, isDate } from '../../utils/typeOf'
 import {
   getDay,
   getMonth,
@@ -35,18 +35,19 @@ function pad(val: string | number, len?: number) {
 export function getFormatDate(
   this: State,
   date: DateType | DateType[],
-  format: string,
+  format: string
 ): string | null {
-  const { locale, hasWW } = this
+  const { locale, options } = this
   const separator = ' - '
 
   function formatParse(dateStr: DateType): string | null {
     if (!dateStr) return null
-    if (hasWW && isDate(dateStr)) {
+
+    if (has(options.format, 'w') && isDate(dateStr)) {
       dateStr = getWeekRange(dateStr, locale.weekStart).start
     }
     return format.replace(token, (val) =>
-      formats[val as 'dd'](new Date(dateStr!.toString()), locale),
+      formats[val as 'dd'](new Date(dateStr!.toString()), locale)
     )
   }
 

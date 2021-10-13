@@ -93,7 +93,6 @@ export default function Picker(): BetterPicker {
 
   function changeWeekFormat() {
     if (state.options.type === 'week' && (!userConfig || !userConfig.format)) {
-      state.hasWW = true
       state.options.format = state.locale.weekFormat
     }
   }
