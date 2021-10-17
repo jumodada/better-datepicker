@@ -1,17 +1,20 @@
-import { DateData } from '../../../../../types/store'
+import { State } from '../../../../../types/store'
 import { joinDate, getTenRange } from '../../../../../utils/date'
 import { getStatus } from '../public'
 
-export function updateMonth(year: number, date: string, state: DateData): void {
-  state._month.forEach((item, idx) => {
-    item.date = joinDate(idx + 1, year)
+export function updateMonth(
+  this: State,
+  name: 'start' | 'end' = 'start'
+): void {
+  this[name]._month.forEach((item, idx) => {
+    item.date = joinDate(idx + 1, this[name].year)
     item.status = getStatus(this, item.date, idx)
   })
 }
 
-export function updateYear(year: number, date: string, state: DateData): void {
-  const range = getTenRange(year)
-  state._year.forEach((item, idx) => {
+export function updateYear(this: State, name: 'start'): void {
+  const range = getTenRange(this[name].year)
+  this[name]._year.forEach((item, idx) => {
     item.date = joinDate(1, range[idx])
     const status = idx === 0 ? 'pre' : idx === 11 ? 'next' : ''
     item.status = getStatus(this, item.date, idx, 'year', status)

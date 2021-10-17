@@ -19,6 +19,7 @@ import { CreateElementPartOptions } from '../../../types/utils'
 import { Bind } from '../../../utils/bind'
 import { getFormatDate } from '../../util/format'
 import { SVGStyle } from './type'
+import { Sub } from '../../../types/observer'
 
 let name: keyof RangeType = 'start'
 
@@ -43,43 +44,34 @@ function format(date: string, state: State): string {
 function yearRange(): CreateElementPartOptions {
   return {
     name: 'span',
-    text: {
-      key: {
-        name: 'start',
-        childKey: ['year', '_date'],
-      },
-      cb: (year: number) => getRange(year),
+    text() {
+      return getRange(this[name].year)
     },
     $style: canIShow((page: pageName) => visible(page === 'year')),
     event: toYearPage,
   }
 }
 
-function year(state: State): CreateElementPartOptions {
+function year(): CreateElementPartOptions {
   return {
     name: 'span',
-    text: {
-      key: {
-        name,
-        childKey: ['year', '_date'],
-      },
-      cb: (year) => format(year, state),
+    text() {
+      return format(String(this.start.year), this)
     },
     class: ['pointerCursor'],
     event: toYearPage,
     $style: canIShow((page: pageName) => visible(page !== 'year')),
+    style: {
+      display: 'inline-block',
+    },
   }
 }
 
-function month(state: State): CreateElementPartOptions {
+function month(): CreateElementPartOptions {
   return {
     name: 'span',
-    text: {
-      key: {
-        name,
-        childKey: ['month'],
-      },
-      cb: (idx: number) => state.locale.months[idx - 1],
+    text() {
+      return this.locale.months[this[name].month - 1]
     },
     class: ['pointerCursor'],
     event: toMonthPage,
@@ -87,31 +79,21 @@ function month(state: State): CreateElementPartOptions {
   }
 }
 
-export function getTextType(
-  state: State
-): DateComponentsType<[string[], (...arg: any) => string]> {
+export function getTextType(state: State): DateComponentsType {
   return {
-    date: [
-      ['month', 'year'],
-      (idx: number, year: string) =>
-        format(year, state) + ' ' + state.locale.months[idx - 1],
-    ],
-    month: [['year'], (year: number) => String(year)],
-    year: [['year', '_date'], (year: number) => getRange(year)],
+    date: () =>
+      format(String(state[name].year), state) +
+      ' ' +
+      state.locale.months[state[name].month - 1],
+    month: () => String(state[name].year),
+    year: () => getRange(state[name].year),
   }
 }
 
-function date(state: State): CreateElementPartOptions {
-  const [childKey, cb] = getTextType(state)[state._type]
+function date(): CreateElementPartOptions {
   return {
     name: 'span',
-    text: {
-      key: {
-        name,
-        childKey,
-      },
-      cb,
-    },
+    text: getTextType(this)[this._type as 'year'],
   }
 }
 
@@ -175,10 +157,7 @@ const headerChildren: HeaderChildrenOptions = {
   end: [date, nextYearIcon, nextMonthIcon],
 }
 
-export function Header(
-  state: State,
-  t?: keyof RangeType
-): CreateElementPartOptions {
+export function Header(t?: keyof RangeType): CreateElementPartOptions {
   name = t || 'start'
   return {
     class: ['header'],
@@ -186,10 +165,10 @@ export function Header(
   }
 }
 
-export function HeaderLeft(state: State): CreateElementPartOptions {
-  return Header(state, 'start')
+export function HeaderLeft(): CreateElementPartOptions {
+  return Header('start')
 }
 
-export function HeaderRight(state: State): CreateElementPartOptions {
-  return Header(state, 'end')
+export function HeaderRight(): CreateElementPartOptions {
+  return Header('end')
 }

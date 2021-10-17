@@ -77,7 +77,9 @@ export function createPopover(state: State): void {
       class: state.options.classes.concat(['wrapper']),
       children: popoverType[state.options.type],
       hidden: true,
-      style: state.options.style,
+      style: {
+        display: 'inline-block',
+      },
     },
     state
   ) as HTMLElement

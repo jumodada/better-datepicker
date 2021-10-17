@@ -23,11 +23,13 @@ $transition: .3s all ease;
       transition: $transition;
     }
     table{
-      padding: 5px 20px;
       text-align: center;
       width: 320px;
       table-layout: fixed;
     }
+  }
+  &-content{
+    padding: 15px 12px;
   }
 
   &-range-wrapper{

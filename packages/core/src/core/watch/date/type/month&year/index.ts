@@ -1,24 +1,21 @@
 import { Sub } from '../../../../../types/observer'
 import { updateYear, updateMonth } from './public'
+import { Bind } from '../../../../../utils/bind'
 
-const key = (name: string) => {
-  return { name, childKey: ['year', 'date'] }
+export const watchYM = (type = true, name = 'start'): Sub => {
+  return Bind(type ? updateMonth : updateYear, name)
 }
 
-export function wacthYM(type = true, name = 'start'): Sub {
-  return { key: key(name), cb: type ? updateMonth : updateYear }
-}
-
-export function LinkYear(name: 'start' | 'end' = 'start', isTen = false): Sub {
+export const LinkYear = (
+  name: 'start' | 'end' = 'start',
+  isTen = false
+): Sub => {
   const spacing = isTen ? 10 : 1
-  return {
-    key: { name, childKey: ['year'] },
-    cb(year: number): void {
-      if (name === 'start') {
-        this.end.year = year + spacing
-      } else {
-        this.start.year = year - spacing
-      }
-    },
+  return function (): void {
+    if (name === 'start') {
+      this.end.year = this.start.year + spacing
+    } else {
+      this.start.year = this.end.year - spacing
+    }
   }
 }

@@ -23,23 +23,25 @@ export const sheetRule = [
     `@keyframes show { 0% {display: block;opacity: 0;transform:scaleY(.8) ${orn};} 100% {display: block;opacity: 1;transform: scaleY(1) ${orn};} }`,
 ]
 
-export function updatePopover(vis: boolean): void {
-  const el = this.popover
-  if (!el) return
+export function updatePopover(): void {
+  const { visible, popover } = this
+  if (!popover) return
   const { zIndex } = this.options
-  if (vis) {
-    el.style.display = ''
+  if (visible) {
+    popover.style.display = ''
     setPopoverLocation.call(this)
   }
-  setPopoverStyle(el, zIndex)
+  setPopoverStyle(popover, zIndex)
   const ss = document.styleSheets[0]
-  const animation = animations[Number(vis)]
+  const animation = animations[Number(visible)]
   if (canIUseAnimation()) {
     deleteRules()
-    sheetRule.forEach((r, idx) => ss.insertRule(r(el.style.transform), idx))
-    el.style.animation = animation
+    sheetRule.forEach((r, idx) =>
+      ss.insertRule(r(popover.style.transform), idx)
+    )
+    popover.style.animation = animation
   } else {
-    el.style.display = vis ? '' : 'none'
+    popover.style.display = visible ? '' : 'none'
   }
   resetRangStatus(this)
 }

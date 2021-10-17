@@ -89,15 +89,12 @@ export function toYearPage(): void {
   this.page = 'year'
 }
 
-export function isDayPage(page: pageName): 'none' | 'inline-block' {
-  return visible(page === 'date')
+export function isDayPage(): 'none' | '' {
+  return visible(this.page === 'date')
 }
 
-export function canIShow(cb: Sub<string>['cb']): DynamicStyle {
+export function canIShow(cb: Sub<string>): DynamicStyle {
   return {
-    display: {
-      key: ['page'],
-      cb,
-    },
+    display: cb,
   }
 }

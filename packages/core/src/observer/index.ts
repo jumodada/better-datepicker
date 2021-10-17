@@ -34,7 +34,7 @@ export function reactive(
   }
 
   function defineReactive<T>(obj: T, key: keyof T, val: unknown) {
-    const dep = new Dep(obj, state)
+    const dep = new Dep()
     Object.defineProperty(obj, key, {
       enumerable: true,
       configurable: true,
@@ -49,6 +49,5 @@ export function reactive(
       },
     })
   }
-
   return observe(state)
 }

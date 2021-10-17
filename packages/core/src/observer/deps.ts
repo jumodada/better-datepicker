@@ -1,5 +1,5 @@
-import { Watcher } from '../types/observer'
 import { State } from '../types/store'
+import Watcher from './watcher'
 
 let uid = 0
 
@@ -7,14 +7,9 @@ export default class Dep<T = State> {
   static target: any
   id: number
   subs: Watcher[]
-  state: State
-  child: any
-
-  constructor(child: any, state: State) {
+  constructor() {
     this.id = uid++
     this.subs = []
-    this.state = state
-    this.child = child
   }
 
   addSub(sub: Watcher): void {

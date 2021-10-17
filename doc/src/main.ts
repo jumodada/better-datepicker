@@ -7,7 +7,6 @@ import './assets/style/index.scss'
 import 'element-plus/lib/theme-chalk/index.css'
 import './assets/style/el-message.css'
 import { createDatePicker } from '../../packages/better-datepicker/src'
-console.log(createDatePicker)
 import NProgress from 'nprogress'
 import { useElementComponent } from './useElementComponent'
 import '../../packages/core/src/assets/date-picker.scss'

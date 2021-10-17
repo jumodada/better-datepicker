@@ -1,6 +1,6 @@
-import { State, RangeType, DateComponents } from '../../../types/store'
+import { RangeType } from '../../../types/store'
 import { canIShow, isDayPage } from '../utils'
-import { CreateElementPartOptions, updateOptions } from '../../../types/utils'
+import { CreateElementPartOptions } from '../../../types/utils'
 import { dayEvent } from './event'
 import _for from '../../../utils/for'
 import { getWeeks } from '../../../utils/date'
@@ -9,22 +9,8 @@ let type: keyof RangeType = 'start'
 const rowsCount = 6
 const colsCount = 7
 
-function cellOptionsGenerator(
-  child: DateComponents,
-  name: 'text' | 'status' = 'status'
-): updateOptions {
-  return {
-    key: {
-      name: [name],
-      child,
-    },
-    cb: (val: string) => val,
-    static: ['cell'],
-  }
-}
-
-function tBody(state: State): CreateElementPartOptions {
-  function tr(): CreateElementPartOptions[] {
+function tBody(): CreateElementPartOptions {
+  const tr = (): CreateElementPartOptions[] => {
     return _for((rc) => {
       return {
         name: 'tr',
@@ -33,20 +19,23 @@ function tBody(state: State): CreateElementPartOptions {
     }, rowsCount)
   }
 
-  function td(rc: number): CreateElementPartOptions[] {
+  const td = (rc: number): CreateElementPartOptions[] => {
     return _for((cc) => {
       const idx = rc * 7 + cc
-      const child = state[type]._date[idx]
+      const child = this[type]._date[idx]
       return {
         name: 'td',
         children: [
           {
-            text: cellOptionsGenerator(child, 'text'),
+            text: () => child['text'],
           },
         ],
-        class: cellOptionsGenerator(child),
+        class: {
+          cb: () => child['status'],
+          static: ['cell'],
+        },
         event: {
-          listener: dayEvent(child)[state.options.type as 'date'],
+          listener: dayEvent(child)[this.options.type as 'date'],
           arg: child,
         },
       }
@@ -59,9 +48,9 @@ function tBody(state: State): CreateElementPartOptions {
   }
 }
 
-function bar(state: State): CreateElementPartOptions {
-  const offset = state.locale.weekStart
-  const { weekdays } = state.locale
+function bar(): CreateElementPartOptions {
+  const offset = this.locale.weekStart
+  const { weekdays } = this.locale
   return {
     name: 'thead',
     children: getWeeks<string>(weekdays, offset).map((name) => {
@@ -70,21 +59,23 @@ function bar(state: State): CreateElementPartOptions {
   }
 }
 
-export function Day(
-  state: State,
-  t: keyof RangeType = 'start'
-): CreateElementPartOptions {
+export function Day(t: keyof RangeType = 'start'): CreateElementPartOptions {
   type = t
   const classes = ['date']
-  if (state.options.type === 'week') classes.push('week')
+  if (this.options.type === 'week') classes.push('week')
   return {
-    name: 'table',
-    children: [bar, tBody],
-    class: classes,
+    class: ['content'],
+    children: [
+      {
+        name: 'table',
+        children: [bar, tBody],
+        class: classes,
+      },
+    ],
     $style: canIShow(isDayPage),
   }
 }
 
-export function endDay(state: State): CreateElementPartOptions {
-  return Day(state, 'end')
+export function endDay(): CreateElementPartOptions {
+  return Day('end')
 }

@@ -4,7 +4,8 @@ import {
   transformDateToArray,
   rangeSort,
   isDisabledDate,
-  isSame, getWeekRange,
+  isSame,
+  getWeekRange,
 } from '../../../../utils/date'
 import { Sub } from '../../../../types/observer'
 import { dispatchDateChange, getDate } from '../../../util/method'
@@ -60,73 +61,54 @@ export function weekStatus(curDate: Date): ComponentStatus {
   return isAfter(curDate, start) && isAfter(end, curDate) ? 'inRangeWeek' : ''
 }
 
-
-export const startDate: Sub = {
-  key: { name: 'start', childKey: ['date'] },
-  cb(date: string) {
-    if (!date) return
-    const { start } = this
-    ;[start.year, start.month] = transformDateToArray(date)
-    this.date = getDate(this)
-  },
+export function startDate(): void {
+  const { date } = this.start
+  if (!date) return
+  const { start } = this
+  ;[start.year, start.month] = transformDateToArray(date)
+  this.date = getDate(this)
 }
 
-export const endDate: Sub = {
-  key: { name: 'end', childKey: ['date'] },
-  cb(date: string) {
-    if (!date) return
-    this.date = getDate(this)
-  },
+export function endDate(): void {
+  if (!this.end.date) return
+  this.date = getDate(this)
 }
 
-export const handleSelecting: Sub = {
-  key: { name: 'range', childKey: ['status'] },
-  cb(status: string) {
-    if (status === 'selecting') {
-      this.range.end = null
-    } else {
-      finishSelect(this)
-    }
-  },
+export function handleSelecting(this: State): void {
+  if (this.range.status === 'selecting') {
+    this.range.end = null
+  } else {
+    finishSelect(this)
+  }
 }
 
-export const date: Sub = {
-  key: ['date'],
-  cb: dispatchDateChange,
-}
-
-export const startMonthAndYear: Sub = {
-  key: { name: 'start', childKey: ['year', 'month'] },
-  cb(year, month, state: DateData) {
-    state._month.forEach((item, idx) => {
-      item.status = month === idx + 1 ? 'selected' : ''
-    })
-    state._year.forEach((item, idx) => {
-      const [itemYear] = transformDateToArray(item.date)
-      item.status =
-        idx === 0
-          ? 'pre'
-          : idx === 11
-          ? 'next'
-          : year === itemYear
-          ? 'selected'
-          : ''
-    })
-  },
+export function startMonthAndYear(this: State): void {
+  const { year, month } = this.start
+  this.start._month.forEach((item, idx) => {
+    item.status = month === idx + 1 ? 'selected' : ''
+  })
+  this.start._year.forEach((item, idx) => {
+    const [itemYear] = transformDateToArray(item.date)
+    item.status =
+      idx === 0
+        ? 'pre'
+        : idx === 11
+        ? 'next'
+        : year === itemYear
+        ? 'selected'
+        : ''
+  })
 }
 
 export function hoverSelect(type: keyof DateComponentsType = 'month'): Sub {
-  return {
-    key: { name: 'range', childKey: ['start', 'end'] },
-    cb() {
-      ;(['start', 'end'] as const).forEach((name) => {
-        this[name][('_' + type) as '_month']
-          .filter((item) => not(item.status, ['pre', 'next']))
-          .forEach(
-            (item, idx) => (item.status = getStatus(this, item.date, idx, type))
-          )
-      })
-    },
+  return function () {
+    ;(['start', 'end'] as const).forEach((name) => {
+      this[name][('_' + type) as '_month']
+        .filter((item) => not(item.status, ['pre', 'next']))
+        .forEach(
+          (item, idx) => (item.status = getStatus(this, item.date, idx, type))
+        )
+    })
   }
 }
 

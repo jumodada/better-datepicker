@@ -1,4 +1,4 @@
-import { ComponentStatus, DateData } from '../../../../../types/store'
+import { ComponentStatus, State } from '../../../../../types/store'
 import {
   daysInAMonth,
   getNext,
@@ -8,19 +8,15 @@ import {
 } from '../../../../../utils/date'
 import { getStatus } from '../public'
 
-export function updateDays(
-  month: number,
-  year: number,
-  date: string,
-  state: DateData
-): void {
+export function updateDays(this: State): void {
+  const { month, year, _date } = this.start
   const [preMonth, preYear] = getPre(month, year)
   const preDays = daysInAMonth(preYear, preMonth)
   const [fd, days] = [
     monthStartDay(year, month, this.locale.weekStart),
     daysInAMonth(year, month),
   ]
-  state._date.forEach((item, index) => {
+  _date.forEach((item, index) => {
     const idx = index + 1
     const currentIdx = idx - fd
     const status: ComponentStatus =

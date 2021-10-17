@@ -17,6 +17,7 @@ import { UpdateCbType } from '../types/components'
 import { SvgName } from '../types/element'
 import { resetHoverColor, resetSelectColor } from './theme'
 import { Callback } from '../types/core'
+import { Sub } from '../types/observer'
 
 const handler: Handler = {
   event(el, val, state) {
@@ -52,17 +53,17 @@ const handler: Handler = {
       state.options[(val + 'Color') as 'thColor']
     if (color) addAttr(el, { color }, 'style')
   },
-  text(el, val) {
+  text(el, val, state) {
     if (isString(val)) {
       el.innerText = val
     } else {
-      update(el, val)
+      update.call(state, el, val)
     }
   },
   hidden: (el, val) => hidden(el, val),
-  $style(el, val) {
+  $style(el, val, state) {
     Object.keys(val).forEach((key) => {
-      update<boolean>(el, val[key as never], 'style', key)
+      update.call(state, el, val[key as never], 'style', key)
     })
   },
 }
@@ -97,8 +98,9 @@ export function createElement(
   opt: Partial<CreateElementOptions> | CreateElement,
   state: State
 ): Node {
-  if (isFunc<Partial<CreateElementOptions>>(opt))
-    return createElement(opt(state), state)
+  if (isFunc<Partial<CreateElementOptions>>(opt)) {
+    return createElement(opt.call(state), state)
+  }
   const el =
     opt.name === 'svg' ? createSVG(opt.text as string) : createEL(opt.name)
   Object.keys(opt).forEach((key) => {
@@ -123,21 +125,21 @@ export function appendChild(
   }
 }
 
-export function visible(vis: boolean): 'none' | 'inline-block' {
-  return vis ? 'inline-block' : 'none'
+export function visible(vis: boolean): 'none' | '' {
+  return vis ? '' : 'none'
 }
 
 export function update<T>(
+  this: State,
   el: HTMLElement,
-  opt: updateOptions<T> | string[],
+  opt: Sub<string> | updateOptions | string[],
   type: keyof UpdateCbType = 'text',
   styKey?: string
 ): void {
   if (isArray(opt)) return resetAttr(el, mergeClasses(opt))
-  const { key, cb } = opt
   const callbacks: UpdateCbType = {
     cls: (res: string) => {
-      const classes = mergeClasses(res, opt.static)
+      const classes = mergeClasses(res, (opt as updateOptions).static)
       resetAttr(el, classes)
       resetSelectColor(el, this, classes)
     },
@@ -145,11 +147,8 @@ export function update<T>(
     style: (val: string) => (el.style[styKey as 'color'] = val),
   }
 
-  addWatch({
-    key,
-    cb(): void {
-      const res = cb.apply(this, arguments as any) as never
-      callbacks[type](res)
-    },
+  addWatch(() => {
+    const cb: Sub<string> = 'cb' in opt ? opt.cb : opt
+    callbacks[type](cb.call(this))
   })
 }

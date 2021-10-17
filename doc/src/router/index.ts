@@ -8,8 +8,7 @@ const history = createWebHashHistory()
 
 function createRoute(lang: string, lists: any[]) {
   const createChild = (list: any) => {
-    const isSecondLevel =  list.path.indexOf('-') > -1
-    console.log(list.name, import(`../views/${lang}/${list.path}.md`))
+    const isSecondLevel = list.path.indexOf('-') > -1
     return {
       path: list.path,
       name: list.name,

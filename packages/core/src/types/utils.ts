@@ -78,14 +78,15 @@ export interface CreateElement {
   (...arg: any): Partial<CreateElementOptions>
 }
 
-export interface updateOptions<T = string> extends Sub<T> {
+export interface updateOptions {
   static?: string[]
+  cb: Sub<string>
 }
 
 export interface DynamicStyle {
-  display?: updateOptions
-  color?: updateOptions
-  background?: updateOptions
+  display?: Sub<string>
+  color?: Sub<string>
+  background?: Sub<string>
 }
 
 export type CreateElementPartOptions = Partial<CreateElementOptions>
@@ -106,7 +107,7 @@ export interface CreateElementOptions {
     | 'tbody'
     | 'i'
   text: string | Sub<string>
-  class: updateOptions | string[]
+  class: updateOptions | string[] | Sub<string>
   event: eventHandler | _EventListener[] | EventListenerHasArguments
   style: Style
   $style: DynamicStyle

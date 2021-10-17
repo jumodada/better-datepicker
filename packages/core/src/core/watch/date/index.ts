@@ -1,50 +1,46 @@
 import { addWatch } from '../../../observer/watcher'
 import Options from '../../../types/options'
-import { updateDayDom, linkMonth } from './type/date&week/date-range'
-import { startDays } from './type/date&week/date'
-import { LinkYear, wacthYM } from './type/month&year'
+import { linkMonth } from './type/date&week/date-range'
+import { LinkYear, watchYM } from './type/month&year'
 import {
   handleSelecting,
-  startDate,
   endDate,
-  date,
-  startMonthAndYear,
   hoverSelect,
+  startMonthAndYear,
 } from './type/public'
 import { Listeners } from '../../../types/watch'
 import { has } from '../../../utils/typeOf'
+import { updateDays } from './type/date&week/public'
 
-const dateWeek = [startDays, wacthYM(false), wacthYM(), startMonthAndYear]
-
+const dateWeek = [updateDays, watchYM(false), watchYM(), startMonthAndYear]
 const listeners: Listeners = {
   'date-range': [
-    startDays,
-    updateDayDom,
+    updateDays,
     linkMonth(),
     linkMonth('end'),
     hoverSelect('date'),
   ],
   date: dateWeek,
   week: dateWeek,
-  month: [wacthYM()],
+  month: [watchYM()],
   'month-range': [
-    wacthYM(),
+    watchYM(),
     LinkYear(),
     LinkYear('end'),
-    wacthYM(true, 'end'),
+    watchYM(true, 'end'),
     hoverSelect(),
   ],
-  year: [wacthYM(false)],
+  year: [watchYM(false)],
   'year-range': [
-    wacthYM(false),
-    wacthYM(false, 'end'),
+    watchYM(false),
+    watchYM(false, 'end'),
     LinkYear('start', true),
     LinkYear('end', true),
     hoverSelect('year'),
   ],
 }
 
-const currency = [startDate, date]
+const currency = [updateDays]
 const range = [handleSelecting, endDate]
 
 export function watchDate(options: Options): void {

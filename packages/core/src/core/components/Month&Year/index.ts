@@ -24,12 +24,8 @@ const components: CreateMonthOrYearComponentsOptions = {
     listener: (child, state) => yearEvent(child)[state.options.type as 'date'],
     children: (idx: number) => [
       {
-        text: {
-          key: {
-            name: type,
-            childKey: ['year'],
-          },
-          cb: (y) => String(getTenRange(y)[idx]),
+        text() {
+          return String(getTenRange(this[type].year)[idx])
         },
       },
     ],
@@ -40,12 +36,8 @@ export function YM(
   componentName: keyof ComponentsType = 'month'
 ): createMonthOrYearComponentsFunction {
   const { children, listener } = components[componentName]
-  return function (
-    state: State,
-    t: keyof RangeType = 'start'
-  ): CreateElementPartOptions {
+  return function (t: keyof RangeType = 'start'): CreateElementPartOptions {
     type = t
-
     function tBody(): CreateElementPartOptions {
       return {
         children: tr(),
@@ -53,7 +45,7 @@ export function YM(
       }
     }
 
-    function tr(): CreateElementPartOptions[] {
+    const tr = (): CreateElementPartOptions[] => {
       return _for((rc) => {
         return {
           name: 'tr',
@@ -62,24 +54,18 @@ export function YM(
       }, rows)
     }
 
-    function td(rc: number): CreateElementPartOptions[] {
+    const td = (rc: number): CreateElementPartOptions[] => {
       return _for((cc) => {
         const idx = rc * cols + cc
-        const child = state[type][('_' + componentName) as '_month'][idx]
+        const child = this[type][('_' + componentName) as '_month'][idx]
         return {
           name: 'td',
           event: {
-            listener: listener(child, state),
+            listener: listener(child, this),
             arg: child,
           },
-          children: children(idx, state.locale.months),
-          class: {
-            key: {
-              name: ['status'],
-              child,
-            },
-            cb: (val: string) => val,
-          },
+          children: children(idx, this.locale.months),
+          class: () => child.status,
         }
       }, cols)
     }
@@ -88,19 +74,19 @@ export function YM(
       name: 'table',
       children: [tBody()],
       class: [componentName],
-      $style: canIShow((page: string) => visible(page === componentName)),
+      $style: canIShow(() => visible(this.page === componentName)),
     }
   }
 }
 
 export const Month = YM()
 
-export function endMonth(state: State): CreateElementPartOptions {
-  return Month(state, 'end')
+export function endMonth(): CreateElementPartOptions {
+  return Month.call(this, 'end')
 }
 
 export const Year = YM('year')
 
-export function endYear(state: State): CreateElementPartOptions {
-  return Year(state, 'end')
+export function endYear(): CreateElementPartOptions {
+  return Year.call(this, 'end')
 }

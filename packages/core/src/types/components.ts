@@ -10,7 +10,7 @@ import { DatepickerType, DateType, MonthType, YearType } from './options'
 import { Sub } from './observer'
 
 export interface createMonthOrYearComponentsFunction {
-  (state: State, t: keyof RangeType): Partial<CreateElementOptions>
+  (this: State, t: keyof RangeType): Partial<CreateElementOptions>
 }
 
 export interface UpdateCbType<F = (res: string) => void> {
