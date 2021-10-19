@@ -43,7 +43,7 @@ export function getFormatDate(
   function formatParse(dateStr: DateType): string | null {
     if (!dateStr) return null
 
-    if (has(options.format, 'w') && isDate(dateStr)) {
+    if (has(options?.format, 'w') && isDate(dateStr)) {
       dateStr = getWeekRange(dateStr, locale.weekStart).start
     }
     return format.replace(token, (val) =>

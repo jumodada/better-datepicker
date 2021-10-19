@@ -1,8 +1,8 @@
 //https://github.com/vuejs/vue/blob/dev/src/core/observer/scheduler.js
 //mini scheduler
-import { Watcher } from '../types/observer'
 import { UtilObject } from '../types/utils'
 import nextTick from '../utils/nexttick'
+import Watcher from './watcher'
 
 const queue: Watcher[] = []
 let has: UtilObject = {}

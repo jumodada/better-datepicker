@@ -37,7 +37,7 @@ export function has(
   val: string | string[]
 ): boolean {
   if (isArray(val)) return val.some((v) => has(target, v))
-  return target.indexOf(val) > -1
+  return target?.indexOf(val) > -1
 }
 
 export function not(

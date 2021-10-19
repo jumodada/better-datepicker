@@ -4,7 +4,6 @@ import { State } from '../../src/types/store'
 describe('getFormatDate', () => {
   const date = '2020/10/3'
   const stateMock = {
-    hasXX: false,
     locale: {
       weekFormat: 'yyyy',
     },
