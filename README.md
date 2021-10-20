@@ -6,7 +6,6 @@ A PC Datepicker with only 9KB
 
 ![](https://camo.githubusercontent.com/b39d1e12ba779319ff9bab0f56ba7e41f108d898/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6c6963656e73652f6a756d6f646164612f76756558696e2e737667)
 ![code-test](https://github.com/jumodada/better-datepicker/workflows/code-test/badge.svg)
-![](https://travis-ci.com/jumodada/better-datepicker.svg?branch=main)
 ![](https://img.shields.io/codecov/c/github/jumodada/better-datepicker/master.svg)
 ![](http://img.badgesize.io/https://unpkg.com/better-datepicker/dist/betterDatePicker.es5.js?compression=gzip)
 [![install size](https://packagephobia.com/badge?p=better-datepicker)](https://packagephobia.com/result?p=better-datepicker)
