@@ -1,14 +1,9 @@
-import { State } from '../types/store'
 import Watcher from './watcher'
 
-let uid = 0
-
-export default class Dep<T = State> {
-  static target: any
-  id: number
+export default class Dep {
+  static target: Watcher | null
   subs: Watcher[]
   constructor() {
-    this.id = uid++
     this.subs = []
   }
 

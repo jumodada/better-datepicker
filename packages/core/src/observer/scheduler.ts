@@ -1,5 +1,4 @@
 //https://github.com/vuejs/vue/blob/dev/src/core/observer/scheduler.js
-//mini scheduler
 import { UtilObject } from '../types/utils'
 import nextTick from '../utils/nexttick'
 import Watcher from './watcher'

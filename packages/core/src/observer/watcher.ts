@@ -1,5 +1,5 @@
-import { clearTarget, setTarget } from './deps'
-import { Dep, Sub } from '../types/observer'
+import Dep, { clearTarget, setTarget } from './deps'
+import { Sub } from '../types/observer'
 import { queueWatcher } from './scheduler'
 import { isArray } from '../utils/typeOf'
 import { State } from '../types/store'

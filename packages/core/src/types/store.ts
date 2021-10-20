@@ -1,4 +1,4 @@
-import Options, { DatepickerType, LocaleConfig } from './options'
+import Options, { LocaleConfig } from './options'
 import { DateType, Fn } from './utils'
 import { Callback } from './core'
 
