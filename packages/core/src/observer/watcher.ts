@@ -1,7 +1,7 @@
 import Dep, { clearTarget, setTarget } from './deps'
 import { Sub } from '../types/observer'
 import { queueWatcher } from './scheduler'
-import { isArray } from '../utils/typeOf'
+import { isArray, isFunc } from '../utils/typeOf'
 import { State } from '../types/store'
 import { getState } from '../store'
 
@@ -19,7 +19,8 @@ export default class Watcher {
   }
 
   getter(): void {
-    this.watcher.call(this.state)
+    const val = this.watcher.call(this.state)
+    if (isFunc(val)) this.watcher = val
     clearTarget()
   }
 
