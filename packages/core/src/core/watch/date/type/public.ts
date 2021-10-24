@@ -1,4 +1,4 @@
-import { ComponentStatus, DateData, State } from '../../../../types/store'
+import { ComponentStatus, State } from '../../../../types/store'
 import {
   isAfter,
   transformDateToArray,
@@ -8,7 +8,7 @@ import {
   getWeekRange,
 } from '../../../../utils/date'
 import { Sub } from '../../../../types/observer'
-import { dispatchDateChange, getDate } from '../../../util/method'
+import { getDate } from '../../../util/method'
 import { mergeClasses } from '../../../../utils/merge'
 import { DateComponentsType } from '../../../../types/components'
 import { has, not } from '../../../../utils/typeOf'

@@ -11,6 +11,7 @@ import {
 import { Listeners } from '../../../types/watch'
 import { has } from '../../../utils/typeOf'
 import { updateDays } from './type/date&week/public'
+import { dispatchDateChange } from '../../util/method'
 
 const dateWeek = [updateDays, watchYM(false), watchYM(), startMonthAndYear]
 const listeners: Listeners = {
@@ -40,7 +41,7 @@ const listeners: Listeners = {
   ],
 }
 
-const currency = [updateDays]
+const currency = [updateDays, dispatchDateChange]
 const range = [handleSelecting, endDate]
 
 export function watchDate(options: Options): void {
