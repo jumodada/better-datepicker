@@ -132,5 +132,18 @@ $header-height: 66px;
       }
     }
   }
+
+  @media screen and (min-width: 1220px) {
+    &-logo {
+      margin-left: 70px;
+    }
+  }
+
+  @media screen and (min-width: 1420px)  {
+    &-logo {
+      margin-left: 210px;
+    }
+  }
+
 }
 </style>

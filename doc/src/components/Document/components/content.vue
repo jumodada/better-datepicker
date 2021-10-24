@@ -18,10 +18,9 @@ export default {
   background: #112232;
   padding: 20px 20px 20px 20px;
   color: #dae3f6;
-  max-width: calc(100vw - 230px);
   font-family: Futura;
   width: 80%;
-
+  max-width: 800pt;
   &-wrapper {
     width: calc(100vw - 210px);
     background: #112232;

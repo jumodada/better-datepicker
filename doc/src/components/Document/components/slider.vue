@@ -130,5 +130,14 @@ export default {
       }
     }
   }
+
+  @media screen and (min-width: 1220px)  {
+    width: 280px;
+    padding-left: 70px;
+  }
+  @media screen and (min-width: 1420px)  {
+    width: 410px;
+    padding-left: 210px;
+  }
 }
 </style>
