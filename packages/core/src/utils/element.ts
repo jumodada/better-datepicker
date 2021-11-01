@@ -22,20 +22,16 @@ import { Sub } from '../types/observer'
 const handler: Handler = {
   event(el, val, state) {
     const { themeColor } = state.options
-
-    function addListener(
-      listener: _EventListener[] | Callback,
-      arg?: unknown
-    ): void {
+    function addListener(listener: _EventListener[] | Callback): void {
       if (isArray<{ name: eventType; handler: eventHandler }>(listener)) {
-        listener.forEach((e) => on(el, e.handler, e.name, state, arg))
+        listener.forEach((e) => on(el, e.handler, e.name, state))
       } else {
-        on(el, listener, 'click', state, arg)
+        on(el, listener, 'click', state)
       }
     }
 
     if ('listener' in val) {
-      addListener(val.listener, val.arg)
+      addListener(val.listener)
     } else {
       addListener(val)
     }

@@ -45,7 +45,6 @@ export interface _EventListener {
 }
 
 export interface EventListenerHasArguments {
-  arg: any
   listener: eventHandler | _EventListener[]
 }
 

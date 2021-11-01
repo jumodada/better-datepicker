@@ -34,10 +34,7 @@ function tBody(): CreateElementPartOptions {
           cb: () => child['status'],
           static: ['cell'],
         },
-        event: {
-          listener: dayEvent(child)[this.options.type as 'date'],
-          arg: child,
-        },
+        event: dayEvent(child)[this.options.type as 'date'],
       }
     }, colsCount)
   }

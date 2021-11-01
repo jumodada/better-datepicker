@@ -1,6 +1,6 @@
 import { visible } from '../../../utils/element'
 import { canIShow } from '../utils'
-import { State, RangeType } from '../../../types/store'
+import { RangeType } from '../../../types/store'
 import {
   ComponentsType,
   createMonthOrYearComponentsFunction,
@@ -11,33 +11,32 @@ import { CreateElementPartOptions } from '../../../types/utils'
 import _for from '../../../utils/for'
 import { getTenRange } from '../../../utils/date'
 
-let type: keyof RangeType = 'start'
 const rows = 3
 const cols = 4
-
-const components: CreateMonthOrYearComponentsOptions = {
-  month: {
-    listener: (child, state) => monthEvent(child)[state.options.type as 'date'],
-    children: (idx, months) => [{ text: months[idx] }],
-  },
-  year: {
-    listener: (child, state) => yearEvent(child)[state.options.type as 'date'],
-    children: (idx: number) => [
-      {
-        text() {
-          return String(getTenRange(this[type].year)[idx])
-        },
-      },
-    ],
-  },
-}
 
 export function YM(
   componentName: keyof ComponentsType = 'month'
 ): createMonthOrYearComponentsFunction {
-  const { children, listener } = components[componentName]
   return function (t: keyof RangeType = 'start'): CreateElementPartOptions {
-    type = t
+    const components: CreateMonthOrYearComponentsOptions = {
+      month: {
+        listener: (child, state) =>
+          monthEvent(child)[state.options.type as 'date'],
+        children: (idx) => [{ text: this.locale.months[idx] }],
+      },
+      year: {
+        listener: (child, state) =>
+          yearEvent(child)[state.options.type as 'date'],
+        children: (idx: number) => [
+          {
+            text() {
+              return String(getTenRange(this[t].year)[idx])
+            },
+          },
+        ],
+      },
+    }
+    const { children, listener } = components[componentName]
     function tBody(): CreateElementPartOptions {
       return {
         children: tr(),
@@ -57,14 +56,12 @@ export function YM(
     const td = (rc: number): CreateElementPartOptions[] => {
       return _for((cc) => {
         const idx = rc * cols + cc
-        const child = this[type][('_' + componentName) as '_month'][idx]
+        const child = this[t][('_' + componentName) as '_month'][idx]
+
         return {
           name: 'td',
-          event: {
-            listener: listener(child, this),
-            arg: child,
-          },
-          children: children(idx, this.locale.months),
+          event: listener(child, this),
+          children: children(idx),
           class: () => child.status,
         }
       }, cols)

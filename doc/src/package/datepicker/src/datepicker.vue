@@ -12,7 +12,10 @@ export default defineComponent({
   name: 'datepicker',
   props:{
     placeholder: String,
-    type: String
+    type: {
+      type: String,
+      default: 'month'
+    }
   },
   data() {
     return {
