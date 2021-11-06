@@ -11,6 +11,7 @@ export interface MonthType<T = unknown, U = unknown> {
 export interface YearType<T = unknown, U = unknown> {
   date: T
   year: T
+  month: T
   'year-range': T | U
 }
 

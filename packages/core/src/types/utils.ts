@@ -44,10 +44,6 @@ export interface _EventListener {
   handler: eventHandler
 }
 
-export interface EventListenerHasArguments {
-  listener: eventHandler | _EventListener[]
-}
-
 export interface Style {
   height?: string
   width?: string
@@ -107,7 +103,7 @@ export interface CreateElementOptions {
     | 'i'
   text: string | Sub<string>
   class: updateOptions | string[] | Sub<string>
-  event: eventHandler | _EventListener[] | EventListenerHasArguments
+  event: eventHandler | _EventListener[]
   style: Style
   $style: DynamicStyle
   children: (CreateElementPartOptions | CreateElement)[]

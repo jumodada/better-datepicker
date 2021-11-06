@@ -29,12 +29,7 @@ const handler: Handler = {
         on(el, listener, 'click', state)
       }
     }
-
-    if ('listener' in val) {
-      addListener(val.listener)
-    } else {
-      addListener(val)
-    }
+    addListener(val)
     if (themeColor) {
       resetHoverColor(el, themeColor)
     }

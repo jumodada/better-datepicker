@@ -23,7 +23,7 @@ const listeners: Listeners = {
   ],
   date: dateWeek,
   week: dateWeek,
-  month: [watchYM()],
+  month: [watchYM(), watchYM(false)],
   'month-range': [
     watchYM(),
     LinkYear(),

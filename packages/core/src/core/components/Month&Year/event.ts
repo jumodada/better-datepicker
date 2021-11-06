@@ -12,9 +12,11 @@ export function monthEvent(state: MonthOrYearComponents): MonthEvent {
 }
 
 export function yearEvent(state: MonthOrYearComponents): YearEvent {
+  const toggleMonth = Bind(toMonthPage, state)
   return {
-    date: Bind(toMonthPage, state),
+    date: toggleMonth,
     'year-range': handleRange(state),
     year: Bind(selectYM, [state, 'year']),
+    month: toggleMonth,
   }
 }
