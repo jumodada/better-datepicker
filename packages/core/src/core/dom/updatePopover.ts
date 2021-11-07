@@ -4,6 +4,7 @@ import { isInBody } from '../../utils/isInBody'
 import { deleteRules } from './create-popover'
 import { canIUseAnimation } from '../../utils/env'
 import { State } from '../../types/store'
+import { objectKeys } from '../../utils/objectKeys'
 
 function transform(offset: number | string): Transform {
   offset = offset + 'px'
@@ -110,7 +111,7 @@ export function setPopoverLocation(): void {
       },
     }
     const tp = transform[placement as 'top']
-    Object.keys(tp).forEach((key) => (popover.style[key] = tp[key as never]))
+    objectKeys(tp).forEach((key) => (popover.style[key] = tp[key]))
   }
 
   const { popover, reference, options } = this

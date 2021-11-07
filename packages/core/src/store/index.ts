@@ -1,6 +1,7 @@
 import { State, States } from '../types/store'
 import initState from './state'
 import Options from '../types/options'
+import { objectKeys } from '../utils/objectKeys'
 
 const Store = (function () {
   let id = 0
@@ -32,9 +33,7 @@ const Store = (function () {
     if (partialStates) {
       partialStates.forEach((state) => runDestroyed(states[state.id]))
     } else {
-      Object.keys(states).forEach((key) =>
-        runDestroyed(states[key as unknown as keyof typeof states])
-      )
+      objectKeys(states).forEach((key) => runDestroyed(states[key]))
       id = 0
     }
   }

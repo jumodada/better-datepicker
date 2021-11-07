@@ -1,5 +1,6 @@
-import { Style, UtilObject } from '../types/utils'
+import { Style } from '../types/utils'
 import { isObject } from './typeOf'
+import { objectKeys } from './objectKeys'
 
 export function resetAttr(
   el: HTMLElement | Element,
@@ -12,26 +13,24 @@ export function resetAttr(
 
 export function transformStyle(sty: Style): string {
   if (!sty) return ''
-  return Object.keys(sty)
-    .reduce(
-      (acc, key) => acc.concat(`${key}:${sty[key as never]}`),
-      [] as string[]
-    )
+  return objectKeys(sty)
+    .reduce((acc, key) => acc.concat(`${key}:${sty[key]}`), [''])
     .join(';')
 }
 
 export function addAttr(
   el: HTMLElement | Element,
-  val: string | UtilObject,
+  val: string | Style,
   name = 'class'
 ): void {
   if (!val) return
   let attr = el.getAttribute(name) || ''
-  if (isObject(val)) {
-    val = Object.keys(val)
-      .filter((key) => val[key as keyof void])
-      .reduce((c, key) => c + key + ':' + val[key as keyof void] + ';', '')
+  let _val = val
+  if (isObject<Style>(val)) {
+    _val = objectKeys(val)
+      .filter((key) => val[key])
+      .reduce((c, key) => c + key + ':' + val[key] + ';', '')
   }
-  attr += ' ' + val
+  attr += ' ' + _val
   el.setAttribute(name, attr)
 }

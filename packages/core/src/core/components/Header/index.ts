@@ -15,7 +15,7 @@ import {
 } from '../utils'
 import { pageName, State, RangeType } from '../../../types/store'
 import { getTenRange } from '../../../utils/date'
-import { CreateElementPartOptions } from '../../../types/utils'
+import { CreateElementRequiredOptions } from '../../../types/utils'
 import { Bind } from '../../../utils/bind'
 import { getFormatDate } from '../../util/format'
 import { SVGStyle } from './type'
@@ -41,7 +41,7 @@ function format(date: string, state: State): string {
   return getFormatDate.call(state, date, state.locale.yearFormat) as string
 }
 
-function yearRange(): CreateElementPartOptions {
+function yearRange(): CreateElementRequiredOptions {
   return {
     name: 'span',
     text() {
@@ -52,7 +52,7 @@ function yearRange(): CreateElementPartOptions {
   }
 }
 
-function year(): CreateElementPartOptions {
+function year(): CreateElementRequiredOptions {
   return {
     name: 'span',
     text() {
@@ -67,7 +67,7 @@ function year(): CreateElementPartOptions {
   }
 }
 
-function month(): CreateElementPartOptions {
+function month(): CreateElementRequiredOptions {
   return {
     name: 'span',
     text() {
@@ -90,14 +90,14 @@ export function getTextType(state: State): DateComponentsType {
   }
 }
 
-function date(): CreateElementPartOptions {
+function date(): CreateElementRequiredOptions {
   return {
     name: 'span',
     text: getTextType(this)[this._type as 'year'],
   }
 }
 
-function preYearIcon(): CreateElementPartOptions {
+function preYearIcon(): CreateElementRequiredOptions {
   return {
     name: 'svg',
     text: 'year',
@@ -106,7 +106,7 @@ function preYearIcon(): CreateElementPartOptions {
   }
 }
 
-function preMonthIcon(): CreateElementPartOptions {
+function preMonthIcon(): CreateElementRequiredOptions {
   return {
     name: 'svg',
     text: 'month',
@@ -118,7 +118,7 @@ function preMonthIcon(): CreateElementPartOptions {
   }
 }
 
-function nextYearIcon(): CreateElementPartOptions {
+function nextYearIcon(): CreateElementRequiredOptions {
   return {
     name: 'svg',
     text: 'year',
@@ -130,7 +130,7 @@ function nextYearIcon(): CreateElementPartOptions {
   }
 }
 
-function nextMonthIcon(): CreateElementPartOptions {
+function nextMonthIcon(): CreateElementRequiredOptions {
   return {
     name: 'svg',
     text: 'month',
@@ -157,7 +157,7 @@ const headerChildren: HeaderChildrenOptions = {
   end: [date, nextYearIcon, nextMonthIcon],
 }
 
-export function Header(t?: keyof RangeType): CreateElementPartOptions {
+export function Header(t?: keyof RangeType): CreateElementRequiredOptions {
   name = t || 'start'
   return {
     class: ['header'],
@@ -165,10 +165,10 @@ export function Header(t?: keyof RangeType): CreateElementPartOptions {
   }
 }
 
-export function HeaderLeft(): CreateElementPartOptions {
+export function HeaderLeft(): CreateElementRequiredOptions {
   return Header('start')
 }
 
-export function HeaderRight(): CreateElementPartOptions {
+export function HeaderRight(): CreateElementRequiredOptions {
   return Header('end')
 }

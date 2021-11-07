@@ -18,6 +18,7 @@ import { SvgName } from '../types/element'
 import { resetHoverColor, resetSelectColor } from './theme'
 import { Callback } from '../types/core'
 import { Sub } from '../types/observer'
+import { objectKeys } from './objectKeys'
 
 const handler: Handler = {
   event(el, val, state) {
@@ -53,8 +54,8 @@ const handler: Handler = {
   },
   hidden: (el, val) => hidden(el, val),
   $style(el, val, state) {
-    Object.keys(val).forEach((key) => {
-      update.call(state, el, val[key as never], 'style', key)
+    objectKeys(val).forEach((key) => {
+      update.call(state, el, val[key], 'style', key)
     })
   },
 }
@@ -73,7 +74,7 @@ const svgName: SvgName = {
   ],
 }
 
-export default function createSVG(name: string): Element {
+export default function createSVG(name: string): HTMLElement {
   const url = 'http://www.w3.org/2000/svg'
   const svg = document.createElementNS(url, 'svg')
   svg.setAttribute('viewBox', '0 0 1024 1024')
@@ -82,20 +83,20 @@ export default function createSVG(name: string): Element {
     path.setAttribute('d', item)
     svg.appendChild(path)
   })
-  return svg
+  return svg as unknown as HTMLElement
 }
 
 export function createElement(
-  opt: Partial<CreateElementOptions> | CreateElement,
+  opt: Required<CreateElementOptions> | CreateElement,
   state: State
 ): Node {
-  if (isFunc<Partial<CreateElementOptions>>(opt)) {
+  if (isFunc<Required<CreateElementOptions>>(opt)) {
     return createElement(opt.call(state), state)
   }
   const el =
     opt.name === 'svg' ? createSVG(opt.text as string) : createEL(opt.name)
-  Object.keys(opt).forEach((key) => {
-    handler[key as keyof Handler](el as HTMLElement, opt[key as never], state)
+  objectKeys(opt).forEach((key) => {
+    handler[key](el, opt[key as never], state)
   })
   return el
 }

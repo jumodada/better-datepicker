@@ -2,13 +2,13 @@ import { Sub } from './observer'
 import { State } from './store'
 
 export interface UtilObject {
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export type DateType = string | Date | null
 
 export interface Fn {
-  (...arg: any): any
+  (...arg: never): unknown
 }
 
 export interface Types {
@@ -70,7 +70,7 @@ export interface Style {
 }
 
 export interface CreateElement {
-  (...arg: any): Partial<CreateElementOptions>
+  (...arg: any): Required<CreateElementOptions>
 }
 
 export interface updateOptions {
@@ -78,13 +78,13 @@ export interface updateOptions {
   cb: Sub<string>
 }
 
-export interface DynamicStyle {
+export type DynamicStyle = Required<{
   display?: Sub<string>
   color?: Sub<string>
   background?: Sub<string>
-}
+}>
 
-export type CreateElementPartOptions = Partial<CreateElementOptions>
+export type CreateElementRequiredOptions = Required<CreateElementOptions>
 
 export interface CreateElementOptions {
   name:
@@ -106,7 +106,7 @@ export interface CreateElementOptions {
   event: eventHandler | _EventListener[]
   style: Style
   $style: DynamicStyle
-  children: (CreateElementPartOptions | CreateElement)[]
+  children: (CreateElementRequiredOptions | CreateElement)[]
   hidden: boolean
 }
 

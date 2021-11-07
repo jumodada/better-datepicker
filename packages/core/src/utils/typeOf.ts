@@ -8,7 +8,7 @@ export function isNumber(val: unknown): val is number {
   return typeOf(val, 'Number') && !Number.isNaN(val)
 }
 
-export function isObject(val: unknown): val is UtilObject {
+export function isObject<T = UtilObject>(val: unknown): val is T {
   return typeOf(val, 'Object')
 }
 

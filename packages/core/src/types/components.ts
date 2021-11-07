@@ -2,7 +2,7 @@ import { MonthOrYearComponents, RangeType, State } from './store'
 import {
   CreateElement,
   CreateElementOptions,
-  CreateElementPartOptions,
+  CreateElementRequiredOptions,
   eventHandler,
 } from './utils'
 import { _EventListener } from './utils'
@@ -62,7 +62,7 @@ export type CreateMonthOrYearComponentsOptions =
   ComponentsType<CreateComponentsOptions>
 
 export interface HeaderChildrenOptions<
-  F = ((state: State) => CreateElementPartOptions)[]
+  F = ((state: State) => CreateElementRequiredOptions)[]
 > {
   start: F
   main: F
