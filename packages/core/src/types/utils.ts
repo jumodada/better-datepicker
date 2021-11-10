@@ -8,8 +8,13 @@ export interface UtilObject {
 export type DateType = string | Date | null
 
 export interface Fn {
-  (...arg: never): unknown
+  (...arg: any): unknown
 }
+
+export type PartialAtLeastOne<
+  T,
+  U = { [K in keyof T]: Pick<T, K> }
+> = Partial<T> & U[keyof U]
 
 export interface Types {
   Number: string
@@ -70,7 +75,7 @@ export interface Style {
 }
 
 export interface CreateElement {
-  (...arg: any): Required<CreateElementOptions>
+  (...arg: any): PartialAtLeastOne<CreateElementOptions>
 }
 
 export interface updateOptions {
@@ -78,13 +83,14 @@ export interface updateOptions {
   cb: Sub<string>
 }
 
-export type DynamicStyle = Required<{
-  display?: Sub<string>
-  color?: Sub<string>
-  background?: Sub<string>
+export type DynamicStyle = PartialAtLeastOne<{
+  display: Sub<string>
+  color: Sub<string>
+  background: Sub<string>
 }>
 
-export type CreateElementRequiredOptions = Required<CreateElementOptions>
+export type CreateElementRequiredOptions =
+  PartialAtLeastOne<CreateElementOptions>
 
 export interface CreateElementOptions {
   name:

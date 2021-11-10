@@ -28,7 +28,12 @@ export function on(
   arg?: unknown
 ): (e: Event) => unknown {
   function listener(e: Event) {
-    if (isObject(arg) && arg.date && state && isDisabledDate(state, arg.date))
+    if (
+      isObject(arg) &&
+      arg.date &&
+      state &&
+      isDisabledDate(state, (arg as any).date)
+    )
       return
     return handler.call(state, e)
   }

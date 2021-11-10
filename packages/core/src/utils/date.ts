@@ -93,7 +93,7 @@ export function isInRange<T = number>(
 }
 
 export function getPre<T = number>(m: number, y?: number): [number, number] {
-  if (isObject(m)) [m, y] = [m.month, m.year]
+  if (isObject<DateData>(m)) [m, y] = [m.month, m.year]
   let month = --m
   if (month === 0) {
     month = 12
@@ -106,7 +106,7 @@ export function getNext<T = number>(
   m: number | DateData,
   y?: number
 ): [number, number] {
-  if (isObject(m)) [m, y] = [m.month, m.year]
+  if (isObject<DateData>(m)) [m, y] = [m.month, m.year]
   let month = ++m
   if (month === 13) {
     month = 1

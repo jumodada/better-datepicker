@@ -4,13 +4,14 @@ import {
   CreateElementOptions,
   CreateElementRequiredOptions,
   eventHandler,
+  PartialAtLeastOne,
 } from './utils'
 import { _EventListener } from './utils'
 import { DatepickerType, DateType, MonthType, YearType } from './options'
 import { Sub } from './observer'
 
 export interface createMonthOrYearComponentsFunction {
-  (this: State, t: keyof RangeType): Partial<CreateElementOptions>
+  (this: State, t: keyof RangeType): PartialAtLeastOne<CreateElementOptions>
 }
 
 export interface UpdateCbType<F = (res: string) => void> {
@@ -44,7 +45,9 @@ export interface RangeClickEvent {
 
 interface CreateComponentsOptions {
   listener: (child: MonthOrYearComponents, state: State) => eventHandler
-  children: (idx: number) => (Partial<CreateElementOptions> | CreateElement)[]
+  children: (
+    idx: number
+  ) => (PartialAtLeastOne<CreateElementOptions> | CreateElement)[]
 }
 
 export interface DateComponentsType<S = Sub<string>> {

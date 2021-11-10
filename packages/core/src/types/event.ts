@@ -10,7 +10,7 @@ export type eventType =
   | 'blur'
 
 export interface Handler {
-  (...arg: any): unknown
+  (...arg: any): any
 }
 
 export interface _Event {

@@ -15,6 +15,12 @@ export default defineComponent({
     type: {
       type: String,
       default: 'month'
+    },
+    disabledDate:{
+      type:Function,
+      default(date){
+        return true
+      }
     }
   },
   data() {
@@ -24,6 +30,7 @@ export default defineComponent({
   },
   mounted() {
     const input = this.$refs.input
+    console.log(this.$props.disabledDate)
     this.datepicker = createDatePicker(input.$el, this.$props)
   },
   beforeUnmount() {

@@ -57,7 +57,6 @@ export function YM(
       return _for((cc) => {
         const idx = rc * cols + cc
         const child = this[t][('_' + componentName) as '_month'][idx]
-
         return {
           name: 'td',
           event: listener(child, this),

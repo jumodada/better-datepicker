@@ -8,6 +8,7 @@ import {
   Handler,
   _EventListener,
   CreateElement,
+  PartialAtLeastOne,
 } from '../types/utils'
 import { State } from '../types/store'
 import { addWatch } from '../observer/watcher'
@@ -55,7 +56,7 @@ const handler: Handler = {
   hidden: (el, val) => hidden(el, val),
   $style(el, val, state) {
     objectKeys(val).forEach((key) => {
-      update.call(state, el, val[key], 'style', key)
+      update.call(state, el, val[key] as Sub<string>, 'style', key)
     })
   },
 }
@@ -87,10 +88,10 @@ export default function createSVG(name: string): HTMLElement {
 }
 
 export function createElement(
-  opt: Required<CreateElementOptions> | CreateElement,
+  opt: PartialAtLeastOne<CreateElementOptions> | CreateElement,
   state: State
 ): Node {
-  if (isFunc<Required<CreateElementOptions>>(opt)) {
+  if (isFunc<PartialAtLeastOne<CreateElementOptions>>(opt)) {
     return createElement(opt.call(state), state)
   }
   const el =
@@ -140,7 +141,7 @@ export function update<T>(
   }
 
   addWatch(() => {
-    const cb: Sub<string> = 'cb' in opt ? opt.cb : opt
+    const cb = 'cb' in opt ? opt.cb : opt
     callbacks[type](cb.call(this))
   })
 }
