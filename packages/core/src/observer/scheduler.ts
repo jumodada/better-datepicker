@@ -1,37 +1,25 @@
-//https://github.com/vuejs/vue/blob/dev/src/core/observer/scheduler.js
-import { UtilObject } from '../types/utils'
 import nextTick from '../utils/nexttick'
 import Watcher from './watcher'
 
 const queue: Watcher[] = []
-let has: UtilObject = {}
-let waiting = false
-let index = 0
+const map = new WeakMap()
+let queued = false
 
 function flushSchedulerQueue() {
-  let watcher, id
-  for (index = 0; index < queue.length; index++) {
-    watcher = queue[index]
-    watcher.getter()
-    id = watcher.id
-    has[id] = null
+  for (const job of queue) {
+    job.getter()
+    map.delete(job)
   }
-  reset()
-}
-
-function reset() {
-  waiting = false
-  has = {}
-  queue.length = index = 0
+  queued = false
+  queue.length = 0
 }
 
 export function queueWatcher(watcher: Watcher): void {
-  const { id } = watcher
-  if (!has[id]) {
-    has[id] = true
+  if (!map.get(watcher)) {
+    map.set(watcher, true)
     queue.push(watcher)
-    if (!waiting) {
-      waiting = true
+    if (!queued) {
+      queued = true
       nextTick(() => flushSchedulerQueue())
     }
   }

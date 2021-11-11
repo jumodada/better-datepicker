@@ -5,14 +5,11 @@ import { isArray, isFunc } from '../utils/typeOf'
 import { State } from '../types/store'
 import { getState } from '../store'
 
-let id = 0
 export default class Watcher {
-  id: number
   state: State
   watcher: Sub
   constructor(watcher: Sub, state: State) {
     this.watcher = watcher
-    this.id = ++id
     this.state = state
     setTarget(this)
     this.getter()
