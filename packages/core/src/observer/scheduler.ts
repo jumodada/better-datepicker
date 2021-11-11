@@ -20,7 +20,7 @@ export function queueWatcher(watcher: Watcher): void {
     queue.push(watcher)
     if (!queued) {
       queued = true
-      nextTick(() => flushSchedulerQueue())
+      nextTick(flushSchedulerQueue)
     }
   }
 }

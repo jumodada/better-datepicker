@@ -14,7 +14,7 @@ export function mergeOptions(
       source[key] = val
     }
   }
-  reactive(target, source)
+  reactive(target)
   return source
 }
 

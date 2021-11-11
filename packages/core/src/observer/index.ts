@@ -1,47 +1,30 @@
 import Dep from './deps'
 import { State } from '../types/store'
-import { isArray, isObject } from '../utils/typeOf'
-import { Callback } from '../types/core'
-import { objectKeys } from '../utils/objectKeys'
+import { isObject } from '../utils/typeOf'
 
-export default function ObserveState(state: State): State {
-  const get = (dep: Dep) => {
-    if (Dep.target) dep.depend()
-  }
-  const set = (dep: Dep) => dep.notify()
-  return reactive(state, {}, set, get)
-}
+export function reactive(state: State): State {
+  const depMap = new Map()
 
-export function reactive(
-  state: State,
-  target: any,
-  setCb?: Callback,
-  getCb?: Callback
-): State {
-  const stack = new Map()
-
-  function observe<T = State>(obj: T): T {
-    return defineReactive<T>(obj)
-  }
-
-  function defineReactive<T>(obj: any) {
+  function defineReactive<T>(obj: any): any {
     return new Proxy(obj, {
-      get(target, propKey: string, receiver) {
-        if (!stack.has(propKey)) {
-          stack.set(propKey, new Dep())
+      get(target, key: string, receiver) {
+        const res = Reflect.get(target, key, receiver)
+        if (!depMap.has(key)) {
+          depMap.set(key, new Dep())
         }
-        getCb?.(stack.get(propKey))
-        return Reflect.get(target, propKey, receiver)
+        if (Dep.target) depMap.get(key).depend()
+        if (isObject(target[key])) {
+          return defineReactive(res)
+        }
+        return res
       },
-      set(target, propKey, value, receiver) {
-        if (value === val) return
-        return Reflect.set(target, propKey, value, receiver)
+      set(target, key, value, receiver) {
+        if (target[key] !== value) {
+          depMap.get(key)?.notify()
+        }
+        return Reflect.set(target, key, value, receiver)
       },
     })
   }
-
-  function createDep(key: string) {
-    return new Dep()
-  }
-  return observe(state)
+  return defineReactive(state)
 }
