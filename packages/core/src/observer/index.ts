@@ -18,37 +18,30 @@ export function reactive(
   setCb?: Callback,
   getCb?: Callback
 ): State {
+  const stack = new Map()
+
   function observe<T = State>(obj: T): T {
-    objectKeys(obj).forEach((key) => {
-      const val = obj[key]
-      if (isArray(val)) {
-        val.forEach((v) => {
-          if (isObject(v)) observe(v)
-        })
-      } else if (isObject(val)) {
-        observe(val)
-      } else {
-        defineReactive<T>(obj, key, val)
-      }
-    })
-    return obj
+    return defineReactive<T>(obj)
   }
 
-  function defineReactive<T>(obj: T, key: keyof T, val: unknown) {
-    const dep = new Dep()
-    Object.defineProperty(obj, key, {
-      enumerable: true,
-      configurable: true,
-      get() {
-        getCb?.(dep)
-        return val
+  function defineReactive<T>(obj: any) {
+    return new Proxy(obj, {
+      get(target, propKey: string, receiver) {
+        if (!stack.has(propKey)) {
+          stack.set(propKey, new Dep())
+        }
+        getCb?.(stack.get(propKey))
+        return Reflect.get(target, propKey, receiver)
       },
-      set(newVal) {
-        if (newVal === val) return
-        target[key] = val = newVal
-        setCb?.(dep)
+      set(target, propKey, value, receiver) {
+        if (value === val) return
+        return Reflect.set(target, propKey, value, receiver)
       },
     })
+  }
+
+  function createDep(key: string) {
+    return new Dep()
   }
   return observe(state)
 }
