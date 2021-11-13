@@ -1,11 +1,10 @@
 import Dep from './deps'
-import { State } from '../types/store'
 import { isObject } from '../utils/typeOf'
 
-export function reactive(state: State): State {
+export function reactive<T>(target: T): T {
   const depMap = new Map()
 
-  function defineReactive<T>(obj: any): any {
+  function proxy<T>(obj: any): any {
     return new Proxy(obj, {
       get(target, key: string, receiver) {
         const res = Reflect.get(target, key, receiver)
@@ -14,7 +13,7 @@ export function reactive(state: State): State {
         }
         if (Dep.target) depMap.get(key).depend()
         if (isObject(target[key])) {
-          return defineReactive(res)
+          return proxy(res)
         }
         return res
       },
@@ -26,5 +25,5 @@ export function reactive(state: State): State {
       },
     })
   }
-  return defineReactive(state)
+  return proxy(target)
 }

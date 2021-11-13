@@ -18,10 +18,13 @@ export default defineComponent({
     },
     disabledDate:{
       type:Function,
-      default(date){
+      default(){
         return true
       }
     }
+  },
+  updated() {
+    this.datepicker.update(this.$props)
   },
   data() {
     return {
@@ -30,7 +33,6 @@ export default defineComponent({
   },
   mounted() {
     const input = this.$refs.input
-    console.log(this.$props.disabledDate)
     this.datepicker = createDatePicker(input.$el, this.$props)
   },
   beforeUnmount() {
