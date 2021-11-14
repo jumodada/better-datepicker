@@ -7,7 +7,7 @@ import {
   PartialAtLeastOne,
 } from './utils'
 import { _EventListener } from './utils'
-import { DatepickerType, DateType, MonthType, YearType } from './options'
+import { DatepickerType, DateType, MonthType, YearType } from './store'
 import { Sub } from './observer'
 
 export interface createMonthOrYearComponentsFunction {

@@ -1,5 +1,4 @@
 import { addWatch } from '../../../observer/watcher'
-import Options from '../../../types/options'
 import { linkMonth } from './type/date&week/date-range'
 import { LinkYear, watchYM } from './type/month&year'
 import {
@@ -12,6 +11,7 @@ import { Listeners } from '../../../types/watch'
 import { has } from '../../../utils/typeOf'
 import { updateDays } from './type/date&week/public'
 import { dispatchDateChange } from '../../util/method'
+import { State } from '../../../types/store'
 
 const dateWeek = [updateDays, watchYM(false), watchYM(), startMonthAndYear]
 const listeners: Listeners = {
@@ -44,8 +44,8 @@ const listeners: Listeners = {
 const currency = [updateDays, dispatchDateChange]
 const range = [handleSelecting, endDate]
 
-export function watchDate(options: Options): void {
-  const { type } = options
+export function watchDate(state: State): void {
+  const { type } = state
   let publicListener = currency
   if (has(type, 'range')) publicListener = publicListener.concat(range)
   addWatch(listeners[type].concat(publicListener))

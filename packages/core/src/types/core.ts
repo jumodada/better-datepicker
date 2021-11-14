@@ -2,7 +2,7 @@ import Options, { LocaleConfig } from './options'
 import { State } from './store'
 
 export interface BetterPicker {
-  (el: HTMLInputElement, options?: Partial<Options>): BetterPickerInstance
+  (options: Partial<State>): BetterPickerInstance
 }
 
 export type GetDateType = (Date | null) | (Date | null)[]
@@ -12,7 +12,6 @@ export type Callback = (...arg: any) => any
 export interface BetterPickerInstance {
   id: number
   getCurrentDate: () => GetDateType
-  onChange: (cb: Callback) => void
   update: (options: Partial<Options>) => void
   destroyed: () => void
   clear: () => void

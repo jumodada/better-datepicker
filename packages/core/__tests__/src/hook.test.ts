@@ -1,5 +1,5 @@
 import { getDate, dispatchDateChange } from '../../src/core/util/method'
-import defaultOptions from '../../src/core/util/default-options'
+import defaultOptions from '../../src/store/default-options'
 import { createState } from '../../src/store'
 
 const startDate = '1999/10/1'

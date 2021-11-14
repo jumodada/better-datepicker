@@ -1,6 +1,5 @@
 import { State, States } from '../types/store'
 import initState from './state'
-import Options from '../types/options'
 import { objectKeys } from '../utils/objectKeys'
 
 const Store = (function () {
@@ -15,9 +14,8 @@ const Store = (function () {
     delete states[id]
   }
 
-  function createState(options: Options): State {
+  function createState(options: Partial<State>): State {
     const state = initState(options)
-    state._type = options.type.split('-').shift() as 'date'
     state.id = ++id
     states[id] = state
     return state

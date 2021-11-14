@@ -16,7 +16,7 @@ export function resetSelectColor(
   state: State,
   classes: string
 ): void {
-  const { themeColor, rangeBgColor } = state.options
+  const { themeColor, rangeBgColor } = state
   const div = Array.from(el.children).shift() as HTMLElement
   if (!div) return
   const { style } = div

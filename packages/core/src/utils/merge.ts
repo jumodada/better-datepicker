@@ -1,14 +1,12 @@
-import Options from '../types/options'
 import { logo } from './classes'
 import { isArray, has } from './typeOf'
 
-export function mergeOptions(
-  source: any,
-  target = Object.create(null)
-): Options {
+export function mergeOptions<S>(source: S, target = Object.create(null)): S {
   for (const key in source) {
     const val = target[key]
-    source[key] = val
+    if (typeof val !== 'undefined') {
+      source[key] = val
+    }
   }
   return source
 }

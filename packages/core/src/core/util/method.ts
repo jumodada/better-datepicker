@@ -5,7 +5,7 @@ import { has } from '../../utils/typeOf'
 import { date } from '../../utils/date'
 
 export function getDate(state: State): GetDateType {
-  const isRange = has(state.options.type, 'range')
+  const isRange = has(state.type, 'range')
   const [startDate, endDate] = [date(state.start.date), date(state.end.date)]
   if (isRange) {
     return [startDate, endDate]
@@ -17,8 +17,8 @@ export function getDate(state: State): GetDateType {
 export function dispatchDateChange(): void {
   const date = getDate(this)
   if (this.onChange) this.onChange(date)
-  if (this.options.binding && this.reference) {
-    this.reference.value = getFormatDate.call(this, date, this.options.format)
+  if (this.binding && this.reference) {
+    this.reference.value = getFormatDate.call(this, date, this.format)
   }
 }
 

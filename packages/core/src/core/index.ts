@@ -1,25 +1,19 @@
-import Options from '../types/options'
-import { findInputElement } from '../utils/findInputElement'
 import { createState, removeState } from '../store'
-import { mergeOptions } from '../utils/merge'
 import { watch } from './watch'
 import { State } from '../types/store'
 import { createPopover } from './dom/create-popover'
-import { isFunc } from '../utils/typeOf'
 import { destroyHook, getDate } from './util/method'
-import { BetterPicker, BetterPickerInstance, Callback } from '../types/core'
+import { BetterPicker, BetterPickerInstance } from '../types/core'
 import { getEventListener } from '../utils/event'
 import { listenToScrollParents } from '../utils/listenToParents'
 import clickOutside from '../utils/clickoutside'
 import { Off } from '../types/event'
-import defaultOptions from './util/default-options'
 import { Bind } from '../utils/bind'
+import { findInputElement } from '../utils/findInputElement'
+import { mergeOptions } from '../utils/merge'
 
 export default function Picker(): BetterPicker {
-  let state: State,
-    reference: HTMLInputElement,
-    opt: Options,
-    userConfig: Partial<Options> | undefined
+  let state: State
   let onRef, offRef: Off, onBody, offBody: Off
 
   function openPopover() {
@@ -27,30 +21,20 @@ export default function Picker(): BetterPicker {
   }
 
   function addListener() {
-    ;[onRef, offRef] = getEventListener(reference)
+    if (!state.reference) return
+    ;[onRef, offRef] = getEventListener(state.reference)
     ;[onBody, offBody] = getEventListener(document.body)
     onRef(openPopover)
     onBody(Bind(clickOutside, state))
-    if (state) listenToScrollParents(reference, state)
+    if (state) listenToScrollParents(state)
   }
 
   function getCurrentDate() {
     return getDate(state)
   }
 
-  function onChange(cb: Callback) {
-    if (isFunc(cb)) {
-      state.onChange = cb
-    } else {
-      console.error('Invalid argument provided. They must be a Function')
-    }
-  }
-
-  function update(options: Partial<Options>) {
-    if (options) userConfig = options
-    opt = mergeOptions(opt, options)
-    destroyed()
-    create()
+  function update(options: Partial<State>) {
+    state = mergeOptions(state, options)
   }
 
   function destroyed() {
@@ -60,14 +44,13 @@ export default function Picker(): BetterPicker {
     removeState(state.id)
   }
 
-  function create(): void {
-    state = Object.assign(createState(opt), {
+  function create(options: Partial<State>): void {
+    state = Object.assign(createState(options), {
       update,
       destroyed,
-      reference,
     })
     changeWeekFormat()
-    watch(opt)
+    watch(state)
     addListener()
     createPopover(state)
   }
@@ -92,24 +75,18 @@ export default function Picker(): BetterPicker {
   }
 
   function changeWeekFormat() {
-    if (state.options.type === 'week' && (!userConfig || !userConfig.format)) {
-      state.options.format = state.locale.weekFormat
+    // TODO if (state.type === 'week' && (!userConfig || !userConfig.format))
+    if (state.type === 'week') {
+      state.format = state.locale.weekFormat
     }
   }
 
-  return function (
-    el: HTMLInputElement,
-    options?: Partial<Options>
-  ): BetterPickerInstance {
-    reference = findInputElement(el)
-    opt = mergeOptions(defaultOptions(), options)
-    userConfig = options
-    create()
+  return function (options: Partial<State>): BetterPickerInstance {
+    create(options)
     return {
       id: state.id,
       state,
       getCurrentDate,
-      onChange,
       update,
       destroyed,
       clear,

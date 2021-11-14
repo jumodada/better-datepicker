@@ -65,7 +65,7 @@ EXAMPLE-OPTIONS
         {value: 'month', label:'month'},
         {value: 'month-range', label:'month-range'},
       ],
-      value: ''
+      value: 'date'
     }
   }
 </script>

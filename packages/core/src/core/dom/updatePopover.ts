@@ -27,7 +27,7 @@ export const sheetRule = [
 export function updatePopover(): void {
   const { visible, popover } = this
   if (!popover) return
-  const { zIndex } = this.options
+  const { zIndex } = this
   if (visible) {
     popover.style.display = ''
     setPopoverLocation.call(this)
@@ -114,8 +114,7 @@ export function setPopoverLocation(): void {
     objectKeys(tp).forEach((key) => (popover.style[key] = tp[key]))
   }
 
-  const { popover, reference, options } = this
-  const { offset, placement } = options
+  const { popover, reference, offset, placement } = this
   const rect = reference.getBoundingClientRect()
   const popInBody = isInBody(popover)
   if (popInBody) {

@@ -1,7 +1,7 @@
 import { DateData, State } from '../types/store'
 import { isArray, isObject, isString } from './typeOf'
 import _for from './for'
-import { LocaleConfig } from '../types/options'
+import { LocaleConfig } from '../types/store'
 import { WeekRange } from '../types/utils'
 
 const Ms = 86400000
@@ -116,7 +116,7 @@ export function getNext<T = number>(
 }
 
 export function isDisabledDate(state: State, date: string): string {
-  const { disabledDate } = state.options
+  const { disabledDate } = state
   return disabledDate && disabledDate(new Date(date)) ? 'disabled' : ''
 }
 

@@ -1,4 +1,4 @@
-import { ComponentStatus, State } from '../../../../types/store'
+import { ComponentStatus, DatepickerType, State } from '../../../../types/store'
 import {
   isAfter,
   transformDateToArray,
@@ -116,7 +116,7 @@ export function getStatus(
   self: State,
   date: string,
   idx: number,
-  type: keyof DateComponentsType = 'month',
+  type: keyof DatepickerType = 'month',
   preStatus = ''
 ): ComponentStatus {
   const typeStatus: GetStatusFunctionsType = {
@@ -130,9 +130,9 @@ export function getStatus(
     return Date.parse(self.today) === Date.parse(date) ? 'today' : ''
   }
 
-  const method = has(self.options.type, 'range')
+  const method = has(self.type, 'range')
     ? rangeStatus
-    : typeStatus[type]
+    : typeStatus[type as 'date']
   return mergeClasses(
     method?.call(self, date, idx),
     isDisabledDate(self, date),

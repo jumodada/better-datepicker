@@ -1,6 +1,6 @@
 import { setPopoverLocation, sheetRule } from '../../src/core/dom/updatePopover'
 import { createState } from '../../src/store'
-import defaultOptions from '../../src/core/util/default-options'
+import defaultOptions from '../../src/store/default-options'
 
 describe('sheetRuleStatus', () => {
   it('should match Snapshot', () => {

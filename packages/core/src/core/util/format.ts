@@ -35,18 +35,17 @@ function pad(val: string | number, len?: number) {
 export function getFormatDate(
   this: State,
   date: DateType | DateType[],
-  format: string
+  formatConfig: string
 ): string | null {
-  const { locale, options } = this
+  const { locale, format } = this
   const separator = ' - '
-
   function formatParse(dateStr: DateType): string | null {
     if (!dateStr) return null
 
-    if (has(options?.format, 'w') && isDate(dateStr)) {
+    if (has(format, 'w') && isDate(dateStr)) {
       dateStr = getWeekRange(dateStr, locale.weekStart).start
     }
-    return format.replace(token, (val) =>
+    return formatConfig.replace(token, (val) =>
       formats[val as 'dd'](new Date(dateStr!.toString()), locale)
     )
   }

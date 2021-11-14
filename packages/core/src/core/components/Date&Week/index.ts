@@ -34,7 +34,7 @@ function tBody(): CreateElementRequiredOptions {
           cb: () => child['status'],
           static: ['cell'],
         },
-        event: dayEvent(child)[this.options.type as 'date'],
+        event: dayEvent(child)[this.type as 'date'],
       }
     }, colsCount)
   }
@@ -61,7 +61,7 @@ export function Day(
 ): CreateElementRequiredOptions {
   type = t
   const classes = ['date']
-  if (this.options.type === 'week') classes.push('week')
+  if (this.type === 'week') classes.push('week')
   return {
     class: ['content'],
     children: [

@@ -36,6 +36,6 @@ export function updateDays(this: State): void {
       },
     }
     ;[item.text, item.date] = newDate[status || 'other']()
-    item.status = getStatus(this, item.date, idx, this._type, status)
+    item.status = getStatus(this, item.date, idx, this.type, status)
   })
 }

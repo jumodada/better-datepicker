@@ -1,6 +1,6 @@
 import { createState, destroyed, getState } from '../../src/store'
 import { mergeOptions } from '../../src/utils/merge'
-import defaultOptions from '../../src/core/util/default-options'
+import defaultOptions from '../../src/store/default-options'
 
 describe('can i use Store', () => {
   const options = mergeOptions(defaultOptions(), {

@@ -4,7 +4,7 @@
 
 <script lang='ts'>
 import '../../../assets/svg/svg'
-import { defineComponent, toRefs } from 'vue'
+import { defineComponent } from 'vue'
 
  import { createDatePicker } from 'better-datepicker'
 
@@ -33,7 +33,11 @@ export default defineComponent({
   },
   mounted() {
     const input = this.$refs.input
-    this.datepicker = createDatePicker(input.$el, this.$props)
+    this.datepicker = createDatePicker({
+      ...this.$props,
+      reference: input.$el,
+      type: 'date'
+    })
   },
   beforeUnmount() {
     this.datepicker.destroyed()

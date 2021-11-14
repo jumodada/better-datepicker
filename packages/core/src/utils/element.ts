@@ -23,7 +23,7 @@ import { objectKeys } from './objectKeys'
 
 const handler: Handler = {
   event(el, val, state) {
-    const { themeColor } = state.options
+    const { themeColor } = state
     function addListener(listener: _EventListener[] | Callback): void {
       if (isArray<{ name: eventType; handler: eventHandler }>(listener)) {
         listener.forEach((e) => on(el, e.handler, e.name, state))
@@ -42,8 +42,7 @@ const handler: Handler = {
   class: (el, val, state) => update.call(state, el, val, 'cls'),
   style: (el, val) => addAttr(el, transformStyle(val), 'style'),
   name: (el, val, state) => {
-    const color: string | undefined =
-      state.options[(val + 'Color') as 'thColor']
+    const color: string | undefined = state[(val + 'Color') as 'thColor']
     if (color) addAttr(el, { color }, 'style')
   },
   text(el, val, state) {
