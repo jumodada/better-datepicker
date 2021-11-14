@@ -1,5 +1,4 @@
 import Options from '../types/options'
-import { checkOptions } from './checkOptions'
 import { logo } from './classes'
 import { isArray, has } from './typeOf'
 
@@ -9,9 +8,7 @@ export function mergeOptions(
 ): Options {
   for (const key in source) {
     const val = target[key]
-    if (checkOptions(key as keyof Options, val)) {
-      source[key] = val
-    }
+    source[key] = val
   }
   return source
 }

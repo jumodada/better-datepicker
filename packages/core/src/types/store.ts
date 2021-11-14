@@ -1,14 +1,6 @@
-import Options, { LocaleConfig } from './options'
-import { DateType, Fn } from './utils'
+import { DatepickerType, LocaleConfig, Placement } from './options'
+import { DateType, Style } from './utils'
 import { Callback } from './core'
-
-interface Watcher<K> {
-  (target: stateComponent, key: keyof K, value: unknown): void
-}
-
-type componentWatcher = Watcher<componentsWatchers>
-type dateWatcher = Watcher<dateWatchers>
-type utilWatcher = Watcher<utilWatchers>
 
 export type ComponentStatus =
   | 'other'
@@ -37,12 +29,6 @@ export interface MonthOrYearComponents {
   date: string
 }
 
-export interface stateComponent<T = null | HTMLElement, U = null | Fn> {
-  reference: HTMLInputElement | null
-  popover: T
-  onChange: U
-}
-
 export interface DateData {
   date: string | null
   year: number
@@ -63,43 +49,39 @@ export interface Range extends RangeType<string | null> {
   status: RangeStatus
 }
 
-export interface stateDate<T = Date> {
-  range: Range
-  start: DateData
-  end: DateData
-  today: string
-  date: DateType | DateType[]
-}
-
 export type pageName = 'date' | 'year' | 'month'
 
-export interface stateUtil {
-  options: Options
+export interface State {
+  reference: HTMLInputElement | null
+  popover: HTMLElement | null
+  onChange?: Callback
   visible: boolean
   page: pageName
   locale: LocaleConfig
   destroyed?: Callback
   update?: Callback
-}
-
-export interface componentsWatchers<T = componentWatcher> {
-  reference: T
-  popover: T
-}
-
-export interface dateWatchers<T = dateWatcher> {
-  startDate: T
-}
-
-export interface utilWatchers<T = utilWatcher> {
-  options: T
-  visible: T
-  page: T
-}
-
-export interface State extends stateComponent, stateUtil, stateDate {
-  id: number
-  _type: pageName
+  range: Range
+  start: DateData
+  end: DateData
+  today: string
+  date: DateType | DateType[]
+  placement: Placement
+  placeholder: string
+  style: Style
+  classes: string[]
+  type: keyof DatepickerType
+  unlinkPanels: boolean
+  offset: number
+  zIndex: number
+  format: string
+  insertTo: 'body' | 'parent'
+  binding: boolean
+  disabledDate?: ((date: Date) => boolean) | null
+  disabled: boolean
+  themeColor: string
+  rangeBgColor: string
+  tdColor: string
+  thColor: string
 }
 
 export interface States {
