@@ -6,6 +6,8 @@ import { WeekRange } from '../types/utils'
 
 const Ms = 86400000
 
+const defaultWeeks = [0, 1, 2, 3, 4, 5, 6]
+
 export function date(date: string | null | number): Date | null {
   if (!date) return null
   return new Date(date)
@@ -27,7 +29,7 @@ export function transformDateToArray(date: string): number[] {
   return date.split('/').map((str) => Number(str))
 }
 
-export function daysInAMonth(year: number, month: number): number {
+export function daysInMonth(year: number, month: number): number {
   return new Date(year, month, 0).getDate()
 }
 
@@ -41,15 +43,15 @@ export function monthStartDay(year: number, month: number, start = 0): number {
   return firstDate - start
 }
 
-export function joinDate<T = number | string>(
-  month?: T[] | T,
+export function joinDate(
+  month?: (number | string)[] | number | string,
   year = 1,
   day = 1
 ): string {
   if (isArray(month)) {
-    return month.reverse().join('/') + '/' + year
+    return month.reverse().concat(year).join('/')
   }
-  return year + '/' + month + '/' + day
+  return [year, month, day].join('/')
 }
 
 export function transformDate(date: Date | string): string {
@@ -102,17 +104,16 @@ export function getPre<T = number>(m: number, y?: number): [number, number] {
   return [month, y as number]
 }
 
-export function getNext<T = number>(
-  m: number | DateData,
-  y?: number
-): [number, number] {
+export function getNext(m: number, y: number): [number, number]
+export function getNext(m: DateData): [number, number]
+export function getNext(m: DateData | number, y = 1): [number, number] {
   if (isObject<DateData>(m)) [m, y] = [m.month, m.year]
   let month = ++m
   if (month === 13) {
     month = 1
-    ++(y as number)
+    ++y
   }
-  return [month, y as number]
+  return [month, y]
 }
 
 export function isDisabledDate(state: State, date: string): string {
@@ -143,8 +144,6 @@ export function getWeeks<S = number>(weekdays: S[], weekStart: number): S[] {
     .slice(weekStart, weekdays.length)
     .concat(weekdays.slice(0, weekStart))
 }
-
-const defaultWeeks = [0, 1, 2, 3, 4, 5, 6]
 
 export function getWeekRange(d: Date | string, weekStart: number): WeekRange {
   if (isString(d)) d = date(d) as Date

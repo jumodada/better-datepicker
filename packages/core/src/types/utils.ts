@@ -55,11 +55,12 @@ export interface Style {
   float?: 'left' | 'right'
   color?: string
   backgroundColor?: string
+  background?: string
   margin?: string
-  'margin-left'?: string
-  'margin-right'?: string
-  'margin-top'?: string
-  'margin-bottom'?: string
+  marginLeft?: string
+  marginRight?: string
+  marginTop?: string
+  marginBottom?: string
   padding?: string
   position?: 'relative' | 'absolute'
   left?: string
@@ -68,10 +69,14 @@ export interface Style {
   bottom?: string
   cursor?: 'default' | 'pointer'
   transform?: string
-  'text-align'?: string
-  display?: 'inline-block' | 'none' | 'block'
-  'border-right'?: string
-  'z-index'?: number
+  textAlign?: string
+  display?: 'inline-block' | 'none' | 'block' | ''
+  borderRight?: string
+  zIndex?: number
+}
+
+export type StyleOption = {
+  [key in keyof Style]: Style[key] | (() => Style[key])
 }
 
 export interface CreateElement {
@@ -107,17 +112,19 @@ export interface CreateElementOptions {
     | 'thead'
     | 'tbody'
     | 'i'
+    | 'yearIcon'
+    | 'monthIcon'
   text: string | Sub<string>
-  class: updateOptions | string[] | Sub<string>
+  class: any
   event: eventHandler | _EventListener[]
-  style: Style
-  $style: DynamicStyle
+  style: StyleOption
   children: (CreateElementRequiredOptions | CreateElement)[]
   hidden: boolean
+  componentType: 'start' | 'end'
 }
 
 interface HandlerCb<V> {
-  (el: HTMLElement, val: V, state: State): void
+  (val: V, componentType: 'start' | 'end'): void
 }
 
 export type Handler = {

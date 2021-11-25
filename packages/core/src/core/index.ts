@@ -9,8 +9,6 @@ import { listenToScrollParents } from '../utils/listenToParents'
 import clickOutside from '../utils/clickoutside'
 import { Off } from '../types/event'
 import { Bind } from '../utils/bind'
-import { findInputElement } from '../utils/findInputElement'
-import { mergeOptions } from '../utils/merge'
 
 export default function Picker(): BetterPicker {
   let state: State
@@ -34,7 +32,7 @@ export default function Picker(): BetterPicker {
   }
 
   function update(options: Partial<State>) {
-    state = mergeOptions(state, options)
+    state = Object.assign(state, options)
   }
 
   function destroyed() {

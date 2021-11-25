@@ -1,7 +1,6 @@
 import BD from './core'
 import { BetterPickerInstance } from './types/core'
-import { changeOpt } from './store/default-options'
-import { pickerLocale } from './store/default-options'
+import { changeDefaultOption, pickerLocale } from './store/state'
 import { destroyed } from './store'
 import { State } from './types/store'
 
@@ -12,7 +11,7 @@ export function createDatePicker(
   return <BetterPickerInstance>picker(options)
 }
 
-export const defaultOptions = changeOpt
+export const defaultOptions = changeDefaultOption
 
 export const locale = pickerLocale
 

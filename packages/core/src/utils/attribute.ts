@@ -1,36 +1,36 @@
-import { Style } from '../types/utils'
-import { isObject } from './typeOf'
 import { objectKeys } from './objectKeys'
+import { addLogo } from './merge'
 
-export function resetAttr(
-  el: HTMLElement | Element,
-  val: string,
-  name = 'class'
-): void {
-  if (!val) return el.removeAttribute(name)
-  el.setAttribute(name, val)
+export function setClasses(el: HTMLElement | Element, val: string): void {
+  el.setAttribute(
+    'class',
+    val
+      .split(' ')
+      .map((name) => addLogo(name))
+      .join(' ')
+  )
 }
 
-export function transformStyle(sty: Style): string {
-  if (!sty) return ''
-  return objectKeys(sty)
-    .reduce((acc, key) => acc.concat(`${key}:${sty[key]}`), [''])
-    .join(';')
-}
-
-export function addAttr(
-  el: HTMLElement | Element,
-  val: string | Style,
-  name = 'class'
-): void {
-  if (!val) return
-  let attr = el.getAttribute(name) || ''
-  let _val = val
-  if (isObject<Style>(val)) {
-    _val = objectKeys(val)
-      .filter((key) => val[key])
-      .reduce((c, key) => c + key + ':' + val[key] + ';', '')
+export function classNames(
+  names: string,
+  config: {
+    [key: string]: () => boolean
+  } = {}
+): () => string {
+  return () => {
+    return objectKeys(config).reduce((classNames: string, key) => {
+      return config[key]() ? `${classNames} ${key}` : classNames
+    }, names)
   }
-  attr += ' ' + _val
-  el.setAttribute(name, attr)
+}
+
+export function styleNames(
+  styles: {
+    [key: string]: boolean
+  } = {}
+): () => string {
+  return () =>
+    objectKeys(styles).reduce((stylesName: string, sty) => {
+      return stylesName.concat(`${sty}:${styles[sty]}`)
+    }, '')
 }

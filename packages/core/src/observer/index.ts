@@ -1,5 +1,5 @@
 import Dep from './deps'
-import { isObject } from '../utils/typeOf'
+import { isArray, isObject } from '../utils/typeOf'
 
 export function reactive<T>(target: T): T {
   const depMap = new Map()
@@ -12,7 +12,7 @@ export function reactive<T>(target: T): T {
           depMap.set(key, new Dep())
         }
         if (Dep.target) depMap.get(key).depend()
-        if (isObject(target[key])) {
+        if (isObject(target[key]) || isArray(target[key])) {
           return proxy(res)
         }
         return res

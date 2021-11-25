@@ -6,10 +6,10 @@ const startDate = '1999/10/1'
 const endDate = '2000/10/1'
 describe('getDate', () => {
   const state = createState(defaultOptions())
-  it('should get date of `State`', () => {
+  it('should get actions of `State`', () => {
     expect(getDate(state)).toBeNull()
   })
-  it('if `State` type has `range`, return a date array', () => {
+  it('if `State` type has `range`, return a actions array', () => {
     state.options.type = 'date-range'
     state.start.date = startDate
     state.end.date = endDate
@@ -19,7 +19,7 @@ describe('getDate', () => {
 
 describe('dispatchDateChange', () => {
   const state = createState(defaultOptions())
-  it('should be called when date has changed', () => {
+  it('should be called when actions has changed', () => {
     const fn = jest.fn()
     state.onChange = fn
     dispatchDateChange.call(state)

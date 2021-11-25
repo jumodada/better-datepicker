@@ -1,5 +1,4 @@
-import Options, { LocaleConfig } from './options'
-import { State } from './store'
+import { LocaleConfig, State } from './store'
 
 export interface BetterPicker {
   (options: Partial<State>): BetterPickerInstance
@@ -12,7 +11,7 @@ export type Callback = (...arg: any) => any
 export interface BetterPickerInstance {
   id: number
   getCurrentDate: () => GetDateType
-  update: (options: Partial<Options>) => void
+  update: (options: any) => void
   destroyed: () => void
   clear: () => void
   close: () => void

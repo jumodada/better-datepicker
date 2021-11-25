@@ -32,12 +32,12 @@ export function isArray<T = unknown>(val: unknown): val is T[] {
   return Array.isArray(val)
 }
 
-export function has(
-  target: string | string[],
+export function has<T extends string>(
+  target: T[] | T,
   val: string | string[]
-): boolean {
+): val is T {
   if (isArray(val)) return val.some((v) => has(target, v))
-  return target?.indexOf(val) > -1
+  return target.indexOf(val as never) > -1
 }
 
 export function not(

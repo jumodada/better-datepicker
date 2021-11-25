@@ -16,7 +16,6 @@ export interface createMonthOrYearComponentsFunction {
 
 export interface UpdateCbType<F = (res: string) => void> {
   text: F
-  cls: F
   style: F
 }
 

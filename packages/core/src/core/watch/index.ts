@@ -1,10 +1,8 @@
-import { watchComponents } from './picker'
-import { watchDate } from './date'
-import { watchOptions } from './options'
+import { actions } from './actions'
 import { State } from '../../types/store'
+import { init } from './init'
 
 export function watch(state: State): void {
-  watchComponents()
-  watchDate(state)
-  watchOptions()
+  init()
+  actions(state)
 }

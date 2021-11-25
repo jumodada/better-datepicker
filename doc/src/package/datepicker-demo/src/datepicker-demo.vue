@@ -83,7 +83,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-//@import "../../../../../../src/assets/date-picker";
+//@import "../../../../../../src/assets/actions-picker";
 
 .better-datepicker-wrapper {
   position: relative !important;

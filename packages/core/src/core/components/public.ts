@@ -3,6 +3,7 @@ import {
   pageName,
   RangeStatus,
   RangeType,
+  State,
 } from '../../types/store'
 import { RangeClickEvent } from '../../types/components'
 import { _EventListener, DynamicStyle } from '../../types/utils'
@@ -89,12 +90,6 @@ export function toYearPage(): void {
   this.page = 'year'
 }
 
-export function isDayPage(): 'none' | '' {
-  return visible(this.page === 'date')
-}
-
-export function canIShow(cb: Sub<string>): DynamicStyle {
-  return {
-    display: cb,
-  }
+export function canIShow(state: State, name = 'day') {
+  return () => visible(state.page === name)
 }

@@ -1,4 +1,4 @@
-import { ComponentStatus, DatepickerType, State } from '../../../../types/store'
+import { ComponentStatus, DatepickerType, State } from '../../../types/store'
 import {
   isAfter,
   transformDateToArray,
@@ -6,13 +6,11 @@ import {
   isDisabledDate,
   isSame,
   getWeekRange,
-} from '../../../../utils/date'
-import { Sub } from '../../../../types/observer'
-import { getDate } from '../../../util/method'
-import { mergeClasses } from '../../../../utils/merge'
-import { DateComponentsType } from '../../../../types/components'
-import { has, not } from '../../../../utils/typeOf'
-import { GetStatusFunctionsType } from '../../../../types/core'
+} from '../../../utils/date'
+import { getDate } from '../../util/method'
+import { mergeClasses } from '../../../utils/merge'
+import { has } from '../../../utils/typeOf'
+import { GetStatusFunctionsType } from '../../../types/core'
 
 export function rangeStatus(date: string): ComponentStatus {
   const { start, end } = this.range
@@ -100,24 +98,11 @@ export function startMonthAndYear(this: State): void {
   })
 }
 
-export function hoverSelect(type: keyof DateComponentsType = 'month'): Sub {
-  return function () {
-    ;(['start', 'end'] as const).forEach((name) => {
-      this[name][('_' + type) as '_month']
-        .filter((item) => not(item.status, ['pre', 'next']))
-        .forEach(
-          (item, idx) => (item.status = getStatus(this, item.date, idx, type))
-        )
-    })
-  }
-}
-
 export function getStatus(
   self: State,
   date: string,
   idx: number,
-  type: keyof DatepickerType = 'month',
-  preStatus = ''
+  type: keyof DatepickerType = 'month'
 ): ComponentStatus {
   const typeStatus: GetStatusFunctionsType = {
     year: yearStatus,
@@ -126,18 +111,12 @@ export function getStatus(
     week: weekStatus,
   }
 
-  function isToday() {
-    return Date.parse(self.today) === Date.parse(date) ? 'today' : ''
-  }
-
   const method = has(self.type, 'range')
     ? rangeStatus
     : typeStatus[type as 'date']
   return mergeClasses(
     method?.call(self, date, idx),
-    isDisabledDate(self, date),
-    isToday(),
-    preStatus
+    isDisabledDate(self, date)
   ) as ''
 }
 

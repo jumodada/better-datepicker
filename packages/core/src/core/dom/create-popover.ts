@@ -1,52 +1,41 @@
 import { State } from '../../types/store'
 import { createElement } from '../../utils/element'
-import { Header, HeaderLeft, HeaderRight } from '../components/Header'
-import { Day, endDay } from '../components/Date&Week'
-import { Month, endMonth, Year, endYear } from '../components/Month&Year'
-import { PopoverType, DateComponentsType } from '../../types/components'
+import { Header } from '../components/header'
+import { Day } from '../components/date&week'
+import { Month, Year } from '../components/month&year'
+import { PopoverType } from '../../types/components'
 import { has } from '../../utils/typeOf'
 import { canIUseAnimation } from '../../utils/env'
+import { classNames } from '../../utils/attribute'
 
-const componentType = {
-  date: {
-    start: [HeaderLeft, Day],
-    end: [HeaderRight, endDay],
-  },
-  month: {
-    start: [HeaderLeft, Month],
-    end: [HeaderRight, endMonth],
-  },
-  year: {
-    start: [HeaderLeft, Year],
-    end: [HeaderRight, endYear],
-  },
-}
-function rangeComponent(type: keyof DateComponentsType = 'month') {
-  const comp = componentType[type]
+function rangeComponent(child: any) {
+  const children = [Header, child]
   return [
     {
       class: ['range-wrapper'],
       children: [
         {
-          children: comp.start,
+          children,
+          componentType: 'start',
         },
         {
-          children: comp.end,
+          children,
+          componentType: 'end',
         },
       ],
     },
   ]
 }
 
-const dateAndWeek = [Header, Day, Month, Year]
+const dateAndWeek = [Header, Day]
 const popoverType: PopoverType = {
   date: dateAndWeek,
   week: dateAndWeek,
-  'date-range': rangeComponent('date'),
+  'date-range': rangeComponent(Day),
   month: [Header, Month, Year],
-  'month-range': rangeComponent(),
+  'month-range': rangeComponent(Month),
   year: [Header, Year],
-  'year-range': rangeComponent('year'),
+  'year-range': rangeComponent(Year),
 }
 
 export function deleteRules(sheet: any = document.styleSheets[0]): void {
@@ -74,11 +63,14 @@ function listenToAnimation(pop: HTMLElement) {
 export function createPopover(state: State): void {
   state.popover = createElement(
     {
-      class: state.classes.concat(['wrapper']),
+      //class: state.classes.concat(['wrapper']),
+      class: classNames('wrapper'),
       children: popoverType[state.type],
       hidden: true,
       style: {
         display: 'inline-block',
+        position: 'absolute',
+        zIndex: state.zIndex,
       },
     },
     state

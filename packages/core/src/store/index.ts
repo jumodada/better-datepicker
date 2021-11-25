@@ -1,5 +1,5 @@
 import { State, States } from '../types/store'
-import initState from './state'
+import { initState } from './state'
 import { objectKeys } from '../utils/objectKeys'
 
 const Store = (function () {
@@ -15,15 +15,12 @@ const Store = (function () {
   }
 
   function createState(options: Partial<State>): State {
-    const state = initState(options)
-    state.id = ++id
-    states[id] = state
-    return state
+    return (states[id] = initState(options, id))
   }
 
   function runDestroyed(state: State) {
-    if (state && state.destroyed) {
-      state.destroyed()
+    if (state) {
+      state.destroyed?.()
     }
   }
 

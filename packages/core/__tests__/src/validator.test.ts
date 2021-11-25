@@ -25,7 +25,7 @@ describe('checkOptions', () => {
     })
   })
   describe('KeyName: type', () => {
-    it('should return whether `value` is in [date,date-range, month,month-range]', () => {
+    it('should return whether `value` is in [actions,actions-range, month,month-range]', () => {
       expect(checkOptions('type', 'date')).toBeTruthy()
       expect(checkOptions('type', 'date-range')).toBeTruthy()
       expect(checkOptions('type', 'month')).toBeTruthy()
@@ -39,7 +39,7 @@ describe('checkOptions', () => {
     })
   })
   describe('KeyName: unlinkPanels', () => {
-    it('should return whether `value` is in [date,date-range, month,month-range]', () => {
+    it('should return whether `value` is in [actions,actions-range, month,month-range]', () => {
       expect(checkOptions('unlinkPanels', false)).toBeTruthy()
       expect(checkOptions('unlinkPanels', 0)).toBeFalsy()
       expect(checkOptions('unlinkPanels', 1)).toBeFalsy()

@@ -1,5 +1,4 @@
 import { Rect, Transform } from '../../types/utils'
-import { addAttr } from '../../utils/attribute'
 import { isInBody } from '../../utils/isInBody'
 import { deleteRules } from './create-popover'
 import { canIUseAnimation } from '../../utils/env'
@@ -27,12 +26,10 @@ export const sheetRule = [
 export function updatePopover(): void {
   const { visible, popover } = this
   if (!popover) return
-  const { zIndex } = this
   if (visible) {
     popover.style.display = ''
     setPopoverLocation.call(this)
   }
-  setPopoverStyle(popover, zIndex)
   const ss = document.styleSheets[0]
   const animation = animations[Number(visible)]
   if (canIUseAnimation()) {
@@ -56,17 +53,6 @@ function resetRangStatus(self: State) {
   } else {
     range.start = range.end = null
   }
-}
-
-export function setPopoverStyle(el: HTMLElement, zx: number): void {
-  addAttr(
-    el,
-    {
-      position: 'absolute',
-      'z-index': zx,
-    },
-    'style'
-  )
 }
 
 export function setPopoverLocation(): void {

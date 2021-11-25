@@ -112,6 +112,7 @@ export interface State {
   style: Style
   classes: string[]
   type: keyof DatepickerType
+  _type: 'date' | 'month' | 'year'
   unlinkPanels: boolean
   offset: number
   zIndex: number

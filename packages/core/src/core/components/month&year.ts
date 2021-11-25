@@ -1,18 +1,38 @@
-import { visible } from '../../../utils/element'
-import { canIShow } from '../utils'
-import { RangeType } from '../../../types/store'
+import { visible } from '../../utils/element'
+import { handleRange, selectYM, toDayPage, toMonthPage } from './public'
+import { MonthOrYearComponents, RangeType } from '../../types/store'
 import {
   ComponentsType,
   createMonthOrYearComponentsFunction,
   CreateMonthOrYearComponentsOptions,
-} from '../../../types/components'
-import { monthEvent, yearEvent } from './event'
-import { CreateElementRequiredOptions } from '../../../types/utils'
-import _for from '../../../utils/for'
-import { getTenRange } from '../../../utils/date'
+  MonthEvent,
+  YearEvent,
+} from '../../types/components'
+import { CreateElementRequiredOptions } from '../../types/utils'
+import _for from '../../utils/for'
+import { getTenRange } from '../../utils/date'
+import { Bind } from '../../utils/bind'
 
 const rows = 3
 const cols = 4
+
+function monthEvent(state: MonthOrYearComponents): MonthEvent {
+  return {
+    date: Bind(toDayPage, state),
+    'month-range': handleRange(state),
+    month: Bind(selectYM, [state, 'month']),
+  }
+}
+
+function yearEvent(state: MonthOrYearComponents): YearEvent {
+  const toggleMonth = Bind(toMonthPage, state)
+  return {
+    date: toggleMonth,
+    'year-range': handleRange(state),
+    year: Bind(selectYM, [state, 'year']),
+    month: toggleMonth,
+  }
+}
 
 export function YM(
   componentName: keyof ComponentsType = 'month'
@@ -68,19 +88,13 @@ export function YM(
       name: 'table',
       children: [tBody()],
       class: [componentName],
-      $style: canIShow(() => visible(this.page === componentName)),
+      style: {
+        display: () => visible(this.page === componentName),
+      },
     }
   }
 }
 
 export const Month = YM()
 
-export function endMonth(): CreateElementRequiredOptions {
-  return Month.call(this, 'end')
-}
-
 export const Year = YM('year')
-
-export function endYear(): CreateElementRequiredOptions {
-  return Year.call(this, 'end')
-}

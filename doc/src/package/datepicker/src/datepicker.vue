@@ -14,14 +14,18 @@ export default defineComponent({
     placeholder: String,
     type: {
       type: String,
-      default: 'month'
+      default: 'date-range'
     },
     disabledDate:{
       type:Function,
       default(){
         return true
       }
-    }
+    },
+    // rangBgColor: {
+    //   type: String,
+    //   default: '#ffffff'
+    // }
   },
   updated() {
     this.datepicker.update(this.$props)
@@ -36,7 +40,7 @@ export default defineComponent({
     this.datepicker = createDatePicker({
       ...this.$props,
       reference: input.$el,
-      type: 'date'
+      type: 'date-range'
     })
   },
   beforeUnmount() {

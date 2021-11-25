@@ -13,7 +13,7 @@ export function flushCallbacks(): void {
 }
 const p = Promise.resolve()
 
-export default function extTick(cb: Callback): void {
+export default function nextTick(cb: Callback): void {
   callbacks.push(cb)
   if (!pending) {
     pending = true

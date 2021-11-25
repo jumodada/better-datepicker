@@ -54,7 +54,7 @@ When you change options property, it will be automatically updated on the datepi
   picker.update({placement: 'top'}) //Update configuration, destroyed old datepicker
 
   picker.onChange((date)=>{
-    console.log('The current date is ' + date)
+    console.log('The current actions is ' + date)
   })
 
   picker.getCurrentDate()

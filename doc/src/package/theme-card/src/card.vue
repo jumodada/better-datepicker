@@ -76,7 +76,7 @@ export default defineComponent({
     }
 
     function downloadCss() {
-      // import('../../../../../core/src/assets/date-picker.scss').then(res => {
+      // import('../../../../../core/src/assets/actions-picker.scss').then(res => {
       //   download(res)
       // })
 
