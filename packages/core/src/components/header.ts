@@ -1,33 +1,31 @@
-import {
-  DateComponentsType,
-  HeaderChildrenOptions,
-} from '../../types/components'
-import { visible } from '../../utils/element'
+import { isElementShow } from '../utils/element'
 import {
   nextMonth,
   nextYear,
   preMonth,
   preYear,
-  toMonthPage,
-  toYearPage,
+  monthMode,
+  yearMode,
   canIShow,
 } from './public'
-import { State, RangeType } from '../../types/store'
-import { getTenRange } from '../../utils/date'
-import { CreateElementRequiredOptions, StyleOption } from '../../types/utils'
-import { Bind } from '../../utils/bind'
-import { getFormatDate } from '../util/format'
+import { State, RangeType } from '../types/store'
+import { getTenYearTimeRange } from '../utils/date'
+import { CreateElementRequiredOptions, StyleOption } from '../types/utils'
+import { Bind } from '../utils/bind'
+import { getFormatDate } from '../utils/format'
+
+const svgSize = '14px'
 
 function SVGStyleGenerator(style: Partial<StyleOption>): StyleOption {
   return Object.assign(style, {
     position: 'absolute',
-    width: '14px',
-    height: '14px',
+    width: svgSize,
+    height: svgSize,
   })
 }
 
 const getRange = (year: number) => {
-  const min = getTenRange(year)[1]
+  const min = getTenYearTimeRange(year)[1]
   const max = min + 9
   return min + ' - ' + max
 }
@@ -38,41 +36,8 @@ function format(date: string, state: State): string {
 
 export function Header(
   state: State,
-  name?: keyof RangeType
+  type: keyof RangeType
 ): CreateElementRequiredOptions {
-  const type = name ?? 'start'
-  const headerChildren: HeaderChildrenOptions = {
-    start: [preYearIcon, preMonthIcon, date],
-    main: [
-      preYearIcon,
-      preMonthIcon,
-      yearRange,
-      year,
-      month,
-      nextYearIcon,
-      nextMonthIcon,
-    ],
-    end: [date, nextYearIcon, nextMonthIcon],
-  }
-
-  function getTextType(state: State): DateComponentsType {
-    return {
-      date: () =>
-        format(String(state[type].year), state) +
-        ' ' +
-        state.locale.months[state[type].month - 1],
-      month: () => String(state[type].year),
-      year: () => getRange(state[type].year),
-    }
-  }
-
-  function date(): CreateElementRequiredOptions {
-    return {
-      name: 'span',
-      text: getTextType(state)[state._type],
-    }
-  }
-
   function preYearIcon(): CreateElementRequiredOptions {
     return {
       name: 'yearIcon',
@@ -123,9 +88,9 @@ export function Header(
         return getRange(state[type].year)
       },
       style: {
-        display: () => visible(state.page === 'year'),
+        display: () => isElementShow(state.mode === 'year'),
       },
-      event: toYearPage,
+      event: yearMode,
     }
   }
 
@@ -136,9 +101,9 @@ export function Header(
         return format(String(state.start.year), state)
       },
       class: ['pointerCursor'],
-      event: toYearPage,
+      event: yearMode,
       style: {
-        display: () => visible(state.page !== 'year'),
+        display: () => isElementShow(state.mode !== 'year'),
       },
     }
   }
@@ -150,14 +115,22 @@ export function Header(
         return state.locale.months[state[type].month - 1]
       },
       class: ['pointerCursor'],
-      event: toMonthPage,
+      event: monthMode,
       style: {
-        display: () => visible(state.page !== 'year'),
+        display: () => isElementShow(state.mode !== 'year'),
       },
     }
   }
   return {
     class: ['header'],
-    children: headerChildren[name || 'main'],
+    children: [
+      preYearIcon,
+      preMonthIcon,
+      yearRange,
+      year,
+      month,
+      nextYearIcon,
+      nextMonthIcon,
+    ],
   }
 }

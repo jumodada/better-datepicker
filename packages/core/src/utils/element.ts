@@ -10,7 +10,7 @@ import {
   PartialAtLeastOne,
 } from '../types/utils'
 import { State } from '../types/store'
-import { addWatch } from '../observer/watcher'
+import { createWatcher } from '../observer/watcher'
 import { setClasses } from './attribute'
 import { SvgName } from '../types/element'
 import { resetHoverColor } from './theme'
@@ -42,7 +42,7 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
       if (isArray(val)) {
         setClasses(el, val.join(' '))
       } else {
-        addWatch(() => {
+        createWatcher(() => {
           setClasses(el, val())
         })
       }
@@ -51,7 +51,7 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
       objectKeys(val).forEach((key) => {
         const style = val[key]
         if (isFunc(style)) {
-          addWatch(() => {
+          createWatcher(() => {
             el.style[key] = style()
           })
         } else {
@@ -63,12 +63,15 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
       if (isString(val)) {
         el.innerText = val
       } else {
-        addWatch(() => {
+        createWatcher(() => {
           el.innerText = val.call(state)
         })
       }
     },
     hidden: (val) => hidden(el, val),
+    watch(val) {
+      createWatcher(val)
+    },
   }
 }
 
@@ -107,7 +110,7 @@ export function createElement(
   componentType: 'start' | 'end' = 'start'
 ): Node {
   if (isFunc<PartialAtLeastOne<CreateElementOptions>>(opt)) {
-    return createElement(opt(state), state, componentType)
+    return createElement(opt(state, componentType), state, componentType)
   }
   const el = createEL(opt.name)
   const handlers = getHandler(el, state)
@@ -136,6 +139,6 @@ export function appendChild(
   }
 }
 
-export function visible(vis: boolean): 'none' | '' {
+export function isElementShow(vis: boolean): 'none' | '' {
   return vis ? '' : 'none'
 }

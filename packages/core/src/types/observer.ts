@@ -1,3 +1,3 @@
 import { State } from './store'
 
-export type Sub<T = unknown> = (this: State, ...arg: any) => T
+export type Sub = (this: State, ...arg: any) => Sub | void

@@ -18,12 +18,13 @@ EXAMPLE-OPTIONS
     </el-select>
   </el-form-item>
   <el-form-item label="datepicker">
-    <el-input id="typeInput" ref="picker" />
+    <datepicker placeholder="Select date" :type="value"></datepicker>
   </el-form-item>
 </el-form>
 
 <script>
-  data(){
+  data()
+  {
     return {
       datepickerTypesList: [
         { value: 'date', label: 'date' },
@@ -36,11 +37,6 @@ EXAMPLE-OPTIONS
       ],
       value: '',
     }
-  },
-  mounted(){
-    const input = this.createDatePicker({
-      reference: document.querySelector('#typeInput')
-    })
   }
 </script>
 ```

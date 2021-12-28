@@ -19,10 +19,10 @@ export function isNode(node: unknown): node is Node {
 }
 
 export function getScrollParents(
-  node: HTMLElement,
+  node: HTMLElement | null,
   list: HTMLElement[] = []
 ): HTMLElement[] {
-  if (isBody(node)) return list
+  if (!node || isBody(node)) return list
   if (isNode(node)) {
     const { overflow, overflowX, overflowY } = getComputedStyle(node)
     if (/auto|scroll|overlay|hidden/.test(overflow + overflowY + overflowX)) {

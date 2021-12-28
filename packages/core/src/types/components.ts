@@ -1,27 +1,22 @@
-import { MonthOrYearComponents, RangeType, State } from './store'
+import { CellsData, RangeType, State } from './store'
 import {
   CreateElement,
   CreateElementOptions,
-  CreateElementRequiredOptions,
   eventHandler,
+  Fn,
   PartialAtLeastOne,
 } from './utils'
 import { _EventListener } from './utils'
-import { DatepickerType, DateType, MonthType, YearType } from './store'
-import { Sub } from './observer'
+import { PickersMap, DateType, MonthType, YearType } from './store'
 
 export interface createMonthOrYearComponentsFunction {
-  (this: State, t: keyof RangeType): PartialAtLeastOne<CreateElementOptions>
+  (state: State, t: keyof RangeType): PartialAtLeastOne<CreateElementOptions>
 }
 
-export interface UpdateCbType<F = (res: string) => void> {
-  text: F
-  style: F
-}
-
-export type PopoverType = DatepickerType<
-  (CreateElementOptions | CreateElement)[]
->
+export type PickerConfigMap = PickersMap<{
+  children: (CreateElementOptions | CreateElement)[]
+  watch: (Fn | Fn[])[]
+}>
 
 type EventMethod = (this: State) => void
 
@@ -43,16 +38,10 @@ export interface RangeClickEvent {
 }
 
 interface CreateComponentsOptions {
-  listener: (child: MonthOrYearComponents, state: State) => eventHandler
+  listener: (child: CellsData, state: State) => eventHandler
   children: (
     idx: number
   ) => (PartialAtLeastOne<CreateElementOptions> | CreateElement)[]
-}
-
-export interface DateComponentsType<S = Sub<string>> {
-  date: S
-  year: S
-  month: S
 }
 
 export interface ComponentsType<C = never> {
@@ -62,11 +51,3 @@ export interface ComponentsType<C = never> {
 
 export type CreateMonthOrYearComponentsOptions =
   ComponentsType<CreateComponentsOptions>
-
-export interface HeaderChildrenOptions<
-  F = ((state: State) => CreateElementRequiredOptions)[]
-> {
-  start: F
-  main: F
-  end: F
-}

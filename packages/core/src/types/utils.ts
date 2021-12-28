@@ -1,5 +1,6 @@
 import { Sub } from './observer'
-import { State } from './store'
+import { CellsData, State } from './store'
+import mixins from '../watch/mixins'
 
 export interface UtilObject {
   [key: string]: unknown
@@ -85,13 +86,13 @@ export interface CreateElement {
 
 export interface updateOptions {
   static?: string[]
-  cb: Sub<string>
+  cb: Sub
 }
 
 export type DynamicStyle = PartialAtLeastOne<{
-  display: Sub<string>
-  color: Sub<string>
-  background: Sub<string>
+  display: Sub
+  color: Sub
+  background: Sub
 }>
 
 export type CreateElementRequiredOptions =
@@ -114,13 +115,14 @@ export interface CreateElementOptions {
     | 'i'
     | 'yearIcon'
     | 'monthIcon'
-  text: string | Sub<string>
+  text: string | Sub
   class: any
   event: eventHandler | _EventListener[]
   style: StyleOption
   children: (CreateElementRequiredOptions | CreateElement)[]
   hidden: boolean
   componentType: 'start' | 'end'
+  watch: (() => void)[]
 }
 
 interface HandlerCb<V> {
@@ -132,6 +134,6 @@ export type Handler = {
 }
 
 export interface WeekRange {
-  start: Date
-  end: Date
+  start: CellsData['date']
+  end: CellsData['date']
 }

@@ -19,9 +19,7 @@ const Store = (function () {
   }
 
   function runDestroyed(state: State) {
-    if (state) {
-      state.destroyed?.()
-    }
+    state?.destroyed?.()
   }
 
   function destroyed(partialStates?: State[]) {

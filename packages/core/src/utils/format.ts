@@ -1,14 +1,8 @@
-import { Formats } from '../../types/core'
-import { has, isArray, isDate } from '../../utils/typeOf'
-import {
-  getDay,
-  getMonth,
-  getWeekRange,
-  getYear,
-  getYearWeek,
-} from '../../utils/date'
-import { DateType } from '../../types/utils'
-import { State } from '../../types/store'
+import { Formats } from '../types/core'
+import { has, isArray, isDate } from './typeOf'
+import { getDay, getMonth, getWeekRange, getYear, getYearWeek } from './date'
+import { DateType } from '../types/utils'
+import { State } from '../types/store'
 
 const token = /d{1,2}|M{1,2}|w{1,2}|yy(?:yy)?|"[^"]*"|'[^']*'/g
 
@@ -35,19 +29,19 @@ function pad(val: string | number, len?: number) {
 export function getFormatDate(
   this: State,
   date: DateType | DateType[],
-  formatConfig: string
+  formatStr: string
 ): string | null {
-  const { locale, format } = this
+  const { locale } = this
   const separator = ' - '
   function formatParse(dateStr: DateType): string | null {
     if (!dateStr) return null
 
-    if (has(format, 'w') && isDate(dateStr)) {
-      dateStr = getWeekRange(dateStr, locale.weekStart).start
-    }
-    return formatConfig.replace(token, (val) =>
-      formats[val as 'dd'](new Date(dateStr!.toString()), locale)
-    )
+    // if (has(format, 'w') && isDate(dateStr)) {
+    //   dateStr = getWeekRange(dateStr, locale.weekStart).start
+    // }
+    return formatStr.replace(token, (val) => {
+      return formats[val as 'dd'](new Date(dateStr.toString()), locale)
+    })
   }
 
   if (isArray(date)) {

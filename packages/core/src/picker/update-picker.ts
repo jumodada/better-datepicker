@@ -1,9 +1,7 @@
-import { Rect, Transform } from '../../types/utils'
-import { isInBody } from '../../utils/isInBody'
-import { deleteRules } from './create-popover'
-import { canIUseAnimation } from '../../utils/env'
-import { State } from '../../types/store'
-import { objectKeys } from '../../utils/objectKeys'
+import { Rect, Transform } from '../types/utils'
+import { isInBody } from '../utils/isInBody'
+import { State } from '../types/store'
+import { objectKeys } from '../utils/objectKeys'
 
 function transform(offset: number | string): Transform {
   offset = offset + 'px'
@@ -15,44 +13,42 @@ function transform(offset: number | string): Transform {
   }
 }
 
-export const animations = ['hidden 0.3s', 'show 0.3s']
-export const sheetRule = [
-  (orn: string) =>
-    `@keyframes hidden { 0% {opacity: 1;transform: ${orn} scaleY(1);} 100% {opacity: 0;visibility: hidden;transform: ${orn} scaleY(.8);} }`,
-  (orn: string) =>
-    `@keyframes show { 0% {display: block;opacity: 0;transform:scaleY(.8) ${orn};} 100% {display: block;opacity: 1;transform: scaleY(1) ${orn};} }`,
-]
-
-export function updatePopover(): void {
-  const { visible, popover } = this
-  if (!popover) return
-  if (visible) {
-    popover.style.display = ''
-    setPopoverLocation.call(this)
+function getPosition(
+  { top, left, height, width }: Rect,
+  offset: number
+): Transform<{ left: number; top: number }> {
+  const _tTop = top + window.scrollY - offset
+  const _bTop = top + height + window.scrollY + offset
+  const _tLeft = left + window.scrollX
+  const _rLeft = left + width + window.scrollX
+  return {
+    top: { top: _tTop, left: _tLeft },
+    left: { top: _tTop, left: _tLeft },
+    bottom: { top: _bTop, left: _rLeft - width },
+    right: { top: _tTop, left: _rLeft },
   }
-  const ss = document.styleSheets[0]
-  const animation = animations[Number(visible)]
-  if (canIUseAnimation()) {
-    deleteRules()
-    sheetRule.forEach((r, idx) =>
-      ss.insertRule(r(popover.style.transform), idx)
-    )
-    popover.style.animation = animation
-  } else {
-    popover.style.display = visible ? '' : 'none'
-  }
-  resetRangStatus(this)
 }
 
 function resetRangStatus(self: State) {
   const { range, start, end } = self
   range.status = 'complete'
   if (start.date && start.date) {
-    range.start = start.date
-    range.end = end.date
+    // range.start = start.date
+    // range.end = end.date
   } else {
     range.start = range.end = null
   }
+}
+
+export function updatePicker(): void {
+  const { visible, popover } = this
+  if (!popover) return
+  if (visible) {
+    popover.style.display = ''
+    setPopoverLocation.call(this)
+  }
+  popover.style.display = visible ? '' : 'none'
+  // resetRangStatus(this)
 }
 
 export function setPopoverLocation(): void {
@@ -109,21 +105,5 @@ export function setPopoverLocation(): void {
   } else {
     setCloseToReference()
     fixReferencePosition()
-  }
-}
-
-export function getPosition(
-  { top, left, height, width }: Rect,
-  offset: number
-): Transform<{ left: number; top: number }> {
-  const _tTop = top + window.scrollY - offset
-  const _bTop = top + height + window.scrollY + offset
-  const _tLeft = left + window.scrollX
-  const _rLeft = left + width + window.scrollX
-  return {
-    top: { top: _tTop, left: _tLeft },
-    left: { top: _tTop, left: _tLeft },
-    bottom: { top: _bTop, left: _rLeft - width },
-    right: { top: _tTop, left: _rLeft },
   }
 }

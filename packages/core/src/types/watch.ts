@@ -1,8 +1,8 @@
 import { Sub } from './observer'
-import { DatepickerType } from './store'
+import { PickersMap } from './store'
 
 export type Listeners<T = Sub> = {
-  [key in keyof DatepickerType]: T[]
+  [key in keyof PickersMap]: T[]
 }
 
 export interface ReverseMap {

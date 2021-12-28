@@ -2,7 +2,7 @@ import { Style } from './utils'
 import { Callback } from './core'
 
 export type ComponentStatus =
-  | 'other'
+  | 'none'
   | 'pre'
   | 'next'
   | 'selected'
@@ -10,17 +10,19 @@ export type ComponentStatus =
   | 'inRangeWeek'
   | 'range-start'
   | 'range-end'
-  | ''
   | 'range-start range-end'
   | 'today'
   | 'disabled'
   | 'weekStart'
   | 'weekEnd'
 
-export interface DateComponents {
-  text: string
+export interface CellsData {
   status: ComponentStatus
-  date: string
+  date: {
+    year: number
+    month: number
+    day: number
+  }
 }
 
 export interface MonthType<T = unknown, U = unknown> {
@@ -40,7 +42,7 @@ export interface DateType<T = unknown, U = unknown> {
   'date-range': T | U
 }
 
-export interface DatepickerType<T = unknown, U = any>
+export interface PickersMap<T = unknown, U = any>
   extends DateType,
     MonthType,
     YearType {
@@ -55,18 +57,14 @@ export interface DatepickerType<T = unknown, U = any>
 
 export type Placement = 'top' | 'left' | 'bottom' | 'right'
 
-export interface MonthOrYearComponents {
-  status: ComponentStatus
-  date: string
-}
-
 export interface DateData {
-  date: string | null
   year: number
   month: number
-  _date: DateComponents[]
-  _month: MonthOrYearComponents[]
-  _year: MonthOrYearComponents[]
+  day: number
+  date: CellsData['date']
+  _date: CellsData[]
+  _month: CellsData[]
+  _year: CellsData[]
 }
 
 export interface LocaleConfig {
@@ -79,7 +77,7 @@ export interface LocaleConfig {
   yearStart: number
 }
 
-export type RangeStatus = 'complete' | 'selecting'
+export type getRangeStatus = 'complete' | 'selecting'
 
 export interface RangeType<T = null> {
   start: T
@@ -87,10 +85,10 @@ export interface RangeType<T = null> {
 }
 
 export interface Range extends RangeType<string | null> {
-  status: RangeStatus
+  status: getRangeStatus
 }
 
-export type pageName = 'date' | 'year' | 'month'
+export type mode = 'day' | 'year' | 'month'
 
 export interface State {
   id: number
@@ -98,7 +96,7 @@ export interface State {
   popover: HTMLElement | null
   onChange?: Callback
   visible: boolean
-  page: pageName
+  mode: mode
   locale: LocaleConfig
   destroyed?: Callback
   update?: Callback
@@ -111,8 +109,9 @@ export interface State {
   placeholder: string
   style: Style
   classes: string[]
-  type: keyof DatepickerType
+  type: keyof PickersMap
   _type: 'date' | 'month' | 'year'
+  isRange: boolean
   unlinkPanels: boolean
   offset: number
   zIndex: number

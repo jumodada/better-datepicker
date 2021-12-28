@@ -1,14 +1,13 @@
 import { createState, removeState } from '../store'
-import { watch } from './watch'
 import { State } from '../types/store'
-import { createPopover } from './dom/create-popover'
-import { destroyHook, getDate } from './util/method'
+import { createPicker } from './create-picker'
 import { BetterPicker, BetterPickerInstance } from '../types/core'
 import { getEventListener } from '../utils/event'
 import { listenToScrollParents } from '../utils/listenToParents'
 import clickOutside from '../utils/clickoutside'
 import { Off } from '../types/event'
 import { Bind } from '../utils/bind'
+import { getDate } from '../utils/date'
 
 export default function Picker(): BetterPicker {
   let state: State
@@ -18,7 +17,7 @@ export default function Picker(): BetterPicker {
     if (state) state.visible = true
   }
 
-  function addListener() {
+  function changePopoverVisible() {
     if (!state.reference) return
     ;[onRef, offRef] = getEventListener(state.reference)
     ;[onBody, offBody] = getEventListener(document.body)
@@ -35,8 +34,17 @@ export default function Picker(): BetterPicker {
     state = Object.assign(state, options)
   }
 
+  function removePopover(): void {
+    const { popover } = state
+    if (!popover) return
+    const parent = popover.parentNode
+    if (parent && parent.removeChild) {
+      parent.removeChild(popover)
+    }
+  }
+
   function destroyed() {
-    destroyHook(state)
+    removePopover()
     offBody()
     offRef()
     removeState(state.id)
@@ -48,19 +56,17 @@ export default function Picker(): BetterPicker {
       destroyed,
     })
     changeWeekFormat()
-    watch(state)
-    addListener()
-    createPopover(state)
+    changePopoverVisible()
+    createPicker(state)
   }
 
   function clear(): void {
     if (state.reference) {
       state.reference.value = ''
-      state.range.start =
-        state.range.end =
-        state.start.date =
-        state.end.date =
-          null
+      state.range.start = state.range.end = null
+      // state.start.date =
+      // state.end.date =
+      //   null
     }
   }
 

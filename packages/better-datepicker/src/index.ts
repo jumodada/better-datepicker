@@ -1,6 +1,5 @@
 export {
   createDatePicker,
   defaultOptions,
-  destroy,
-  locale
+  locale,
 } from '@better-datepicker/core'

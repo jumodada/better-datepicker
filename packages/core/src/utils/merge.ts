@@ -1,4 +1,4 @@
-import { logo } from './classes'
+import { logo } from './prefixName'
 import { isArray, has } from './typeOf'
 
 export function addLogo(str: string): string {

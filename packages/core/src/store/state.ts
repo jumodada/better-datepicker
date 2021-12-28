@@ -1,42 +1,29 @@
-import { LocaleConfig, PickerOptions } from '../../dist/types/types/options'
-import { getDay, getMonth, getNext, getYear, joinDate } from '../utils/date'
 import {
-  DateComponents,
-  DateData,
-  MonthOrYearComponents,
-  State,
-} from '../types/store'
-import _for from '../utils/for'
+  getMonth,
+  getDateOfNextMonth,
+  getYear,
+  transformDateToObject,
+} from '../utils/date'
+import { CellsData, DateData, LocaleConfig, State } from '../types/store'
+import map from '../utils/for'
 import { reactive } from '../observer'
 
-const dayComponents = (): DateComponents[] =>
-  _for(
+const createCellsData = (length: number): CellsData[] =>
+  map(
     () => ({
-      text: '',
-      status: '',
-      date: '',
+      status: 'none',
+      date: transformDateToObject(),
     }),
-    42
+    length
   )
 
-const _Components = (): MonthOrYearComponents[] =>
-  _for(
-    () => ({
-      status: '',
-      date: '',
-    }),
-    12
-  )
-
-function rangeComponents(month: number, year: number): DateData {
-  return {
-    date: null,
-    year,
-    month,
-    _date: dayComponents(),
-    _month: _Components(),
-    _year: _Components(),
-  }
+function rangeComponents(date: CellsData['date']): DateData {
+  return Object.assign(date, {
+    date: transformDateToObject(),
+    _date: createCellsData(42),
+    _month: createCellsData(12),
+    _year: createCellsData(12),
+  })
 }
 
 let locale: LocaleConfig = {
@@ -68,17 +55,17 @@ export function pickerLocale(config: LocaleConfig): void {
 
 const date = new Date()
 const [startYear, startMonth] = [getYear(date), getMonth(date)]
-const [endMonth, endYear] = getNext(startMonth, startYear)
 
 let defaultOption: State = {
   id: -1,
-  start: rangeComponents(startMonth, startYear),
-  end: rangeComponents(endMonth, endYear),
-  today: joinDate(startMonth, startYear, getDay(date)),
+  start: rangeComponents(transformDateToObject()),
+  end: rangeComponents(getDateOfNextMonth(startYear, startMonth)),
+  today: '', //todo
   placement: 'bottom',
   placeholder: '',
   type: 'date',
   _type: 'date',
+  isRange: false,
   zIndex: 2000,
   unlinkPanels: false,
   format: 'yyyy/MM/dd',
@@ -95,7 +82,7 @@ let defaultOption: State = {
   classes: [],
   date: null,
   visible: false,
-  page: 'date',
+  mode: 'day',
   locale,
   reference: null,
   popover: null,
@@ -108,18 +95,16 @@ let defaultOption: State = {
 
 function createOptions(id: number, options: Partial<State>): State {
   const type = options.type ?? defaultOption.type
-  return Object.assign(
-    {
-      id,
-      type,
-      _type: type.split('-').shift(),
-    },
-    defaultOption,
-    options
-  )
+  const typeToArray = type.split('-')
+  return Object.assign({}, defaultOption, options, {
+    id,
+    type,
+    _type: typeToArray[0],
+    isRange: typeToArray.length === 2,
+  })
 }
 
-export function changeDefaultOption(target: PickerOptions): void {
+export function changeDefaultOption(target: State): void {
   defaultOption = Object.assign(defaultOption, target)
 }
 

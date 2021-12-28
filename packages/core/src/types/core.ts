@@ -6,7 +6,7 @@ export interface BetterPicker {
 
 export type GetDateType = (Date | null) | (Date | null)[]
 
-export type Callback = (...arg: any) => any
+export type Callback = (...arg: any) => unknown
 
 export interface BetterPickerInstance {
   id: number
