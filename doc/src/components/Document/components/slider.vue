@@ -54,6 +54,7 @@ export default {
 
   ul {
     list-style: none;
+    margin: 0;
     margin-left: 25px;
     padding: 0;
 

@@ -5,10 +5,43 @@ EXAMPLE-OPTIONS
 :::
 
 ```html
-<input width="20vw" id="placement" />
+<el-form label-position="top">
+  <el-form-item label="props">
+    <el-select v-model="value" placeholder="Select type">
+      <el-option
+        v-for="item in datepickerTypesList"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      >
+      </el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="datepicker">
+    <el-input id="typeInput" ref="picker" />
+  </el-form-item>
+</el-form>
+
 <script>
-  const input = document.querySelector('#placement')
-  const picker = this.createDatePicker(input)
+  data(){
+    return {
+      datepickerTypesList: [
+        { value: 'date', label: 'date' },
+        { value: 'date-range', label: 'date-range' },
+        { value: 'week', label: 'week' },
+        { value: 'year', label: 'year' },
+        { value: 'year-range', label: 'year-range' },
+        { value: 'month', label: 'month' },
+        { value: 'month-range', label: 'month-range' },
+      ],
+      value: '',
+    }
+  },
+  mounted(){
+    const input = this.createDatePicker({
+      reference: document.querySelector('#typeInput')
+    })
+  }
 </script>
 ```
 

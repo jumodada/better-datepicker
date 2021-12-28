@@ -16,13 +16,13 @@ export default {
 
 .components-content {
   background: #112232;
-  padding: 20px 20px 20px 20px;
+  padding: 0 20px 20px;
   color: #dae3f6;
   font-family: Futura;
   width: 80%;
   max-width: 800pt;
   &-wrapper {
-    width: calc(100vw - 210px);
+    width: 100%;
     background: #112232;
     display: flex;
     justify-content: center;

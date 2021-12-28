@@ -63,7 +63,7 @@ export default defineComponent({
   width: 100%;
   margin-top: 20px;
   font-family: Futura;
-
+  max-width: 600pt;
   &:last-child {
     margin-bottom: 90px;
   }
@@ -81,13 +81,6 @@ export default defineComponent({
     }
   }
 
-  .row {
-    max-width: 50%;
-    min-width: 50%;
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
   &-card {
     padding: 20px;
     margin-bottom: 10px;
@@ -95,12 +88,12 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     color: #ecf2f3;
-    border: 1px dashed #818eff;
     border-radius: 8px;
     background: rgba(55, 55, 56, 0.31);
 
     h2 {
       color: #ffb311;
+      margin: 0;
     }
 
     &-result {
@@ -126,6 +119,15 @@ export default defineComponent({
       overflow-y: auto;
       overflow-x: hidden;
       position: relative;
+      display: flex;
+      align-items: center;
+
+      >div{
+        &:first-child {
+          margin-right: 20px;
+          flex: 1;
+        }
+      }
 
       &-button {
         text-align: end;
@@ -145,10 +147,6 @@ export default defineComponent({
         width: 100%;
         position: relative;
       }
-    }
-
-    &:last-child {
-      padding-bottom: 90px;
     }
   }
 
