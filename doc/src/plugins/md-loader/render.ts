@@ -32,7 +32,9 @@ export default function getRenderComponent(demos: string[]): VueComponents {
      <template v-slot:Result>
          <div  class=demo-card-component>${html}</div>
      </template>
-   
+     <template v-slot:JS>
+         <div class=highlight>${mdScript}</div>
+     </template>
    </demo-card>
     `
     const options: SFCTemplateCompileOptions = {

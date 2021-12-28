@@ -1,77 +1,67 @@
 <template>
-  <div class='demo-card'>
-    <div class='demo-card-codeBox-wrapper'>
+  <div class="demo-card">
+    <div class="demo-card-codeBox-wrapper">
       <slot></slot>
-      <div class='demo-card-codeBox-button'>
-<!--        <span :class='{active:index ===activeIndex}' @click='openActive(index)'-->
-<!--              v-for='(item,index) in buttonGroup'>{{ item }}</span>-->
-      </div>
-      <!--      <div :class="{fixedHeight: buttonGroup.length>1}" class="demo-card-codeBox">-->
-      <!--&lt;!&ndash;        <div ref="code" v-show="activeIndex===0">&ndash;&gt;-->
-      <!--&lt;!&ndash;          <slot name="JS"></slot>&ndash;&gt;-->
-      <!--&lt;!&ndash;        </div>&ndash;&gt;-->
-      <!--        <div class="demo-card-result">-->
-      <!--          <slot name="Result"></slot>-->
-      <!--        </div>-->
-      <!--      </div>-->
-      <div class='demo-card-result'>
-        <slot name='Result'></slot>
+      <div class="demo-card-codeBox">
+        <div ref="code">
+          <slot name="JS"></slot>
+        </div>
+        <div class="demo-card-result">
+          <slot name="Result"></slot>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang='ts'>
-import '../../../assets/svg/svg'
-import { defineComponent, toRefs, ref } from 'vue'
+<script lang="ts">
+import "../../../assets/svg/svg";
+import { defineComponent, toRefs, ref } from "vue";
 
 export default defineComponent({
-  name: 'demo-card',
+  name: "demo-card",
   props: {
     name: {
       type: String,
-      default: '',
+      default: ""
     },
     fontSize: {
       type: [String, Number],
-      default: 20,
+      default: 20
     },
     fill: {
       type: String,
-      default: '#ffffff',
-    },
-  },
-  data() {
-    return {
-
+      default: "#ffffff"
     }
   },
+  data() {
+    return {};
+  },
   setup(props) {
-    let { fontSize } = toRefs(props)
-    const activeIndex = ref(0)
-    const openActive = (idx: number) => activeIndex.value = idx
+    let { fontSize } = toRefs(props);
+    const activeIndex = ref(0);
+    const openActive = (idx: number) => activeIndex.value = idx;
     return {
       fontSize,
       activeIndex,
-      openActive,
-    }
+      openActive
+    };
   },
   mounted() {
     if (!this.$slots.Result()[0].children) {
-      this.buttonGroup = []
+      this.buttonGroup = [];
     }
 
-  },
-})
+  }
+});
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 @import "../../../assets/style/color";
 
 .demo {
   width: 100%;
   margin-top: 20px;
-  display: flex;
   font-family: Futura;
 
   &:last-child {
@@ -108,6 +98,7 @@ export default defineComponent({
     border: 1px dashed #818eff;
     border-radius: 8px;
     background: rgba(55, 55, 56, 0.31);
+
     h2 {
       color: #ffb311;
     }

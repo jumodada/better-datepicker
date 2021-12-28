@@ -29,14 +29,9 @@ export default function transformToVue(source: string): string {
     const componentsEndIdx = snippetStr.lastIndexOf(codeBlock) + codeBlock.length
     const components = snippetStr.slice(0, componentsEndIdx).split(h2)
     const {componentNames, componentsRender} = getRenderComponent(components)
-    const rowLeft: string[] = []
-    const rowRight: string[] = []
+    const rows: string[] = []
     componentNames.forEach((name, idx) => {
-        if (idx & 1) {
-            rowRight.push(name)
-        } else {
-            rowLeft.push(name)
-        }
+        rows.push(name)
     })
     return `
  <template>
@@ -44,12 +39,7 @@ export default function transformToVue(source: string): string {
      <div v-if='String(${title})' class='demo-title'>
        ${title}
      </div>
-     <div class='row'>
-     ${rowLeft.join('')}
-     </div>
-     <div class='row'>
-     ${rowRight.join('')}
-     </div>
+     ${rows.join('')}
    </div>
  </template>
  <script>
