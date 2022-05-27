@@ -51,7 +51,7 @@ export function preYear(): void {
 export function nextMonth(type: keyof RangeType): void {
   const child = this[type]
   const { month, year } = getDateOfNextMonth(child)
-  ;[child.month, child.year] = [month, year]
+  child.month = month
 }
 
 export function preMonth(): void {

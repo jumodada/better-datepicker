@@ -44,11 +44,14 @@ export function Day(
       return map((cc) => {
         const idx = rc * 7 + cc
         const child = state[type]._date[idx]
+
         return {
           name: 'td',
           children: [
             {
-              text: () => String(child.date.day),
+              text: () => {
+                return String(child.date.day)
+              },
             },
           ],
           class: classNames('cell', {

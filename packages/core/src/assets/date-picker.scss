@@ -51,6 +51,7 @@ $transition: .3s all ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     span {
       transition: $transition;
       margin: 0 4px;

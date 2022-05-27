@@ -1,31 +1,32 @@
-import Dep, { clearTarget, setTarget } from './deps'
+import Dep from './deps'
 import { Sub } from '../types/observer'
 import { queueWatcher } from './scheduler'
 import { isArray, isObject } from '../utils/typeOf'
 import { State } from '../types/store'
 import { getState } from '../store'
 
+let id = 0
 export default class Watcher {
   state: State
   watcher: Sub
   dep: string[] = []
+  id: number
+
   constructor(subs: Sub, state: State) {
+    this.id = ++id
     if (isObject(subs)) {
       const { dep, sub } = subs
-      this.watcher = sub
       this.dep = dep
+      this.watcher = sub
     } else {
       this.watcher = subs
     }
     this.state = state
-    setTarget(this)
     this.getter()
   }
 
   getter(): void {
-    const val = getDepsValue(this.dep)
-    this.watcher.apply(this.state, val)
-    clearTarget()
+    this.watcher.apply(this.state, getDepsValue(this.dep, this.state))
   }
 
   update(): void {
@@ -46,9 +47,9 @@ export function createWatcher<T>(subs: Sub | Sub[]): void {
   }
 }
 
-function getDepsValue(deps: string[]) {
+function getDepsValue(deps: string[], state: State) {
   return deps.map((dep) =>
-    dep.split('.').reduce((child, key) => child[key], getState() as any)
+    dep.split('.').reduce((child, key) => child[key], state as any)
   )
 }
 

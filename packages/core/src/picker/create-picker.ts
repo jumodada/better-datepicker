@@ -18,6 +18,7 @@ import {
 } from '../watch/cells'
 import { startMonthAndYear } from '../watch/utils'
 import { concat } from '../utils/concat'
+
 function rangeComponent(child: createMonthOrYearComponentsFunction) {
   const children = [Header, child]
   return [
@@ -46,7 +47,7 @@ const pickersMap: PickerConfigMap = {
   },
   'date-range': {
     children: rangeComponent(Day),
-    watch: [monthPanelLinkage, updateDayCell],
+    watch: [updateDayCell],
   },
   week: {
     children: dateAndWeek,
@@ -84,7 +85,7 @@ export function createPicker(state: State): void {
         zIndex: state.zIndex,
       },
       // TODO range mixins
-      watch: mixins.concat(watch),
+      watch: watch.concat(mixins),
     },
     state
   ) as HTMLElement
