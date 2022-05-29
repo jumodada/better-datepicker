@@ -1,6 +1,5 @@
 import { Sub } from './observer'
-import { CellsData, State } from './store'
-import mixins from '../watch/mixins'
+import { CellsData } from './store'
 
 export interface UtilObject {
   [key: string]: unknown
@@ -25,6 +24,7 @@ export interface Types {
   Date: string
   Object: string
   Boolean: string
+  Map: string
 }
 
 export interface Rect<T = number> {

@@ -1,3 +1,3 @@
-export const createDep = (effects?: any): any => {
-  return new Set(effects) as any
+export const createDep = (): Set<any> => {
+  return new Set()
 }

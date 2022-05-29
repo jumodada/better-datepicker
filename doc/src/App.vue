@@ -1,12 +1,16 @@
 <template>
-  <Header/>
-  <router-view/>
+  <div id='a'>
+    123
+  </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive} from 'vue'
+import { defineComponent, reactive } from 'vue'
 import Header from './components/Header/Header.vue'
+import {reactive as reactiveX} from '../../packages/core/src/reactive'
+import {effect} from '../../packages/core/src/reactive/effect'
 
+let windowAge = 1
 export default defineComponent({
   name: 'App',
   components: {
@@ -36,6 +40,31 @@ export default defineComponent({
       bus: this
     }
   },
+  mounted(){
+    const target = {
+      name: 'target',
+      child1:{
+        name: 'child1',
+        age: 1,
+        child2: {
+          name: 'name2',
+          child3:{
+            name: 'child3'
+          }
+        }
+      }
+    }
+    const state = reactiveX(target)
+    effect(()=>{
+      document.querySelector('#a').innerHTML = String(state.child1.age)
+    })
+
+    setInterval(()=>{
+      state.child1 = {
+        age: ++windowAge
+      }
+    }, 1000)
+  }
 })
 </script>
 

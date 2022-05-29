@@ -1,13 +1,12 @@
 import nextTick from '../utils/nexttick'
-import Watcher from './watcher'
 
-const queue: Watcher[] = []
+const queue: any[] = []
 const map = new WeakMap()
 let queued = false
 
 function flushSchedulerQueue() {
   for (const job of queue) {
-    job.getter()
+    job()
     map.delete(job)
   }
   queued = false
@@ -15,9 +14,9 @@ function flushSchedulerQueue() {
 }
 
 export function queueWatcher(fn: any): void {
-  if (!map.get(watcher)) {
-    map.set(watcher, true)
-    queue.push(watcher)
+  if (!map.get(fn)) {
+    map.set(fn, true)
+    queue.push(fn)
     if (!queued) {
       queued = true
       nextTick(flushSchedulerQueue)
