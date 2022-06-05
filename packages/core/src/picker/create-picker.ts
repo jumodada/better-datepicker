@@ -11,10 +11,10 @@ import { classNames } from '../utils/attribute'
 import mixins from '../watch/mixins'
 import {
   yearPanelLinkage,
-  monthPanelLinkage,
-  updateMonthCell,
-  updateYearCell,
-  updateDayCell,
+  // monthPanelLinkage,
+  // updateMonthCell,
+  // updateYearCell,
+  // updateDayCell,
 } from '../watch/cells'
 import { startMonthAndYear } from '../watch/utils'
 import { concat } from '../utils/concat'
@@ -43,31 +43,31 @@ const dateAndWeek = [Header, Day]
 const pickersMap: PickerConfigMap = {
   date: {
     children: concat(dateAndWeek, [Month, Year]),
-    watch: [updateYearCell, updateMonthCell, startMonthAndYear, updateDayCell],
+    //watch: [updateYearCell, updateMonthCell, startMonthAndYear, updateDayCell],
   },
   'date-range': {
     children: rangeComponent(Day),
-    watch: [updateDayCell],
+    //watch: [updateDayCell],
   },
   week: {
     children: dateAndWeek,
-    watch: [updateYearCell, updateMonthCell, updateDayCell, startMonthAndYear],
+    //watch: [updateYearCell, updateMonthCell, updateDayCell, startMonthAndYear],
   },
   month: {
     children: [Header, Month, Year],
-    watch: [updateMonthCell, updateYearCell],
+    //watch: [updateMonthCell, updateYearCell],
   },
   'month-range': {
     children: rangeComponent(Month),
-    watch: [updateMonthCell, yearPanelLinkage],
+    // watch: [updateMonthCell, yearPanelLinkage],
   },
   year: {
     children: [Header, Year],
-    watch: [updateYearCell],
+    // watch: [updateYearCell],
   },
   'year-range': {
     children: rangeComponent(Year),
-    watch: [updateYearCell, yearPanelLinkage],
+    // watch: [updateYearCell, yearPanelLinkage],
   },
 }
 

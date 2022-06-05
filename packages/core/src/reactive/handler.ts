@@ -1,11 +1,12 @@
 import { reactive } from './index'
 import { isObject } from '../utils/typeOf'
 import { track, trigger } from './effect'
+import { UtilObject } from '../types/utils'
 
 const get = createGetter()
 
 function createGetter() {
-  return function get(target: any, key: string, receiver: any) {
+  return function get(target: UtilObject, key: string, receiver: UtilObject) {
     const res = Reflect.get(target, key, receiver)
     track(target, key)
     if (isObject(res)) {
@@ -19,10 +20,10 @@ const set = createSetter()
 
 function createSetter() {
   return function set(
-    target: any,
+    target: UtilObject,
     key: string,
     value: unknown,
-    receiver: any
+    receiver: UtilObject
   ): boolean {
     const result = Reflect.set(target, key, value, receiver)
     trigger(target, key)
@@ -30,7 +31,7 @@ function createSetter() {
   }
 }
 
-export const mutableHandlers: ProxyHandler<any> = {
+export const mutableHandlers: ProxyHandler<UtilObject> = {
   get,
   set,
 }

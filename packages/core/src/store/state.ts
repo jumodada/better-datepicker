@@ -6,7 +6,7 @@ import {
 } from '../utils/date'
 import { CellsData, DateData, LocaleConfig, State } from '../types/store'
 import map from '../utils/for'
-import { reactive } from '../observer'
+import { reactive } from '../reactive'
 
 const createCellsData = (length: number): CellsData[] =>
   map(
@@ -108,6 +108,9 @@ export function changeDefaultOption(target: State): void {
   defaultOption = Object.assign(defaultOption, target)
 }
 
-export function initState(options: Partial<State>, id: number): State {
+export function initState(
+  options: Partial<State>,
+  id: number
+): ProxyHandler<State> {
   return reactive(createOptions(id, options))
 }

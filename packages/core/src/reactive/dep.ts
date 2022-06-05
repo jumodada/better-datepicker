@@ -1,3 +1,5 @@
-export const createDep = (): any => {
-  return new Set<any>() as any
+import { Fn } from '../types/utils'
+
+export const createDep = (): Set<Fn> => {
+  return new Set<Fn>()
 }

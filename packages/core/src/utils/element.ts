@@ -10,7 +10,7 @@ import {
   PartialAtLeastOne,
 } from '../types/utils'
 import { State } from '../types/store'
-import { createWatcher } from '../observer/watcher'
+import { effect } from '../reactive/effect'
 import { setClasses } from './attribute'
 import { SvgName } from '../types/element'
 import { resetHoverColor } from './theme'
@@ -42,7 +42,7 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
       if (isArray(val)) {
         setClasses(el, val.join(' '))
       } else {
-        createWatcher(() => {
+        effect(() => {
           setClasses(el, val())
         })
       }
@@ -51,7 +51,7 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
       objectKeys(val).forEach((key) => {
         const style = val[key]
         if (isFunc(style)) {
-          createWatcher(() => {
+          effect(() => {
             el.style[key] = style()
           })
         } else {
@@ -63,14 +63,14 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
       if (isString(val)) {
         el.innerText = val
       } else {
-        createWatcher(() => {
+        effect(() => {
           el.innerText = val.call(state)
         })
       }
     },
     hidden: (val) => hidden(el, val),
     watch(val) {
-      createWatcher(val)
+      effect(val)
     },
   }
 }

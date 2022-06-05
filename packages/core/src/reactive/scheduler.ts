@@ -1,6 +1,7 @@
 import nextTick from '../utils/nexttick'
+import { Fn } from '../types/utils'
 
-const queue: any[] = []
+const queue: Fn[] = []
 const map = new WeakMap()
 let queued = false
 
@@ -13,7 +14,7 @@ function flushSchedulerQueue() {
   queue.length = 0
 }
 
-export function queueWatcher(fn: any): void {
+export function queueWatcher(fn: Fn): void {
   if (!map.get(fn)) {
     map.set(fn, true)
     queue.push(fn)
