@@ -44,7 +44,6 @@ export function Day(
       return map((cc) => {
         const idx = rc * 7 + cc
         const child = state[type]._date[idx]
-
         return {
           name: 'td',
           children: [

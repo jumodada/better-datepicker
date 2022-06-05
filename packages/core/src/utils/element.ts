@@ -64,13 +64,13 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
         el.innerText = val
       } else {
         effect(() => {
-          el.innerText = val.call(state)
+          el.innerText = String(val.call(state))
         })
       }
     },
     hidden: (val) => hidden(el, val),
     watch(val) {
-      effect(val)
+      val.forEach((v) => effect(v))
     },
   }
 }

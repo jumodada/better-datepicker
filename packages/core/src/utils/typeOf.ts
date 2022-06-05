@@ -20,7 +20,8 @@ export function isFunc<T = string>(val: unknown): val is (...arg: any) => T {
   return typeOf(val, 'Function')
 }
 
-export const isMap = (val: unknown): val is Map<any, any> => typeOf(val, 'Map')
+export const isObjectOrArray = (val: unknown): val is Record<any, any> =>
+  isObject(val) || isArray(val)
 
 export function isString(val: unknown): val is string {
   return typeOf(val, 'String')

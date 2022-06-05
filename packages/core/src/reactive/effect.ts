@@ -2,6 +2,8 @@ import { createDep } from './dep'
 import { queueWatcher } from './scheduler'
 import { Fn, UtilObject } from '../types/utils'
 import { getState } from '../store'
+import { State } from '../types/store'
+import { isFunc } from '../utils/typeOf'
 
 export let activeEffect: null | Fn = null
 
@@ -9,11 +11,13 @@ export const targetMap = new WeakMap<UtilObject>()
 
 export function track(target: UtilObject, key: keyof UtilObject): void {
   let depsMap = targetMap.get(target)
+
   if (!depsMap) {
-    depsMap = new Map()
+    depsMap = new Map<string, Set<Fn>>()
     targetMap.set(target, depsMap)
   }
-  let deps = depsMap.get(key)
+
+  let deps: Set<Fn> = depsMap.get(key)
   if (!deps) {
     deps = createDep()
     depsMap.set(key, deps)
@@ -24,10 +28,8 @@ export function track(target: UtilObject, key: keyof UtilObject): void {
 }
 
 export function trigger(target: UtilObject, key: keyof UtilObject): void {
-  let depsMap = targetMap.get(target)
-  if (!depsMap) depsMap = targetMap.set(target, new Map<string, Set<Fn>>())
-  if (!depsMap.get(key)) depsMap.set(key)
-  const deps: Fn[] = depsMap.get(key)
+  const deps: Set<Fn> = targetMap.get(target)?.get(key)
+  if (!deps) return
   deps.forEach((dep) => {
     queueWatcher(dep)
   })
@@ -35,7 +37,31 @@ export function trigger(target: UtilObject, key: keyof UtilObject): void {
 
 export function effect(fn: Fn): void {
   const state = getState()
+  fn = fn.bind(state)
   activeEffect = fn
-  fn.call(state)
+  const res = fn()
   activeEffect = null
+  if (isFunc(res)) {
+    res()
+  }
+}
+
+function getDepsValue(deps: string[], state: ProxyHandler<State>) {
+  return deps.map((dep) =>
+    dep.split('.').reduce((child, key) => child[key as never], state)
+  )
+}
+
+export function useEffect(fn: Fn, ...depsArray: string[][]): Fn {
+  return function () {
+    depsArray.forEach((deps) => {
+      effect(function () {
+        const getter = () => getDepsValue(deps, this)
+        const run = () => fn.apply(this, getter())
+        activeEffect = run
+        getter()
+        return run
+      })
+    })
+  }
 }

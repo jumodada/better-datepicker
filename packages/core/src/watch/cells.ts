@@ -8,44 +8,45 @@ import {
   joinDate,
   monthStartDay,
 } from '../utils/date'
+import { useEffect } from '../reactive/effect'
 
-// export const updateDayCell = subscribe(
-//   function (
-//     this: State,
-//     year: number,
-//     month: number,
-//     dateCells: CellsData[]
-//   ): void {
-//     const [fd, days] = [
-//       monthStartDay(year, month, this.locale.weekStart),
-//       daysInMonth({ year, month }),
-//     ]
-//     dateCells.forEach((item, index) => {
-//       const idx = index + 1
-//       const currentIdx = idx - fd
-//       const status: ComponentStatus =
-//         index < fd ? 'pre' : fd + days <= index ? 'next' : 'none'
-//       item.status = status
-//       const getCellDate = {
-//         pre() {
-//           const preMonthDays = daysInMonth(getDateOfPreMonth(year, month))
-//           const day = preMonthDays + currentIdx
-//           return getDateOfPreMonth(year, month, day)
-//         },
-//         next() {
-//           const day = currentIdx - days
-//           return getDateOfNextMonth(year, month, day)
-//         },
-//         none() {
-//           return getDateObject(year, month, currentIdx)
-//         },
-//       }
-//       item.date = getCellDate[status]()
-//     })
-//   },
-//   ['start.year', 'start.month', 'start._date'],
-//   ['end.year', 'end.month', 'end._date']
-// )
+export const updateDayCell = useEffect(
+  function (
+    this: State,
+    year: number,
+    month: number,
+    dateCells: CellsData[]
+  ): void {
+    const [fd, days] = [
+      monthStartDay(year, month, this.locale.weekStart),
+      daysInMonth({ year, month }),
+    ]
+    dateCells.forEach((item, index) => {
+      const idx = index + 1
+      const currentIdx = idx - fd
+      const status: ComponentStatus =
+        index < fd ? 'pre' : fd + days <= index ? 'next' : 'none'
+      item.status = status
+      const getCellDate = {
+        pre() {
+          const preMonthDays = daysInMonth(getDateOfPreMonth(year, month))
+          const day = preMonthDays + currentIdx
+          return getDateOfPreMonth(year, month, day)
+        },
+        next() {
+          const day = currentIdx - days
+          return getDateOfNextMonth(year, month, day)
+        },
+        none() {
+          return getDateObject(year, month, currentIdx)
+        },
+      }
+      item.date = getCellDate[status]()
+    })
+  },
+  ['start.year', 'start.month', 'start._date'],
+  ['end.year', 'end.month', 'end._date']
+)
 
 // export const updateMonthCell = subscribe(
 //   function (this: State, _, year: number, monthDCells: CellsData[]) {

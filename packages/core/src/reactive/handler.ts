@@ -1,5 +1,5 @@
 import { reactive } from './index'
-import { isObject } from '../utils/typeOf'
+import { isObjectOrArray } from '../utils/typeOf'
 import { track, trigger } from './effect'
 import { UtilObject } from '../types/utils'
 
@@ -9,7 +9,7 @@ function createGetter() {
   return function get(target: UtilObject, key: string, receiver: UtilObject) {
     const res = Reflect.get(target, key, receiver)
     track(target, key)
-    if (isObject(res)) {
+    if (isObjectOrArray(res)) {
       return reactive(res)
     }
     return res
