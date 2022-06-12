@@ -43,9 +43,9 @@ export function nextYear(type: keyof RangeType): void {
   this[type].year += num
 }
 
-export function preYear(): void {
+export function preYear(type: keyof RangeType): void {
   const num = this.mode === 'year' ? 10 : 1
-  this.start.year -= num
+  this[type].year -= num
 }
 
 export function nextMonth(type: keyof RangeType): void {
@@ -54,8 +54,8 @@ export function nextMonth(type: keyof RangeType): void {
   child.month = month
 }
 
-export function preMonth(): void {
-  const child = this.start
+export function preMonth(type: keyof RangeType): void {
+  const child = this[type]
   const { month, year } = getDateOfPreMonth(child)
   ;[child.month, child.year] = [month, year]
 }

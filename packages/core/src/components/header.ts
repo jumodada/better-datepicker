@@ -42,7 +42,7 @@ export function Header(
     return {
       name: 'yearIcon',
       style: SVGStyleGenerator({ left: '30px' }),
-      event: preYear,
+      event: Bind(preYear, type),
     }
   }
 
@@ -53,7 +53,7 @@ export function Header(
         left: '50px',
         display: canIShow(state),
       }),
-      event: preMonth,
+      event: Bind(preMonth, type),
     }
   }
 
