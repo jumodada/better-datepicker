@@ -1,12 +1,12 @@
 import { isElementShow } from '../utils/element'
 import {
+  canIShow,
+  monthMode,
   nextMonth,
   nextYear,
   preMonth,
   preYear,
-  monthMode,
   yearMode,
-  canIShow,
 } from './public'
 import { State, RangeType } from '../types/store'
 import { getTenYearTimeRange } from '../utils/date'
@@ -51,7 +51,7 @@ export function Header(
       name: 'monthIcon',
       style: SVGStyleGenerator({
         left: '50px',
-        display: canIShow(state),
+        display: canIShow(state, type),
       }),
       event: Bind(preMonth, type),
     }
@@ -88,9 +88,9 @@ export function Header(
         return getRange(state[type].year)
       },
       style: {
-        display: () => isElementShow(state.mode === 'year'),
+        display: () => isElementShow(state.mode === 'year' && type === 'start'),
       },
-      event: yearMode,
+      event: Bind(yearMode, type),
     }
   }
 
@@ -101,7 +101,7 @@ export function Header(
         return format(String(state.start.year), state)
       },
       class: ['pointerCursor'],
-      event: yearMode,
+      event: Bind(yearMode, type),
       style: {
         display: () => isElementShow(state.mode !== 'year'),
       },
@@ -115,7 +115,7 @@ export function Header(
         return state.locale.months[state[type].month - 1]
       },
       class: ['pointerCursor'],
-      event: monthMode,
+      event: Bind(monthMode, type),
       style: {
         display: () => isElementShow(state.mode !== 'year'),
       },

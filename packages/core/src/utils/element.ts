@@ -52,7 +52,7 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
         const style = val[key]
         if (isFunc(style)) {
           effect(() => {
-            el.style[key] = style()
+            el.style[key] = style(state)
           })
         } else {
           el.style[key] = style as string

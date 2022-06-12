@@ -48,28 +48,28 @@ export const updateDayCell = useEffect(
   ['end.year', 'end.month', 'end._date']
 )
 
-// export const updateMonthCell = subscribe(
-//   function (this: State, _, year: number, monthDCells: CellsData[]) {
-//     monthDCells.forEach((item, idx) => {
-//       item.date = getDateObject(year, idx + 1)
-//       //item.status = getStatus(this, item.date, idx)
-//     })
-//   },
-//   ['start.year', 'start._month'],
-//   ['end.year', 'end._month']
-// )
+export const updateMonthCell = useEffect(
+  function (this: State, year: number, monthDCells: CellsData[]) {
+    monthDCells.forEach((item, idx) => {
+      item.date = getDateObject(year, idx + 1)
+      //item.status = getStatus(this, item.date, idx)
+    })
+  },
+  ['start.year', 'start._month'],
+  ['end.year', 'end._month']
+)
 
-// export const updateYearCell = subscribe(
-//   function (this: State, year, yearCells: CellsData[]): void {
-//     const range = getTenYearTimeRange(year)
-//     yearCells.forEach((item, idx) => {
-//       item.date = getDateObject(range[idx])
-//       // item.status = getStatus(this, item.date, idx, 'year')
-//     })
-//   },
-//   ['start.year', 'start._year'],
-//   ['end.year', 'end._year']
-// )
+export const updateYearCell = useEffect(
+  function (this: State, year, yearCells: CellsData[]): void {
+    const range = getTenYearTimeRange(year)
+    yearCells.forEach((item, idx) => {
+      item.date = getDateObject(range[idx])
+      //item.status = getStatus(this, item.date, idx, 'year')
+    })
+  },
+  ['start.year', 'start._year'],
+  ['end.year', 'end._year']
+)
 
 export function yearPanelLinkage(this: State, _: string, name = 'start'): void {
   const timespan = this._type === 'year' ? 10 : 1

@@ -1,5 +1,5 @@
 import { State } from '../types/store'
-import { createElement } from '../utils/element'
+import { createElement, isElementShow } from '../utils/element'
 import { Header } from '../components/header'
 import { Day } from '../components/date&week'
 import { Month, Year } from '../components/month&year'
@@ -11,6 +11,8 @@ import { classNames } from '../utils/attribute'
 import mixins from '../watch/mixins'
 import {
   updateDayCell,
+  updateMonthCell,
+  updateYearCell,
   yearPanelLinkage,
   // monthPanelLinkage,
   // updateMonthCell,
@@ -28,10 +30,18 @@ function rangeComponent(child: createMonthOrYearComponentsFunction) {
       children: [
         {
           children,
+          class: ['range-left'],
           componentType: 'start',
         },
         {
           children,
+          class: ['range-right'],
+          style: {
+            display: (state: State) =>
+              isElementShow(
+                state.type === 'date-range' && state.mode === 'day'
+              ),
+          },
           componentType: 'end',
         },
       ],
@@ -44,13 +54,11 @@ const dateAndWeek = [Header, Day]
 const pickersMap: PickerConfigMap = {
   date: {
     children: concat(dateAndWeek, [Month, Year]),
-    //watch: [updateYearCell, updateMonthCell, startMonthAndYear, updateDayCell],
-    watch: [],
+    watch: [updateYearCell, updateMonthCell, updateDayCell],
   },
   'date-range': {
-    children: rangeComponent(Day),
+    children: concat(rangeComponent(Day), [Month, Year]),
     watch: [updateDayCell],
-    //watch: [updateDayCell],
   },
   week: {
     children: dateAndWeek,

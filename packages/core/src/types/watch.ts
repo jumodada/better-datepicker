@@ -1,4 +1,4 @@
-import { Sub } from './observer'
+import { Sub } from './reactive'
 import { PickersMap } from './store'
 
 export type Listeners<T = Sub> = {

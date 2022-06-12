@@ -1,4 +1,10 @@
-import { CellsData, getRangeStatus, RangeType, State } from '../types/store'
+import {
+  CellsData,
+  getRangeStatus,
+  mode,
+  RangeType,
+  State,
+} from '../types/store'
 import { RangeClickEvent } from '../types/components'
 import { _EventListener } from '../types/utils'
 import { getDateOfNextMonth, getDateOfPreMonth } from '../utils/date'
@@ -50,7 +56,7 @@ export function preYear(type: keyof RangeType): void {
 
 export function nextMonth(type: keyof RangeType): void {
   const child = this[type]
-  const { month, year } = getDateOfNextMonth(child)
+  const { month } = getDateOfNextMonth(child)
   child.month = month
 }
 
@@ -82,6 +88,6 @@ export function monthMode(state: CellsData): void {
   this.mode = 'month'
 }
 
-export function canIShow(state: State, name = 'day') {
-  return () => isElementShow(state.mode === name)
+export function canIShow(state: State) {
+  return () => isElementShow(state.mode === 'day')
 }

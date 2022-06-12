@@ -19,6 +19,7 @@ const cols = 4
 function monthEvent(state: CellsData): MonthEvent {
   return {
     date: Bind(dayMode, state),
+    'date-range': Bind(dayMode, state),
     'month-range': handleRange(state),
     month: Bind(selectYM, [state, 'month']),
   }
@@ -28,6 +29,7 @@ function yearEvent(state: CellsData): YearEvent {
   const toggleMonth = Bind(monthMode, state)
   return {
     date: toggleMonth,
+    'date-range': toggleMonth,
     month: toggleMonth,
     year: Bind(selectYM, [state, 'year']),
     'year-range': handleRange(state),

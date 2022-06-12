@@ -33,7 +33,7 @@ $transition: .3s all ease;
   }
 
   &-range-wrapper{
-    display: inline-flex;
+    display: flex;
     flex-wrap: nowrap;
   }
 
@@ -99,6 +99,12 @@ $transition: .3s all ease;
     > div {
       background: $range-color;
     }
+  }
+
+  &-range{
+    &-left, &-right{
+     width: 100%;
+   }
   }
 
   &-date {

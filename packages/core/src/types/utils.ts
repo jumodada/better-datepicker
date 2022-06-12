@@ -1,4 +1,4 @@
-import { Sub } from './observer'
+import { Sub } from './reactive'
 import { CellsData } from './store'
 
 export interface UtilObject {
@@ -82,11 +82,6 @@ export type StyleOption = {
 
 export interface CreateElement {
   (...arg: any): PartialAtLeastOne<CreateElementOptions>
-}
-
-export interface updateOptions {
-  static?: string[]
-  cb: Sub
 }
 
 export type DynamicStyle = PartialAtLeastOne<{

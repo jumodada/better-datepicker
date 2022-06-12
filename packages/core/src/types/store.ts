@@ -27,11 +27,13 @@ export interface CellsData {
 
 export interface MonthType<T = unknown, U = unknown> {
   date: T
+  'date-range': T
   month: T
   'month-range': T | U
 }
 export interface YearType<T = unknown, U = unknown> {
   date: T
+  'date-range': T
   year: T
   month: T
   'year-range': T | U
@@ -96,7 +98,6 @@ export interface State {
   popover: HTMLElement | null
   onChange?: Callback
   visible: boolean
-  mode: mode
   locale: LocaleConfig
   destroyed?: Callback
   update?: Callback
@@ -115,6 +116,7 @@ export interface State {
   unlinkPanels: boolean
   offset: number
   zIndex: number
+  mode: mode
   format: string
   insertTo: 'body' | 'parent'
   binding: boolean
