@@ -40,7 +40,7 @@ export default defineComponent({
     this.datepicker = createDatePicker({
       ...this.$props,
       reference: input.$el,
-      type: 'date',
+      type: 'date-range',
       placement: 'left'
     })
   },

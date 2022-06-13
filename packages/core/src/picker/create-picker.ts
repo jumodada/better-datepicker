@@ -58,7 +58,7 @@ const pickersMap: PickerConfigMap = {
   },
   'date-range': {
     children: concat(rangeComponent(Day), [Month, Year]),
-    watch: [updateDayCell],
+    watch: [updateYearCell, updateMonthCell, updateDayCell],
   },
   week: {
     children: dateAndWeek,

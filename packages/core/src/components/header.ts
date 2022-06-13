@@ -98,7 +98,7 @@ export function Header(
     return {
       name: 'span',
       text() {
-        return format(String(state.start.year), state)
+        return format(String(state[type].year), state)
       },
       class: ['pointerCursor'],
       event: Bind(yearMode, type),
