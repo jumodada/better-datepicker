@@ -70,7 +70,7 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
     },
     hidden: (val) => hidden(el, val),
     watch(val) {
-      val.forEach((v) => effect(v))
+      val.flat().forEach((v) => effect(v))
     },
   }
 }

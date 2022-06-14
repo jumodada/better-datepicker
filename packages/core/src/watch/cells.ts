@@ -9,6 +9,7 @@ import {
   monthStartDay,
 } from '../utils/date'
 import { useEffect } from '../reactive/effect'
+import { ReverseMap } from '../types/watch'
 
 export const updateDayCell = useEffect(
   function (
@@ -71,31 +72,19 @@ export const updateYearCell = useEffect(
   ['end.year', 'end._year']
 )
 
-export function yearPanelLinkage(this: State, _: string, name = 'start'): void {
-  const timespan = this._type === 'year' ? 10 : 1
-  const startYear = this.start.year
-  const endYear = this.end.year
-  if (name === 'start') {
-    this.end.year = startYear + timespan
-  } else {
-    this.start.year = endYear - timespan
-  }
-}
-
-// export const monthPanelLinkage = subscribe(
-//   function (currentMonth: number, key: 'start.month' | 'end.month') {
-//     console.log(key)
-//     // const [parentKey] = key.split('.') as ('start' | 'end')[]
-//     // const reverse: ReverseMap = {
-//     //   start: 'end',
-//     //   end: 'start',
-//     // }
-//     // const data = this[reverse[parentKey]]
-//     // const method =
-//     //   parentKey === 'start' ? getDateOfNextMonth : getDateOfPreMonth
-//     // const { month, year } = method(this[parentKey].year, currentMonth)
-//     // ;[data.month, data.year] = [month, year]
-//   },
-//   ['start.month'],
-//   ['end.month']
-// )
+export const panelLinkage = [
+  useEffect(
+    function (startMonth, startYear) {
+      const { month, year } = getDateOfNextMonth(startYear, startMonth)
+      ;[this.end.month, this.end.year] = [month, year]
+    },
+    ['start.month', 'start.year']
+  ),
+  useEffect(
+    function (endMonth, endYear) {
+      const { month, year } = getDateOfPreMonth(endYear, endMonth)
+      ;[this.start.month, this.start.year] = [month, year]
+    },
+    ['end.month', 'end.year']
+  ),
+]

@@ -51,7 +51,7 @@ export function Header(
       name: 'monthIcon',
       style: SVGStyleGenerator({
         left: '50px',
-        display: canIShow(state, type),
+        display: canIShow(state),
       }),
       event: Bind(preMonth, type),
     }

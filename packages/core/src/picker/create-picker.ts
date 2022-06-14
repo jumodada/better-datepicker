@@ -10,11 +10,11 @@ import {
 import { classNames } from '../utils/attribute'
 import mixins from '../watch/mixins'
 import {
+  panelLinkage,
   updateDayCell,
   updateMonthCell,
   updateYearCell,
-  yearPanelLinkage,
-  // monthPanelLinkage,
+  // panelLinkage,
   // updateMonthCell,
   // updateYearCell,
   // updateDayCell,
@@ -58,7 +58,7 @@ const pickersMap: PickerConfigMap = {
   },
   'date-range': {
     children: concat(rangeComponent(Day), [Month, Year]),
-    watch: [updateYearCell, updateMonthCell, updateDayCell],
+    watch: [updateYearCell, updateMonthCell, updateDayCell, panelLinkage],
   },
   week: {
     children: dateAndWeek,

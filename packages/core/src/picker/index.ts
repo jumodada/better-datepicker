@@ -14,7 +14,7 @@ export default function Picker(): BetterPicker {
   let onRef, offRef: Off, onBody, offBody: Off
 
   function openPopover() {
-    if (state) state.visible = true
+    state.visible = true
   }
 
   function changePopoverVisible() {
