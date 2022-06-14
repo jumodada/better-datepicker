@@ -2,6 +2,7 @@ import { CellsData, RangeType, State } from './store'
 import {
   CreateElement,
   CreateElementOptions,
+  CreateElementRequiredOptions,
   eventHandler,
   Fn,
   PartialAtLeastOne,
@@ -14,7 +15,7 @@ export interface createMonthOrYearComponentsFunction {
 }
 
 export type PickerConfigMap = PickersMap<{
-  children: (CreateElementOptions | CreateElement)[]
+  children: (CreateElementRequiredOptions | CreateElement)[]
   watch: (Fn | Fn[])[]
 }>
 

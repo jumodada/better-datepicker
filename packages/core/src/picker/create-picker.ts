@@ -21,9 +21,14 @@ import {
 } from '../watch/cells'
 import { startMonthAndYear } from '../watch/utils'
 import { concat } from '../utils/concat'
+import {
+  CreateElement,
+  CreateElementOptions,
+  CreateElementRequiredOptions,
+} from '../types/utils'
 
 function rangeComponent(child: createMonthOrYearComponentsFunction) {
-  const children = [Header, child]
+  const children = createComponent([child])
   return [
     {
       class: ['range-wrapper'],
@@ -49,11 +54,21 @@ function rangeComponent(child: createMonthOrYearComponentsFunction) {
   ]
 }
 
-const dateAndWeek = [Header, Day]
+function createComponent(
+  children: (CreateElementRequiredOptions | CreateElement)[]
+): (CreateElementRequiredOptions | CreateElement)[] {
+  return [
+    Header,
+    {
+      class: ['content'],
+      children,
+    },
+  ]
+}
 
 const pickersMap: PickerConfigMap = {
   date: {
-    children: concat(dateAndWeek, [Month, Year]),
+    children: concat(createComponent([Day]), [Month, Year]),
     watch: [updateYearCell, updateMonthCell, updateDayCell],
   },
   'date-range': {
@@ -61,7 +76,7 @@ const pickersMap: PickerConfigMap = {
     watch: [updateYearCell, updateMonthCell, updateDayCell, panelLinkage],
   },
   week: {
-    children: dateAndWeek,
+    children: createComponent([Day]),
     watch: [],
     //watch: [updateYearCell, updateMonthCell, updateDayCell, startMonthAndYear],
   },
@@ -91,8 +106,7 @@ export function createPicker(state: State): void {
   const { children, watch } = pickersMap[state.type]
   state.popover = createElement(
     {
-      //class: state.classes.concat(['wrapper']),
-      class: classNames('wrapper'),
+      class: state.classes.concat(['wrapper']),
       children,
       hidden: true,
       style: {
