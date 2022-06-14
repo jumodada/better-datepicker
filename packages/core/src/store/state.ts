@@ -108,9 +108,6 @@ export function changeDefaultOption(target: State): void {
   defaultOption = Object.assign(defaultOption, target)
 }
 
-export function initState(
-  options: Partial<State>,
-  id: number
-): ProxyHandler<State> {
+export function initState(options: Partial<State>, id: number): State {
   return reactive(createOptions(id, options))
 }

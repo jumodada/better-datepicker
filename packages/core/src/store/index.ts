@@ -14,11 +14,11 @@ const Store = (function () {
     delete states[id]
   }
 
-  function createState(options: Partial<State>): ProxyHandler<State> {
+  function createState(options: Partial<State>): State {
     return (states[id] = initState(options, id))
   }
 
-  function runDestroyed(state: ProxyHandler<State>) {
+  function runDestroyed(state: State) {
     ;(state as State)?.destroyed?.()
   }
 

@@ -2,7 +2,7 @@ import { Sub } from './reactive'
 import { CellsData } from './store'
 
 export interface UtilObject {
-  [key: string]: unknown
+  [key: string]: any
 }
 
 export type DateType = string | Date | null

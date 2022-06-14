@@ -46,7 +46,7 @@ export function effect(fn: Fn): void {
   }
 }
 
-function getDepsValue(deps: string[], state: ProxyHandler<State>) {
+function getDepsValue(deps: string[], state: State) {
   return deps.map((dep) =>
     dep.split('.').reduce((child, key) => child[key as never], state)
   )

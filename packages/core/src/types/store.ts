@@ -129,5 +129,5 @@ export interface State {
 }
 
 export interface States {
-  [key: number]: ProxyHandler<State>
+  [key: number]: State
 }
