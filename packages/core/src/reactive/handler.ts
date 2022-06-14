@@ -25,6 +25,7 @@ function createSetter() {
     value: unknown,
     receiver: UtilObject
   ): boolean {
+    if (target[key] === value) return true
     const result = Reflect.set(target, key, value, receiver)
     trigger(target, key)
     return result
