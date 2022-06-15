@@ -36,6 +36,7 @@ export function handleRange(state: CellsData): _EventListener[] {
       name: 'mouseenter',
       handler() {
         const { range } = this
+        console.log(range)
         if (range.status === 'selecting') {
           range.end = state.date
         }

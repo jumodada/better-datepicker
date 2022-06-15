@@ -2,7 +2,7 @@ import { CellsData, RangeType, State } from '../types/store'
 import { handleRange } from './public'
 import { CreateElementRequiredOptions } from '../types/utils'
 import map from '../utils/for'
-import { getWeeks } from '../utils/date'
+import { getWeeks, isSame } from '../utils/date'
 import { DayEvent } from '../types/components'
 import { classNames } from '../utils/attribute'
 import { isElementShow } from '../utils/element'
@@ -54,12 +54,14 @@ export function Day(
             },
           ],
           class: classNames('cell', {
-            // today: () => Date.parse(state.today) === Date.parse(child.date),
+            today: () => {
+              return isSame(state.today, child.date)
+            },
             pre: () => child.status === 'pre',
             next: () => child.status === 'next',
+            selecting: () => child.status === 'selected',
           }),
-          //todo 这里需要一个泛型
-          event: dayEvent(child)[state._type as 'date'],
+          event: dayEvent(child)[state.type as 'date'],
         }
       }, colsCount)
     }

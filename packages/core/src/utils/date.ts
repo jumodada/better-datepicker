@@ -1,5 +1,5 @@
 import { CellsData, State } from '../types/store'
-import { isObject } from './typeOf'
+import { isDate, isObject } from './typeOf'
 import map from './for'
 import { LocaleConfig } from '../types/store'
 import { WeekRange } from '../types/utils'
@@ -19,7 +19,8 @@ export function transformDateToObject(
   return getDateObject(getYear(date), getMonth(date), getDay(date))
 }
 
-export function transformDateToNumber(date: CellsData['date']): number {
+export function transformDateToNumber(date: CellsData['date'] | Date): number {
+  if (isDate(date)) date = transformDateToObject(date)
   return Date.parse(joinDate(date))
 }
 
@@ -91,8 +92,8 @@ export function isLaterTime(
 }
 
 export function isSame(
-  source: CellsData['date'],
-  target: CellsData['date']
+  source: CellsData['date'] | Date,
+  target: CellsData['date'] | Date
 ): boolean {
   return transformDateToNumber(source) === transformDateToNumber(target)
 }

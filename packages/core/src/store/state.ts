@@ -60,7 +60,7 @@ let defaultOption: State = {
   id: -1,
   start: rangeComponents(transformDateToObject()),
   end: rangeComponents(getDateOfNextMonth(startYear, startMonth)),
-  today: '', //todo
+  today: new Date(), //todo
   placement: 'bottom',
   placeholder: '',
   type: 'date',

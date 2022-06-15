@@ -12,7 +12,7 @@ export function isObject<T = UtilObject>(val: unknown): val is T {
   return typeOf(val, 'Object')
 }
 
-export function isDate(val: unknown): val is UtilObject {
+export function isDate(val: unknown): val is Date {
   return typeOf(val, 'Date')
 }
 

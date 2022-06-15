@@ -104,7 +104,7 @@ export interface State {
   range: Range
   start: DateData
   end: DateData
-  today: string
+  today: Date
   date: string | string[] | null
   placement: Placement
   placeholder: string
