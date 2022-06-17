@@ -117,7 +117,7 @@ export function createElement(
   objectKeys(opt).forEach((key) => {
     const handler = handlers[key]
     if (isFunc(handler)) {
-      handler(opt[key as never], opt.componentType)
+      handler(opt[key as never], opt.componentType ?? componentType)
     }
   })
   return el

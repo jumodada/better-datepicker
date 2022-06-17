@@ -114,7 +114,6 @@ export function createPicker(state: State): void {
         position: 'absolute',
         zIndex: state.zIndex,
       },
-      // TODO range mixins
       watch: watch.concat(mixins),
     },
     state
