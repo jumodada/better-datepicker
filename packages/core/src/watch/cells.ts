@@ -9,7 +9,6 @@ import {
   monthStartDay,
 } from '../utils/date'
 import { useEffect } from '../reactive/effect'
-import { ReverseMap } from '../types/watch'
 
 export const updateDayCell = useEffect(
   function (

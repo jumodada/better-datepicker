@@ -19,7 +19,6 @@ import {
   // updateYearCell,
   // updateDayCell,
 } from '../watch/cells'
-import { startMonthAndYear } from '../watch/utils'
 import { concat } from '../utils/concat'
 import {
   CreateElement,

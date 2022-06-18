@@ -84,17 +84,19 @@ export function getDateObject(
   }
 }
 
-export function isLaterTime(
-  source: CellsData['date'],
-  target: CellsData['date']
+export function isAfter(
+  source?: CellsData['date'] | null,
+  target?: CellsData['date'] | null
 ): boolean {
+  if (!source || !target) return false
   return transformDateToNumber(source) > transformDateToNumber(target)
 }
 
 export function isSame(
-  source: CellsData['date'] | Date,
-  target: CellsData['date'] | Date
+  source?: CellsData['date'] | Date | null,
+  target?: CellsData['date'] | Date | null
 ): boolean {
+  if (!source || !target) return false
   return transformDateToNumber(source) === transformDateToNumber(target)
 }
 
@@ -103,15 +105,14 @@ export function rangeSort(
   max: CellsData['date']
 ): CellsData['date'][] {
   const range = [min, max]
-  return isLaterTime(min, max) ? range : range.reverse()
+  return isAfter(min, max) ? range : range.reverse()
 }
 
 export function isInRange<T = number>(
-  max: CellsData['date'],
-  min: CellsData['date'],
-  date: CellsData['date']
-): string {
-  return isLaterTime(max, date) && isLaterTime(date, min) ? 'in-range' : ''
+  date: CellsData['date'],
+  [rangeStart, rangeEnd]: CellsData['date'][]
+): boolean {
+  return isAfter(rangeEnd, date) && isAfter(date, rangeStart)
 }
 
 export function getDateOfPreMonth<T = number>(
@@ -159,7 +160,7 @@ export function getYearWeek(date: Date, locale: LocaleConfig): number {
   // const { start, end } = getWeekRange(date, weekStart)
   // if (month === 12 && day > 25) {
   //   const nextYearStartDay = new Date(year + 1, 0, yearStart)
-  //   if (isLaterTime(end, nextYearStartDay)) return 1
+  //   if (isAfter(end, nextYearStartDay)) return 1
   // }
   // const YearEnd = new Date(year, month - 1, day)
   // const YearStart = new Date(year, 0, yearStart)

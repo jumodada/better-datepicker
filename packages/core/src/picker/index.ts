@@ -63,7 +63,7 @@ export default function Picker(): BetterPicker {
   function clear(): void {
     if (state.reference) {
       state.reference.value = ''
-      state.range.start = state.range.end = null
+      state.hoverSelected.start = state.hoverSelected.end = null
       // state.start.date =
       // state.end.date =
       //   null

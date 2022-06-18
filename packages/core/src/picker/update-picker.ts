@@ -30,13 +30,13 @@ function getPosition(
 }
 
 function resetRangStatus(self: State) {
-  const { range, start, end } = self
-  range.status = 'complete'
+  const { hoverSelected, start, end } = self
+  hoverSelected.status = 'complete'
   if (start.date && start.date) {
-    // range.start = start.date
-    // range.end = end.date
+    hoverSelected.start = start.date
+    hoverSelected.end = end.date
   } else {
-    range.start = range.end = null
+    hoverSelected.start = hoverSelected.end = null
   }
 }
 
@@ -48,7 +48,7 @@ export function updatePicker(): void {
     setPopoverLocation.call(this)
   }
   popover.style.display = visible ? '' : 'none'
-  // resetRangStatus(this)
+  resetRangStatus(this)
 }
 
 export function setPopoverLocation(): void {

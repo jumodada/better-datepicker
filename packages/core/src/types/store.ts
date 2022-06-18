@@ -86,8 +86,9 @@ export interface RangeType<T = null> {
   end: T
 }
 
-export interface Range extends RangeType<string | null> {
+export interface Range extends RangeType<CellsData['date'] | null> {
   status: getRangeStatus
+  range: CellsData['date'][]
 }
 
 export type mode = 'day' | 'year' | 'month'
@@ -101,7 +102,7 @@ export interface State {
   locale: LocaleConfig
   destroyed?: Callback
   update?: Callback
-  range: Range
+  hoverSelected: Range
   start: DateData
   end: DateData
   today: Date

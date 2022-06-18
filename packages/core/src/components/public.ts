@@ -7,7 +7,7 @@ import {
 } from '../types/store'
 import { RangeClickEvent } from '../types/components'
 import { _EventListener } from '../types/utils'
-import { getDateOfNextMonth, getDateOfPreMonth } from '../utils/date'
+import { getDateOfNextMonth, getDateOfPreMonth, isAfter } from '../utils/date'
 import { isElementShow } from '../utils/element'
 
 const rangeClickEvent: RangeClickEvent = {
@@ -26,19 +26,18 @@ export function handleRange(state: CellsData): _EventListener[] {
     {
       name: 'click',
       handler() {
-        const { range } = this
-        const current = rangeClickEvent[range.status as getRangeStatus]
-        range[current.plt] = state.date
-        range.status = current.status
+        const { hoverSelected } = this
+        const current = rangeClickEvent[hoverSelected.status as getRangeStatus]
+        hoverSelected[current.plt] = state.date
+        hoverSelected.status = current.status
       },
     },
     {
       name: 'mouseenter',
       handler() {
-        const { range } = this
-        console.log(range)
-        if (range.status === 'selecting') {
-          range.end = state.date
+        const { hoverSelected } = this
+        if (hoverSelected.status === 'selecting') {
+          hoverSelected.end = state.date
         }
       },
     },

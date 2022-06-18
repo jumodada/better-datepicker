@@ -86,9 +86,10 @@ let defaultOption: State = {
   locale,
   reference: null,
   popover: null,
-  range: {
+  hoverSelected: {
     start: null,
     end: null,
+    range: [],
     status: 'complete',
   },
 }

@@ -2,7 +2,7 @@ import { CellsData, RangeType, State } from '../types/store'
 import { handleRange } from './public'
 import { CreateElementRequiredOptions } from '../types/utils'
 import map from '../utils/for'
-import { getWeeks, isSame } from '../utils/date'
+import { getWeeks, isInRange, isSame } from '../utils/date'
 import { DayEvent } from '../types/components'
 import { classNames } from '../utils/attribute'
 import { isElementShow } from '../utils/element'
@@ -44,6 +44,7 @@ export function Day(
       return map((cc) => {
         const idx = rc * 7 + cc
         const child = state[type]._date[idx]
+        const { hoverSelected } = state
         return {
           name: 'td',
           children: [
@@ -60,6 +61,9 @@ export function Day(
             pre: () => child.status === 'pre',
             next: () => child.status === 'next',
             selecting: () => child.status === 'selected',
+            inRange: () => isInRange(child.date, hoverSelected.range),
+            'range-start': () => isSame(child.date, hoverSelected.range[0]),
+            'range-end': () => isSame(child.date, hoverSelected.range[1]),
           }),
           event: dayEvent(child)[state.type as 'date'],
         }
