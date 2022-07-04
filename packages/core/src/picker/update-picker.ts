@@ -2,6 +2,7 @@ import { Rect, Transform } from '../types/utils'
 import { isInBody } from '../utils/isInBody'
 import { State } from '../types/store'
 import { objectKeys } from '../utils/objectKeys'
+import { usePoppingAnimation } from './animation'
 
 function transform(offset: number | string): Transform {
   offset = offset + 'px'
@@ -47,7 +48,7 @@ export function updatePicker(): void {
     popover.style.display = ''
     setPopoverLocation.call(this)
   }
-  popover.style.display = visible ? '' : 'none'
+  usePoppingAnimation(popover, visible)
   resetRangStatus(this)
 }
 

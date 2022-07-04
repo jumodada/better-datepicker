@@ -306,3 +306,22 @@ $transition: .3s all ease;
     }
   }
 }
+
+@-webkit-keyframes fadeOutDown {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: auto;
+  }
+}
+@keyframes fadeOutDown {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: auto;
+  }
+}

@@ -25,6 +25,7 @@ import {
   CreateElementOptions,
   CreateElementRequiredOptions,
 } from '../types/utils'
+import { has } from '../utils/typeOf'
 
 function rangeComponent(child: createMonthOrYearComponentsFunction) {
   const children = createComponent([child])
