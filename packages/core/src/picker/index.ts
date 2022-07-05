@@ -40,6 +40,7 @@ export default function Picker(): BetterPicker {
     const parent = popover.parentNode
     if (parent && parent.removeChild) {
       parent.removeChild(popover)
+      state.popover = null
     }
   }
 

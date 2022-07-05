@@ -4,6 +4,7 @@ import { updatePicker } from '../picker/update-picker'
 import { getDate, isAfter } from '../utils/date'
 import { getFormatDate } from '../utils/format'
 import { useEffect } from '../reactive/effect'
+import { extend } from '../utils/extend'
 
 function options(): void {
   // this.mode = this.type.replace('week', 'day')
@@ -45,8 +46,10 @@ const hoverSelectRange = useEffect(
 )
 
 const restartPicker = useEffect(
-  function () {
-    console.log(123)
+  function (type) {
+    this.destroyed()
+    this.create(extend(this, { type }))
+    console.log(this)
   },
   ['type']
 )
