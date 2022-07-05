@@ -31,7 +31,9 @@ export default function Picker(): BetterPicker {
   }
 
   function update(options: Partial<State>) {
-    state = Object.assign(state, options)
+    options.reference = state.reference
+    destroyed()
+    create(options)
   }
 
   function removePopover(): void {
@@ -69,15 +71,6 @@ export default function Picker(): BetterPicker {
       //   null
     }
   }
-
-  function open(): void {
-    state.visible = true
-  }
-
-  function close(): void {
-    state.visible = false
-  }
-
   function changeWeekFormat() {
     // TODO if (state.type === 'week' && (!userConfig || !userConfig.format))
     if (state.type === 'week') {
@@ -94,8 +87,6 @@ export default function Picker(): BetterPicker {
       update,
       destroyed,
       clear,
-      open,
-      close,
     }
   }
 }

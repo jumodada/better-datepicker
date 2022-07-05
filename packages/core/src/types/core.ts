@@ -14,8 +14,6 @@ export interface BetterPickerInstance {
   update: (options: any) => void
   destroyed: () => void
   clear: () => void
-  close: () => void
-  open: () => void
   state: State
 }
 
