@@ -36,12 +36,19 @@ function findReference(): void {
   }
 }
 
-const xxx = useEffect(
+const hoverSelectRange = useEffect(
   function (start, end) {
     const range = [start, end]
     this.hoverSelected.range = isAfter(start, end) ? range.reverse() : range
   },
   ['hoverSelected.start', 'hoverSelected.end']
+)
+
+const restartPicker = useEffect(
+  function () {
+    console.log(123)
+  },
+  ['type']
 )
 
 export default [
@@ -50,5 +57,6 @@ export default [
   updatePicker,
   findReference,
   dispatchDateChange,
-  xxx,
+  hoverSelectRange,
+  restartPicker,
 ]

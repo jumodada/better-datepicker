@@ -52,6 +52,7 @@ export default function Picker(): BetterPicker {
 
   function create(options: Partial<State>): void {
     state = Object.assign(createState(options), {
+      create,
       update,
       destroyed,
     })

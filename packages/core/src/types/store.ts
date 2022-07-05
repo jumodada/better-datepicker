@@ -102,6 +102,7 @@ export interface State {
   locale: LocaleConfig
   destroyed?: Callback
   update?: Callback
+  create?: Callback
   hoverSelected: Range
   start: DateData
   end: DateData

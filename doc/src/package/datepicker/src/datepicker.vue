@@ -14,7 +14,7 @@ export default defineComponent({
     placeholder: String,
     type: {
       type: String,
-      default: 'date-range'
+      default: 'date'
     },
     disabledDate:{
       type:Function,
@@ -40,7 +40,7 @@ export default defineComponent({
     this.datepicker = createDatePicker({
       ...this.$props,
       reference: input.$el,
-      type: 'date',
+      type: 'date-range',
       placement: 'left'
     })
   },

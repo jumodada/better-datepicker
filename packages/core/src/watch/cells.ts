@@ -11,7 +11,7 @@ import {
 import { useEffect } from '../reactive/effect'
 
 export const updateDayCell = useEffect(
-  function (
+  function stat(
     this: State,
     year: number,
     month: number,
@@ -49,7 +49,7 @@ export const updateDayCell = useEffect(
 )
 
 export const updateMonthCell = useEffect(
-  function (this: State, year: number, monthDCells: CellsData[]) {
+  function stat(this: State, year: number, monthDCells: CellsData[]) {
     monthDCells.forEach((item, idx) => {
       item.date = getDateObject(year, idx + 1)
       //item.status = getStatus(this, item.date, idx)
@@ -60,7 +60,7 @@ export const updateMonthCell = useEffect(
 )
 
 export const updateYearCell = useEffect(
-  function (this: State, year, yearCells: CellsData[]): void {
+  function stat(this: State, year, yearCells: CellsData[]): void {
     const range = getTenYearTimeRange(year)
     yearCells.forEach((item, idx) => {
       item.date = getDateObject(range[idx])
@@ -73,14 +73,14 @@ export const updateYearCell = useEffect(
 
 export const panelLinkage = [
   useEffect(
-    function (startMonth, startYear) {
+    function stat(startMonth, startYear) {
       const { month, year } = getDateOfNextMonth(startYear, startMonth)
       ;[this.end.month, this.end.year] = [month, year]
     },
     ['start.month', 'start.year']
   ),
   useEffect(
-    function (endMonth, endYear) {
+    function stat(endMonth, endYear) {
       const { month, year } = getDateOfPreMonth(endYear, endMonth)
       ;[this.start.month, this.start.year] = [month, year]
     },

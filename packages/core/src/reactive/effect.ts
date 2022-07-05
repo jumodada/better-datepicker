@@ -52,6 +52,8 @@ function getDepsValue(deps: string[], state: State) {
   )
 }
 
+// 第一参数如果传入一个名为 stat 的函数，则设置为立即执行
+// 默认只在更新阶段执行
 export function useEffect(fn: Fn, ...depsArray: string[][]): Fn {
   return function () {
     depsArray.forEach((deps) => {
@@ -60,7 +62,7 @@ export function useEffect(fn: Fn, ...depsArray: string[][]): Fn {
         const run = () => fn.apply(this, getter())
         activeEffect = run
         getter()
-        return run
+        return fn.name === 'stat' ? run : null
       })
     })
   }
