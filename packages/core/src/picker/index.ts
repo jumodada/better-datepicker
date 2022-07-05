@@ -13,7 +13,7 @@ export default function Picker(): BetterPicker {
   let state: State
   let onRef, offRef: Off, onBody, offBody: Off
 
-  function openPopover() {
+  function open() {
     state.visible = true
   }
 
@@ -21,7 +21,7 @@ export default function Picker(): BetterPicker {
     if (!state.reference) return
     ;[onRef, offRef] = getEventListener(state.reference)
     ;[onBody, offBody] = getEventListener(document.body)
-    onRef(openPopover)
+    onRef(open)
     onBody(Bind(clickOutside, state))
     if (state) listenToScrollParents(state)
   }
@@ -31,9 +31,7 @@ export default function Picker(): BetterPicker {
   }
 
   function update(options: Partial<State>) {
-    options.reference = state.reference
-    destroyed()
-    create(options)
+    state = Object.assign(state, options)
   }
 
   function removePopover(): void {

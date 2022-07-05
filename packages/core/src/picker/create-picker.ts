@@ -19,7 +19,7 @@ import {
   // updateYearCell,
   // updateDayCell,
 } from '../watch/cells'
-import { concat } from '../utils/concat'
+import { concat } from '../utils/extend'
 import {
   CreateElement,
   CreateElementOptions,

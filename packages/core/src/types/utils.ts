@@ -1,9 +1,7 @@
 import { Sub } from './reactive'
 import { CellsData } from './store'
 
-export interface UtilObject {
-  [key: string]: any
-}
+export type UtilObject = Record<any, any>
 
 export type DateType = string | Date | null
 
