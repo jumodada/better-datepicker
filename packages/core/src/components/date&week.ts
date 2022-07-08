@@ -14,9 +14,6 @@ export function Day(
   state: State,
   type: keyof RangeType = 'start'
 ): CreateElementRequiredOptions {
-  // const classes = ['date']
-  // if (state.type === 'week') classes.push('week')
-
   function dayEvent(childState: CellsData): DayEvent {
     function dateWeek() {
       state.start.date = childState.date
@@ -42,9 +39,9 @@ export function Day(
 
     const td = (rc: number): CreateElementRequiredOptions[] => {
       return map((cc) => {
-        const idx = rc * 7 + cc
+        const idx = rc * colsCount + cc
         const child = state[type]._date[idx]
-        const { hoverSelected } = state
+        const { hoverSelected, isRange } = state
         return {
           name: 'td',
           children: [
@@ -60,10 +57,14 @@ export function Day(
             },
             pre: () => child.status === 'pre',
             next: () => child.status === 'next',
-            selecting: () => child.status === 'selected',
-            inRange: () => isInRange(child.date, hoverSelected.range),
-            'range-start': () => isSame(child.date, hoverSelected.range[0]),
-            'range-end': () => isSame(child.date, hoverSelected.range[1]),
+            selected: () => !isRange && isSame(child.date, state.start.date),
+            selecting: () => isRange && child.status === 'selected',
+            inRange: () =>
+              isRange && isInRange(child.date, hoverSelected.range),
+            'range-start': () =>
+              isRange && isSame(child.date, hoverSelected.range[0]),
+            'range-end': () =>
+              isRange && isSame(child.date, hoverSelected.range[1]),
           }),
           event: dayEvent(child)[state.type as 'date'],
         }
