@@ -42,6 +42,8 @@ export function Day(
         const idx = rc * colsCount + cc
         const child = state[type]._date[idx]
         const { hoverSelected, isRange } = state
+        const isInCurrentRange = () =>
+          child.status !== 'pre' && child.status !== 'next' && isRange
         return {
           name: 'td',
           children: [
@@ -60,11 +62,11 @@ export function Day(
             selected: () => !isRange && isSame(child.date, state.start.date),
             selecting: () => isRange && child.status === 'selected',
             inRange: () =>
-              isRange && isInRange(child.date, hoverSelected.range),
+              isInCurrentRange() && isInRange(child.date, hoverSelected.range),
             'range-start': () =>
-              isRange && isSame(child.date, hoverSelected.range[0]),
+              isInCurrentRange() && isSame(child.date, hoverSelected.range[0]),
             'range-end': () =>
-              isRange && isSame(child.date, hoverSelected.range[1]),
+              isInCurrentRange() && isSame(child.date, hoverSelected.range[1]),
           }),
           event: dayEvent(child)[state.type as 'date'],
         }

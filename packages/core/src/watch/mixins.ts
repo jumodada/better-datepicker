@@ -7,7 +7,6 @@ import { useEffect } from '../reactive/effect'
 import { extend } from '../utils/extend'
 
 function options(): void {
-  // this.mode = this.type.replace('week', 'day')
   this.reference && (this.reference.placeholder = this.placeholder)
 }
 
