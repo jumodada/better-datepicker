@@ -7,17 +7,12 @@ import {
   createMonthOrYearComponentsFunction,
   PickerConfigMap,
 } from '../types/components'
-import { classNames } from '../utils/attribute'
 import mixins from '../watch/mixins'
 import {
   panelLinkage,
   updateDayCell,
   updateMonthCell,
   updateYearCell,
-  // panelLinkage,
-  // updateMonthCell,
-  // updateYearCell,
-  // updateDayCell,
 } from '../watch/cells'
 import { concat } from '../utils/extend'
 import {
@@ -44,7 +39,7 @@ function rangeComponent(child: createMonthOrYearComponentsFunction) {
           style: {
             display: (state: State) =>
               isElementShow(
-                state.type === 'date-range' && state.mode === 'day'
+                state.type === 'date-range' && state.mode === 'date'
               ),
           },
           componentType: 'end',
@@ -66,39 +61,35 @@ function createComponent(
   ]
 }
 
+const updateDMY = () => [updateYearCell, updateMonthCell, updateDayCell]
 const pickersMap: PickerConfigMap = {
   date: {
     children: concat(createComponent([Day]), [Month, Year]),
-    watch: [updateYearCell, updateMonthCell, updateDayCell],
+    watch: updateDMY(),
   },
   'date-range': {
     children: concat(rangeComponent(Day), [Month, Year]),
-    watch: [updateYearCell, updateMonthCell, updateDayCell, panelLinkage],
+    watch: concat(updateDMY(), panelLinkage),
   },
   week: {
-    children: createComponent([Day]),
-    watch: [],
-    //watch: [updateYearCell, updateMonthCell, updateDayCell, startMonthAndYear],
+    children: concat(rangeComponent(Day), [Month, Year]),
+    watch: updateDMY(),
   },
   month: {
     children: [Header, Month, Year],
-    watch: [],
-    //watch: [updateMonthCell, updateYearCell],
+    watch: [updateMonthCell, updateYearCell],
   },
   'month-range': {
     children: rangeComponent(Month),
-    watch: [],
-    // watch: [updateMonthCell, yearPanelLinkage],
+    watch: [updateMonthCell, panelLinkage],
   },
   year: {
     children: [Header, Year],
-    watch: [],
-    // watch: [updateYearCell],
+    watch: [updateYearCell],
   },
   'year-range': {
     children: rangeComponent(Year),
-    watch: [],
-    // watch: [updateYearCell, yearPanelLinkage],
+    watch: [updateYearCell, panelLinkage],
   },
 }
 

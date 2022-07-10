@@ -91,7 +91,7 @@ export interface Range extends RangeType<CellsData['date'] | null> {
   range: CellsData['date'][]
 }
 
-export type mode = 'day' | 'year' | 'month'
+export type mode = 'date' | 'year' | 'month'
 
 export interface State {
   id: number
@@ -113,7 +113,6 @@ export interface State {
   style: Style
   classes: string[]
   type: keyof PickersMap
-  _type: 'date' | 'month' | 'year'
   isRange: boolean
   unlinkPanels: boolean
   offset: number

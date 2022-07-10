@@ -64,13 +64,12 @@ let defaultOption: State = {
   placement: 'bottom',
   placeholder: '',
   type: 'date',
-  _type: 'date',
   isRange: false,
   zIndex: 2000,
   unlinkPanels: false,
   format: 'yyyy/MM/dd',
   offset: 12,
-  mode: 'day',
+  mode: 'date',
   insertTo: 'body',
   binding: true,
   disabled: false,
@@ -96,12 +95,13 @@ let defaultOption: State = {
 
 function createOptions(id: number, options: Partial<State>): State {
   const type = options.type ?? defaultOption.type
-  const typeToArray = type.split('-')
+  const types = type.split('-')
+  const [mode] = types
   return Object.assign({}, defaultOption, options, {
     id,
     type,
-    _type: typeToArray[0],
-    isRange: typeToArray.length === 2,
+    mode,
+    isRange: types.length === 2,
   })
 }
 

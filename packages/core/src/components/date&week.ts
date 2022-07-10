@@ -98,7 +98,7 @@ export function Day(
       },
     ],
     style: {
-      display: () => isElementShow(state.mode === 'day'),
+      display: () => isElementShow(state.mode === 'date'),
     },
   }
 }

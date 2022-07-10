@@ -47,7 +47,7 @@ export function selectYM(state: CellsData, name: 'year' | 'month'): void {
 export function dayMode(state: CellsData): void {
   console.log(state)
   this.start.month = state.date.month
-  this.mode = 'day'
+  this.mode = 'date'
 }
 
 export function yearMode(): void {
@@ -61,5 +61,5 @@ export function monthMode(state: CellsData): void {
 }
 
 export function canIShow(state: State) {
-  return () => isElementShow(state.mode === 'day')
+  return () => isElementShow(state.mode === 'date')
 }
