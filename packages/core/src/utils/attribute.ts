@@ -1,12 +1,12 @@
 import { objectKeys } from './objectKeys'
-import { addLogo } from './merge'
+import { addPrefixName } from './prefixName'
 
 export function setClasses(el: HTMLElement | Element, val: string): void {
   el.setAttribute(
     'class',
     val
       .split(' ')
-      .map((name) => addLogo(name))
+      .map((name) => addPrefixName(name))
       .join(' ')
   )
 }

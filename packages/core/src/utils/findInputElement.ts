@@ -6,7 +6,6 @@ export function isInput(el: HTMLElement): boolean {
 }
 
 function findNode(el: any): null | HTMLInputElement {
-  //todo childNodes in for of?
   if (isInput(el)) return el
   if (!el) return null
   const childLists = el.childNodes

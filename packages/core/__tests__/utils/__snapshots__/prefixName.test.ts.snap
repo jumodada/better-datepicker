@@ -2,6 +2,6 @@
 
 exports[`classes produces classnames of the Datepicker 1`] = `
 Object {
-  "logo": "better-datepicker",
+  "prefixName": "better-datepicker",
 }
 `;
