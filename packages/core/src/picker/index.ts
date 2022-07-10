@@ -66,9 +66,7 @@ export default function Picker(): BetterPicker {
     if (state.reference) {
       state.reference.value = ''
       state.hoverSelected.start = state.hoverSelected.end = null
-      // state.start.date =
-      // state.end.date =
-      //   null
+      // state.start.date = state.end.date = null
     }
   }
   function changeWeekFormat() {
