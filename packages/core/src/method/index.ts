@@ -1,13 +1,6 @@
-import {
-  CellsData,
-  getRangeStatus,
-  mode,
-  RangeType,
-  State,
-} from '../types/store'
+import { CellsData, getRangeStatus, State } from '../types/store'
 import { RangeClickEvent } from '../types/components'
 import { _EventListener } from '../types/utils'
-import { getDateOfNextMonth, getDateOfPreMonth, isAfter } from '../utils/date'
 import { isElementShow } from '../utils/element'
 
 const rangeClickEvent: RangeClickEvent = {
@@ -42,28 +35,6 @@ export function handleRange(state: CellsData): _EventListener[] {
       },
     },
   ]
-}
-
-export function nextYear(type: keyof RangeType): void {
-  const num = this.mode === 'year' ? 10 : 1
-  this[type].year += num
-}
-
-export function preYear(type: keyof RangeType): void {
-  const num = this.mode === 'year' ? 10 : 1
-  this[type].year -= num
-}
-
-export function nextMonth(type: keyof RangeType): void {
-  const child = this[type]
-  const { month } = getDateOfNextMonth(child)
-  child.month = month
-}
-
-export function preMonth(type: keyof RangeType): void {
-  const child = this[type]
-  const { month, year } = getDateOfPreMonth(child)
-  ;[child.month, child.year] = [month, year]
 }
 
 export function selectYM(state: CellsData, name: 'year' | 'month'): void {

@@ -1,15 +1,11 @@
 import { isElementShow } from '../utils/element'
-import {
-  canIShow,
-  monthMode,
-  nextMonth,
-  nextYear,
-  preMonth,
-  preYear,
-  yearMode,
-} from './public'
+import { canIShow, monthMode, yearMode } from '../method'
 import { State, RangeType } from '../types/store'
-import { getTenYearTimeRange } from '../utils/date'
+import {
+  getDateOfNextMonth,
+  getDateOfPreMonth,
+  getTenYearTimeRange,
+} from '../utils/date'
 import { CreateElementRequiredOptions, StyleOption } from '../types/utils'
 import { Bind } from '../utils/bind'
 import { getFormatDate } from '../utils/format'
@@ -38,6 +34,28 @@ export function Header(
   state: State,
   type: keyof RangeType
 ): CreateElementRequiredOptions {
+  function nextYear(): void {
+    const num = state.mode === 'year' ? 10 : 1
+    this[type].year += num
+  }
+
+  function preYear(): void {
+    const num = state.mode === 'year' ? 10 : 1
+    this[type].year -= num
+  }
+
+  function nextMonth(): void {
+    const child = state[type]
+    const { month } = getDateOfNextMonth(child)
+    child.month = month
+  }
+
+  function preMonth(): void {
+    const child = state[type]
+    const { month, year } = getDateOfPreMonth(child)
+    ;[child.month, child.year] = [month, year]
+  }
+
   function preYearIcon(): CreateElementRequiredOptions {
     return {
       name: 'yearIcon',

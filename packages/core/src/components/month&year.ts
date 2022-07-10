@@ -1,5 +1,5 @@
 import { isElementShow } from '../utils/element'
-import { handleRange, selectYM, dayMode, monthMode } from './public'
+import { handleRange, selectYM, dayMode, monthMode } from '../method'
 import { CellsData, RangeType, State } from '../types/store'
 import {
   ComponentsType,

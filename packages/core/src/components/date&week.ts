@@ -1,5 +1,5 @@
 import { CellsData, RangeType, State } from '../types/store'
-import { handleRange } from './public'
+import { handleRange } from '../method'
 import { CreateElementRequiredOptions } from '../types/utils'
 import map from '../utils/for'
 import { getWeeks, isInRange, isSame } from '../utils/date'
