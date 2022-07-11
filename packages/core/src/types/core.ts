@@ -40,5 +40,5 @@ export interface GetStatusFunctionsType {
   year: GetStatusFunctions
   month: GetStatusFunctions
   date: GetStatusFunctions
-  week: (date: Date) => void
+  'date-week': (date: Date) => void
 }

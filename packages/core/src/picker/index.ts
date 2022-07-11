@@ -57,7 +57,6 @@ export default function Picker(): BetterPicker {
       update,
       destroyed,
     })
-    changeWeekFormat()
     changePopoverVisible()
     createPicker(state)
   }
@@ -67,12 +66,6 @@ export default function Picker(): BetterPicker {
       state.reference.value = ''
       state.hoverSelected.start = state.hoverSelected.end = null
       // state.start.date = state.end.date = null
-    }
-  }
-  function changeWeekFormat() {
-    // TODO if (state.type === 'week' && (!userConfig || !userConfig.format))
-    if (state.type === 'week') {
-      state.format = state.locale.weekFormat
     }
   }
 

@@ -29,7 +29,7 @@ EXAMPLE-OPTIONS
       datepickerTypesList: [
         { value: 'date', label: 'date' },
         { value: 'date-range', label: 'date-range' },
-        { value: 'week', label: 'week' },
+        { value: 'date-week', label: 'date-week' },
         { value: 'year', label: 'year' },
         { value: 'year-range', label: 'year-range' },
         { value: 'month', label: 'month' },

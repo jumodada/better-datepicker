@@ -95,13 +95,9 @@ let defaultOption: State = {
 
 function createOptions(id: number, options: Partial<State>): State {
   const type = options.type ?? defaultOption.type
-  const types = type.split('-')
-  const [mode] = types
   return Object.assign({}, defaultOption, options, {
     id,
     type,
-    mode,
-    isRange: types.length === 2,
   })
 }
 

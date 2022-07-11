@@ -75,7 +75,7 @@ export interface Style {
 }
 
 export type StyleOption = {
-  [key in keyof Style]: Style[key] | (() => Style[key])
+  [key in keyof Style]: Style[key] | ((...arg: any) => Style[key])
 }
 
 export interface CreateElement {

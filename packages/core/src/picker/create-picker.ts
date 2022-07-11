@@ -17,7 +17,9 @@ import {
 import { concat } from '../utils/extend'
 import { CreateElement, CreateElementRequiredOptions } from '../types/utils'
 
-function rangeComponent(child: createMonthOrYearComponentsFunction[]) {
+function rangeComponent(
+  child: createMonthOrYearComponentsFunction[]
+): (CreateElementRequiredOptions | CreateElement)[] {
   const children = createComponent(child)
   return [
     {
@@ -63,10 +65,10 @@ const pickersMap: PickerConfigMap = {
     watch: updateDMY(),
   },
   'date-range': {
-    children: rangeComponent([Day, Month, Year]),
     watch: concat(updateDMY(), panelLinkage),
+    children: rangeComponent([Day, Month, Year]),
   },
-  week: {
+  'date-week': {
     children: rangeComponent([Day, Month, Year]),
     watch: updateDMY(),
   },

@@ -23,7 +23,7 @@ export function Day(
     return {
       date: dateWeek,
       'date-range': handleRange(childState),
-      week: dateWeek,
+      'date-week': dateWeek,
     }
   }
 
@@ -41,9 +41,9 @@ export function Day(
       return map((cc) => {
         const idx = rc * colsCount + cc
         const child = state[type]._date[idx]
-        const { hoverSelected, isRange } = state
+        const { hoverSelected } = state
         const isInCurrentRange = () =>
-          child.status !== 'pre' && child.status !== 'next' && isRange
+          child.status !== 'pre' && child.status !== 'next' && state.isRange
         return {
           name: 'td',
           children: [
@@ -59,8 +59,9 @@ export function Day(
             },
             pre: () => child.status === 'pre',
             next: () => child.status === 'next',
-            selected: () => !isRange && isSame(child.date, state.start.date),
-            selecting: () => isRange && child.status === 'selected',
+            selected: () =>
+              !isInCurrentRange() && isSame(child.date, state.start.date),
+            selecting: () => isInCurrentRange() && child.status === 'selected',
             inRange: () =>
               isInCurrentRange() && isInRange(child.date, hoverSelected.range),
             'range-start': () =>

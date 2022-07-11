@@ -5,6 +5,7 @@ import { getDate, isAfter } from '../utils/date'
 import { getFormatDate } from '../utils/format'
 import { useEffect } from '../reactive/effect'
 import { extend } from '../utils/extend'
+import { has } from '../utils/typeOf'
 
 function options(): void {
   this.reference && (this.reference.placeholder = this.placeholder)
@@ -61,11 +62,28 @@ const restartPicker = useEffect(
   function (type) {
     this.destroyed()
     this.create(extend(this, { type }))
+    if (has(type, 'week')) {
+      this.format = this.locale.weekFormat
+    }
+  },
+  ['type']
+)
+
+const initial = useEffect(
+  function stat(type) {
+    const types = type.split('-')
+    const [mode] = types
+    this.mode = mode
+    this.isRange = types.includes('range')
+    if (has(type, 'week')) {
+      this.format = this.locale.weekFormat
+    }
   },
   ['type']
 )
 
 export default [
+  initial,
   options,
   appendPopover,
   updatePicker,

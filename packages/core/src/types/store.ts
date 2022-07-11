@@ -40,7 +40,7 @@ export interface YearType<T = unknown, U = unknown> {
 }
 export interface DateType<T = unknown, U = unknown> {
   date: T
-  week: T
+  'date-week': T
   'date-range': T | U
 }
 
@@ -50,7 +50,7 @@ export interface PickersMap<T = unknown, U = any>
     YearType {
   date: T
   'date-range': T | U
-  week: T
+  'date-week': T
   month: T
   'month-range': T | U
   year: T

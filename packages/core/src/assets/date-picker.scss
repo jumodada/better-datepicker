@@ -10,7 +10,8 @@ $border-radius: 5px;
 $shadow-color: #737373;
 $shadow: 0 1px 6px $shadow-color;
 $transition: .3s all ease;
-
+$content-width: 300px;
+$table-width: $content-width - 30px;
 .better-datepicker {
   &-wrapper {
     margin: 0;
@@ -25,12 +26,12 @@ $transition: .3s all ease;
     }
     table{
       text-align: center;
-      width: 270px;
+      width: $table-width;
       table-layout: fixed;
     }
   }
   &-content{
-    padding: 17px 14px;
+    padding: 7px 14px 17px;
   }
 
   &-range-wrapper{
@@ -45,6 +46,7 @@ $transition: .3s all ease;
   }
 
   &-header {
+    width: $content-width;
     height: 50px;
     font-weight: 500;
     font-size: 16px;
