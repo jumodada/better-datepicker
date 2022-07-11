@@ -113,7 +113,6 @@ export interface CreateElementOptions {
   event: eventHandler | _EventListener[]
   style: StyleOption
   children: (CreateElementRequiredOptions | CreateElement)[]
-  hidden: boolean
   componentType: 'start' | 'end'
   watch: (() => void)[]
 }

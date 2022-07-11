@@ -68,7 +68,6 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
         })
       }
     },
-    hidden: (val) => hidden(el, val),
     watch(val) {
       val.flat().forEach((v) => effect(v))
     },
@@ -114,18 +113,17 @@ export function createElement(
   }
   const el = createEL(opt.name)
   const handlers = getHandler(el, state)
-  objectKeys(opt).forEach((key) => {
-    const handler = handlers[key]
-    if (isFunc(handler)) {
-      handler(opt[key as never], opt.componentType ?? componentType)
-    }
-  })
+  // 确保 watch 是最先执行， children 是最后执行
+  objectKeys(opt)
+    .sort()
+    .reverse()
+    .forEach((key) => {
+      const handler = handlers[key]
+      if (isFunc(handler)) {
+        handler(opt[key as never], opt.componentType ?? componentType)
+      }
+    })
   return el
-}
-
-export function hidden(el: HTMLElement, vis: boolean): void {
-  if (!vis) return
-  el.style.display = 'none'
 }
 
 export function appendChild(

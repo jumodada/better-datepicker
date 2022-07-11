@@ -94,14 +94,12 @@ export function createPicker(state: State): void {
   const { children, watch } = pickersMap[state.type]
   state.popover = createElement(
     {
-      class: state.classes.concat(['wrapper']),
       children,
-      hidden: true,
       style: {
-        display: 'inline-block',
         position: 'absolute',
         zIndex: state.zIndex,
       },
+      class: state.classes.concat(['wrapper']),
       watch: watch.concat(mixins),
     },
     state
