@@ -6,6 +6,7 @@ $text-tbody-color: #5f5f5f;
 $text-tbody-light-color: #bcbbbb;
 
 $border-color: #f1f0f0;
+$border-radius: 5px;
 $shadow-color: #737373;
 $shadow: 0 1px 6px $shadow-color;
 $transition: .3s all ease;
@@ -16,6 +17,7 @@ $transition: .3s all ease;
     font-size: 14px;
     background-color: #ffffff;
     box-shadow: $shadow;
+    border-radius:$border-radius;
     svg {
       fill: #858585;
       cursor: pointer;
@@ -23,12 +25,12 @@ $transition: .3s all ease;
     }
     table{
       text-align: center;
-      width: 320px;
+      width: 270px;
       table-layout: fixed;
     }
   }
   &-content{
-    padding: 15px 12px;
+    padding: 17px 14px;
   }
 
   &-range-wrapper{
@@ -73,7 +75,7 @@ $transition: .3s all ease;
     }
 
     td {
-      border-radius: 5px;
+      border-radius: $border-radius;
     }
   }
 
@@ -113,8 +115,8 @@ $transition: .3s all ease;
       text-align: center;
 
       div {
-        height: 36px;
-        line-height: 36px;
+        height: 31px;
+        line-height: 31px;
       }
     }
 
@@ -138,7 +140,7 @@ $transition: .3s all ease;
     div {
       color: white;
       background-color: $theme-color;
-      border-radius: 5px;
+      border-radius:$border-radius;
 
       &:hover {
         color: white !important;
@@ -150,8 +152,8 @@ $transition: .3s all ease;
     > div {
       color: white;
       background-color: $theme-color;
-      border-top-right-radius: 30px;
-      border-bottom-right-radius: 30px;
+      border-top-right-radius:$border-radius;
+      border-bottom-right-radius: $border-radius;
 
       &:hover {
         color: white;
@@ -163,8 +165,8 @@ $transition: .3s all ease;
     > div {
       color: white;
       background-color: $theme-color;
-      border-top-left-radius: 30px;
-      border-bottom-left-radius: 30px;
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
 
       &:hover {
         color: white;
@@ -244,7 +246,7 @@ $transition: .3s all ease;
     div {
       color: white;
       background-color: $theme-color;
-      border-radius: 5px;
+      border-radius: $border-radius;
 
       &:hover {
         color: white;
@@ -256,7 +258,7 @@ $transition: .3s all ease;
     div {
       color: white;
       background-color: $theme-color;
-      border-radius: 5px;
+      border-radius: $border-radius;
 
       &:hover {
         color: white;

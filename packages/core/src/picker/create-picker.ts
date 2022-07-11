@@ -15,15 +15,10 @@ import {
   updateYearCell,
 } from '../watch/cells'
 import { concat } from '../utils/extend'
-import {
-  CreateElement,
-  CreateElementOptions,
-  CreateElementRequiredOptions,
-} from '../types/utils'
-import { has } from '../utils/typeOf'
+import { CreateElement, CreateElementRequiredOptions } from '../types/utils'
 
-function rangeComponent(child: createMonthOrYearComponentsFunction) {
-  const children = createComponent([child])
+function rangeComponent(child: createMonthOrYearComponentsFunction[]) {
+  const children = createComponent(child)
   return [
     {
       class: ['range-wrapper'],
@@ -64,15 +59,15 @@ function createComponent(
 const updateDMY = () => [updateYearCell, updateMonthCell, updateDayCell]
 const pickersMap: PickerConfigMap = {
   date: {
-    children: concat(createComponent([Day]), [Month, Year]),
+    children: createComponent([Day, Month, Year]),
     watch: updateDMY(),
   },
   'date-range': {
-    children: concat(rangeComponent(Day), [Month, Year]),
+    children: rangeComponent([Day, Month, Year]),
     watch: concat(updateDMY(), panelLinkage),
   },
   week: {
-    children: concat(rangeComponent(Day), [Month, Year]),
+    children: rangeComponent([Day, Month, Year]),
     watch: updateDMY(),
   },
   month: {
@@ -80,7 +75,7 @@ const pickersMap: PickerConfigMap = {
     watch: [updateMonthCell, updateYearCell],
   },
   'month-range': {
-    children: rangeComponent(Month),
+    children: rangeComponent([Month]),
     watch: [updateMonthCell, panelLinkage],
   },
   year: {
@@ -88,7 +83,7 @@ const pickersMap: PickerConfigMap = {
     watch: [updateYearCell],
   },
   'year-range': {
-    children: rangeComponent(Year),
+    children: rangeComponent([Year]),
     watch: [updateYearCell, panelLinkage],
   },
 }
