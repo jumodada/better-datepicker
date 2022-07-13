@@ -3,7 +3,7 @@ import { State } from '../types/store'
 import { isDisabledDate } from './date'
 import { isObject } from './typeOf'
 
-export function getEventListener(
+export function useEventListener(
   el: HTMLElement | Window,
   eventName: eventType = 'click'
 ): _EventListener {

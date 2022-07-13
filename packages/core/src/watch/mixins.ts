@@ -1,15 +1,10 @@
 import { appendChild } from '../utils/element'
-import { findInputElement } from '../utils/findInputElement'
 import { updatePicker } from '../picker/update-picker'
 import { getDate, isAfter } from '../utils/date'
 import { getFormatDate } from '../utils/format'
 import { useEffect } from '../reactive/effect'
 import { extend } from '../utils/extend'
 import { has } from '../utils/typeOf'
-
-function options(): void {
-  this.reference && (this.reference.placeholder = this.placeholder)
-}
 
 function appendPopover(): void {
   if (this.popover === null) return
@@ -30,13 +25,6 @@ function dispatchDateChange(): void {
   }
 }
 
-function findReference(): void {
-  const { reference } = this
-  if (reference && !(reference instanceof HTMLInputElement)) {
-    this.reference = findInputElement(reference)
-  }
-}
-
 const hoverSelectRange = useEffect(
   function (start, end) {
     const range = [start, end]
@@ -47,7 +35,6 @@ const hoverSelectRange = useEffect(
 
 const hoverSelectedDate = useEffect(
   function (status) {
-    console.log(this)
     const [start, end] = this.hoverSelected.range
     if (status === 'complete') {
       this.start.date = start
@@ -75,6 +62,7 @@ const initial = useEffect(
     const [mode] = types
     this.mode = mode
     this.isRange = types.includes('range')
+    this.reference && (this.reference.placeholder = this.placeholder)
     if (has(type, 'week')) {
       this.format = this.locale.weekFormat
     }
@@ -84,10 +72,8 @@ const initial = useEffect(
 
 export default [
   initial,
-  options,
   appendPopover,
   updatePicker,
-  findReference,
   dispatchDateChange,
   hoverSelectRange,
   hoverSelectedDate,

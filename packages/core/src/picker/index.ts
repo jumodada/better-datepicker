@@ -2,12 +2,13 @@ import { createState, removeState } from '../store'
 import { State } from '../types/store'
 import { createPicker } from './create-picker'
 import { BetterPicker, BetterPickerInstance } from '../types/core'
-import { getEventListener } from '../utils/event'
+import { useEventListener } from '../utils/event'
 import { listenToScrollParents } from '../utils/listenToParents'
 import clickOutside from '../utils/clickoutside'
 import { Off } from '../types/event'
 import { Bind } from '../utils/bind'
 import { getDate } from '../utils/date'
+import { findInputElement } from '../utils/findInputElement'
 
 export default function Picker(): BetterPicker {
   let state: State
@@ -17,13 +18,18 @@ export default function Picker(): BetterPicker {
     state.visible = true
   }
 
-  function changePopoverVisible() {
-    if (!state.reference) return
-    ;[onRef, offRef] = getEventListener(state.reference)
-    ;[onBody, offBody] = getEventListener(document.body)
+  function mounted() {
+    const { reference } = state
+    if (!reference) return
+    if (!(reference instanceof HTMLInputElement)) {
+      state.reference = findInputElement(reference)
+    }
+    ;[onRef, offRef] = useEventListener(state.reference as HTMLElement)
+    ;[onBody, offBody] = useEventListener(document.body)
     onRef(open)
     onBody(Bind(clickOutside, state))
     if (state) listenToScrollParents(state)
+    createPicker(state)
   }
 
   function getCurrentDate() {
@@ -57,8 +63,7 @@ export default function Picker(): BetterPicker {
       update,
       destroyed,
     })
-    changePopoverVisible()
-    createPicker(state)
+    mounted()
   }
 
   function clear(): void {
