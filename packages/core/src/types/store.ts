@@ -28,12 +28,14 @@ export interface CellsData {
 export interface MonthType<T = unknown, U = unknown> {
   date: T
   'date-range': T
+  'date-week': T
   month: T
   'month-range': T | U
 }
 export interface YearType<T = unknown, U = unknown> {
   date: T
   'date-range': T
+  'date-week': T
   year: T
   month: T
   'year-range': T | U
@@ -114,6 +116,7 @@ export interface State {
   classes: string[]
   type: keyof PickersMap
   isRange: boolean
+  isWeek: boolean
   unlinkPanels: boolean
   offset: number
   zIndex: number

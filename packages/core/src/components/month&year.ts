@@ -12,28 +12,33 @@ import { CreateElementRequiredOptions } from '../types/utils'
 import map from '../utils/for'
 import { getTenYearTimeRange } from '../utils/date'
 import { Bind } from '../utils/bind'
+import { extend } from '../utils/extend'
 
 const rows = 3
 const cols = 4
 
-function monthEvent(state: CellsData): MonthEvent {
+function dateEvent(state: CellsData, handleFn: () => any) {
   return {
-    date: Bind(dayMode, state),
-    'date-range': Bind(dayMode, state),
-    'month-range': handleRange(state),
-    month: Bind(selectYM, [state, 'month']),
+    date: handleFn,
+    'date-range': handleFn,
+    'date-week': handleFn,
   }
+}
+
+function monthEvent(state: CellsData): MonthEvent {
+  return extend(dateEvent(state, Bind(dayMode, state)), {
+    month: Bind(selectYM, [state, 'month']),
+    'month-range': handleRange(state),
+  })
 }
 
 function yearEvent(state: CellsData): YearEvent {
   const toggleMonth = Bind(monthMode, state)
-  return {
-    date: toggleMonth,
-    'date-range': toggleMonth,
+  return extend(dateEvent(state, toggleMonth), {
     month: toggleMonth,
     year: Bind(selectYM, [state, 'year']),
     'year-range': handleRange(state),
-  }
+  })
 }
 
 export function YM(

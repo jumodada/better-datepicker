@@ -65,6 +65,7 @@ let defaultOption: State = {
   placeholder: '',
   type: 'date',
   isRange: false,
+  isWeek: false,
   zIndex: 2000,
   unlinkPanels: false,
   format: 'yyyy/MM/dd',

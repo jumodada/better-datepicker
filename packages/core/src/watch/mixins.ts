@@ -49,9 +49,6 @@ const restartPicker = useEffect(
   function (type) {
     this.destroyed()
     this.create(extend(this, { type }))
-    if (has(type, 'week')) {
-      this.format = this.locale.weekFormat
-    }
   },
   ['type']
 )
@@ -62,8 +59,11 @@ const initial = useEffect(
     const [mode] = types
     this.mode = mode
     this.isRange = types.includes('range')
+    this.isWeek = has(type, 'week')
     this.reference && (this.reference.placeholder = this.placeholder)
-    if (has(type, 'week')) {
+
+    //todo 抽离这段逻辑到 week 专属的监听部分
+    if (this.isWeek) {
       this.format = this.locale.weekFormat
     }
   },
