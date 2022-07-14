@@ -180,19 +180,21 @@ export function getWeeks<S = number>(weekdays: S[], weekStart: number): S[] {
 }
 
 export function getWeekRange(date: Date, weekStart: number): WeekRange {
-  // const weeks = getWeeks(defaultWeeks, weekStart)
-  // const startDiff = weeks.findIndex((week) => week === (d as Date).getDay())
-  // const endDiff = 6 - startDiff
-  return {
-    end: {
+  const weeks = getWeeks(defaultWeeks, weekStart)
+  const startDiff = weeks.findIndex((week) => week === (date as Date).getDay())
+  const endDiff = 6 - startDiff
+  console.log(startDiff)
+  console.log(endDiff)
+  return [
+    {
       year: 2021,
       month: 10,
       day: 1,
     },
-    start: {
+    {
       year: 2021,
       month: 11,
       day: 1,
     },
-  }
+  ]
 }

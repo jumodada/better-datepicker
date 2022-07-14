@@ -39,6 +39,7 @@ export function getFormatDate(
     // if (has(format, 'w') && isDate(dateStr)) {
     //   dateStr = getWeekRange(dateStr, locale.weekStart).start
     // }
+    getWeekRange(dateStr, locale.weekStart)
     return formatStr.replace(token, (val) => {
       return formats[val as 'dd'](new Date(dateStr.toString()), locale)
     })

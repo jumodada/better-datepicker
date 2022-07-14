@@ -125,7 +125,4 @@ export type Handler = {
   [K in keyof CreateElementOptions]: HandlerCb<CreateElementOptions[K]>
 }
 
-export interface WeekRange {
-  start: CellsData['date']
-  end: CellsData['date']
-}
+export type WeekRange<R = CellsData['date']> = [R, R]
