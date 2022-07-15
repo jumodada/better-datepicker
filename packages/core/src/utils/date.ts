@@ -5,7 +5,7 @@ import { LocaleConfig } from '../types/store'
 import { WeekRange } from '../types/utils'
 import { GetDateType } from '../types/core'
 
-const msInADay = 86400000
+const msOfADay = 86400000
 
 const defaultWeeks = [0, 1, 2, 3, 4, 5, 6]
 

@@ -1,12 +1,17 @@
 import { isElementShow } from '../utils/element'
-import { handleRange, selectYM, dayMode, monthMode } from '../method'
+import {
+  getRangeModeListener,
+  selectYearOrMonth,
+  toggleToDayMode,
+  toggleMonthMode,
+} from '../method'
 import { CellsData, RangeType, State } from '../types/store'
 import {
   ComponentsType,
   createMonthOrYearComponentsFunction,
   CreateMonthOrYearComponentsOptions,
-  MonthEvent,
-  YearEvent,
+  MonthCellListener,
+  YearCellListener,
 } from '../types/components'
 import { CreateElementRequiredOptions } from '../types/utils'
 import map from '../utils/for'
@@ -17,7 +22,7 @@ import { extend } from '../utils/extend'
 const rows = 3
 const cols = 4
 
-function dateEvent(state: CellsData, handleFn: () => any) {
+function dateCellListener(state: CellsData, handleFn: () => any) {
   return {
     date: handleFn,
     'date-range': handleFn,
@@ -25,19 +30,19 @@ function dateEvent(state: CellsData, handleFn: () => any) {
   }
 }
 
-function monthEvent(state: CellsData): MonthEvent {
-  return extend(dateEvent(state, Bind(dayMode, state)), {
-    month: Bind(selectYM, [state, 'month']),
-    'month-range': handleRange(state),
+function monthCellListener(state: CellsData): MonthCellListener {
+  return extend(dateCellListener(state, Bind(toggleToDayMode, state)), {
+    month: Bind(selectYearOrMonth, [state, 'month']),
+    'month-range': getRangeModeListener(state),
   })
 }
 
-function yearEvent(state: CellsData): YearEvent {
-  const toggleMonth = Bind(monthMode, state)
-  return extend(dateEvent(state, toggleMonth), {
+function yearCellListener(state: CellsData): YearCellListener {
+  const toggleMonth = Bind(toggleMonthMode, state)
+  return extend(dateCellListener(state, toggleMonth), {
     month: toggleMonth,
-    year: Bind(selectYM, [state, 'year']),
-    'year-range': handleRange(state),
+    year: Bind(selectYearOrMonth, [state, 'year']),
+    'year-range': getRangeModeListener(state),
   })
 }
 
@@ -50,11 +55,13 @@ export function YM(
   ): CreateElementRequiredOptions {
     const components: CreateMonthOrYearComponentsOptions = {
       month: {
-        listener: (child, state) => monthEvent(child)[state.type as 'date'],
+        listener: (child, state) =>
+          monthCellListener(child)[state.type as 'date'],
         children: (idx) => [{ text: state.locale.months[idx] }],
       },
       year: {
-        listener: (child, state) => yearEvent(child)[state.type as 'date'],
+        listener: (child, state) =>
+          yearCellListener(child)[state.type as 'date'],
         children: (idx: number) => [
           {
             text() {

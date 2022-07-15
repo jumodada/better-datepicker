@@ -103,5 +103,5 @@ export function createPicker(state: State): void {
       watch: watch.concat(mixins),
     },
     state
-  ) as HTMLElement
+  )
 }

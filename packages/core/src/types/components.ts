@@ -21,11 +21,11 @@ export type PickerConfigMap = PickersMap<{
 
 type EventMethod = (this: State) => void
 
-export type DayEvent = DateType<EventMethod, _EventListener[]>
+export type DateCellListener = DateType<EventMethod, _EventListener[]>
 
-export type MonthEvent = MonthType<EventMethod, _EventListener[]>
+export type MonthCellListener = MonthType<EventMethod, _EventListener[]>
 
-export type YearEvent = YearType<EventMethod, _EventListener[]>
+export type YearCellListener = YearType<EventMethod, _EventListener[]>
 
 export interface RangeClickEvent {
   complete: {

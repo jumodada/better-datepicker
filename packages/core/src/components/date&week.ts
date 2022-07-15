@@ -1,9 +1,9 @@
 import { CellsData, RangeType, State } from '../types/store'
-import { handleRange } from '../method'
+import { getRangeModeListener } from '../method'
 import { CreateElementRequiredOptions } from '../types/utils'
 import map from '../utils/for'
 import { getWeeks, isInRange, isSame } from '../utils/date'
-import { DayEvent } from '../types/components'
+import { DateCellListener } from '../types/components'
 import { classNames } from '../utils/attribute'
 import { isElementShow } from '../utils/element'
 
@@ -14,7 +14,7 @@ export function Day(
   state: State,
   type: keyof RangeType = 'start'
 ): CreateElementRequiredOptions {
-  function dayEvent(childState: CellsData): DayEvent {
+  function dateCellListener(childState: CellsData): DateCellListener {
     function dateWeek() {
       state.start.date = childState.date
       state.visible = false
@@ -22,7 +22,7 @@ export function Day(
 
     return {
       date: dateWeek,
-      'date-range': handleRange(childState),
+      'date-range': getRangeModeListener(childState),
       'date-week': dateWeek,
     }
   }
@@ -69,7 +69,7 @@ export function Day(
             'range-end': () =>
               isInCurrentRange() && isSame(child.date, hoverSelected.range[1]),
           }),
-          event: dayEvent(child)[state.type as 'date'],
+          event: dateCellListener(child)[state.type as 'date'],
         }
       }, colsCount)
     }

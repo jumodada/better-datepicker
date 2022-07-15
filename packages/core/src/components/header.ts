@@ -1,5 +1,5 @@
 import { isElementShow } from '../utils/element'
-import { canIShow, monthMode, yearMode } from '../method'
+import { isShow, toggleMonthMode, toggleYearMode } from '../method'
 import { State, RangeType } from '../types/store'
 import {
   getDateOfNextMonth,
@@ -69,7 +69,7 @@ export function Header(
       name: 'monthIcon',
       style: SVGStyleGenerator({
         left: '50px',
-        display: canIShow(state),
+        display: isShow(state),
       }),
       event: Bind(preMonth, type),
     }
@@ -93,7 +93,7 @@ export function Header(
       style: SVGStyleGenerator({
         right: '50px',
         transform: 'rotate(180deg)',
-        display: canIShow(state),
+        display: isShow(state),
       }),
       event: Bind(nextMonth, type),
     }
@@ -108,7 +108,7 @@ export function Header(
       style: {
         display: () => isElementShow(state.mode === 'year' && type === 'start'),
       },
-      event: Bind(yearMode, type),
+      event: Bind(toggleYearMode, type),
     }
   }
 
@@ -119,7 +119,7 @@ export function Header(
         return String(state[type].year)
       },
       class: ['pointerCursor'],
-      event: Bind(yearMode, type),
+      event: Bind(toggleYearMode, type),
       style: {
         display: () => isElementShow(state.mode !== 'year'),
       },
@@ -133,7 +133,7 @@ export function Header(
         return state.locale.months[state[type].month - 1]
       },
       class: ['pointerCursor'],
-      event: Bind(monthMode, type),
+      event: Bind(toggleMonthMode, type),
       style: {
         display: () => isElementShow(state.mode !== 'year'),
       },

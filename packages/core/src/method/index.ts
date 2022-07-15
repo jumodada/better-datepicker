@@ -14,7 +14,7 @@ const rangeClickEvent: RangeClickEvent = {
   },
 }
 
-export function handleRange(state: CellsData): _EventListener[] {
+export function getRangeModeListener(state: CellsData): _EventListener[] {
   return [
     {
       name: 'click',
@@ -37,29 +37,31 @@ export function handleRange(state: CellsData): _EventListener[] {
   ]
 }
 
-export function selectYM(state: CellsData, name: 'year' | 'month'): void {
+export function selectYearOrMonth(
+  state: CellsData,
+  name: 'year' | 'month'
+): void {
   const { date } = state
   this.start[name] = date[name]
   this.start.date = date
   this.visible = false
 }
 
-export function dayMode(state: CellsData): void {
-  console.log(state)
+export function toggleToDayMode(state: CellsData): void {
   this.start.month = state.date.month
   this.mode = 'date'
 }
 
-export function yearMode(): void {
+export function toggleYearMode(): void {
   this.mode = 'year'
 }
 
-export function monthMode(state: CellsData): void {
+export function toggleMonthMode(state: CellsData): void {
   const { date } = state
   if (date) this.start.year = date.year
   this.mode = 'month'
 }
 
-export function canIShow(state: State) {
+export function isShow(state: State) {
   return () => isElementShow(state.mode === 'date')
 }

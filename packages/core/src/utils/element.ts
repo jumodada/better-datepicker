@@ -107,7 +107,7 @@ export function createElement(
   opt: PartialAtLeastOne<CreateElementOptions> | CreateElement,
   state: State,
   componentType: 'start' | 'end' = 'start'
-): Node {
+): HTMLElement {
   if (isFunc<PartialAtLeastOne<CreateElementOptions>>(opt)) {
     return createElement(opt(state, componentType), state, componentType)
   }
