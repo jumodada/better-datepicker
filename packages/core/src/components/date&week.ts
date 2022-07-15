@@ -2,7 +2,7 @@ import { CellsData, RangeType, State } from '../types/store'
 import { getRangeModeListener } from '../method'
 import { CreateElementRequiredOptions } from '../types/utils'
 import map from '../utils/for'
-import { getWeeks, isInRange, isSame } from '../utils/date'
+import { getWeekArray, isInRange, isSame } from '../utils/date'
 import { DateCellListener } from '../types/components'
 import { classNames } from '../utils/attribute'
 import { isElementShow } from '../utils/element'
@@ -84,7 +84,7 @@ export function Day(
     const { weekStart, weekdays } = state.locale
     return {
       name: 'thead',
-      children: getWeeks<string>(weekdays, weekStart).map((name) => {
+      children: getWeekArray<string>(weekdays, weekStart).map((name) => {
         return { text: name, name: 'th' }
       }),
     }

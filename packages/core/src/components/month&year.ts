@@ -64,9 +64,7 @@ export function YM(
           yearCellListener(child)[state.type as 'date'],
         children: (idx: number) => [
           {
-            text() {
-              return String(getTenYearTimeRange(state[t].year)[idx])
-            },
+            text: () => String(getTenYearTimeRange(state[t].year)[idx]),
           },
         ],
       },

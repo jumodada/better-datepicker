@@ -1,6 +1,6 @@
 import { Formats } from '../types/core'
 import { has, isArray, isDate } from './typeOf'
-import { getDay, getMonth, getWeekRange, getYear, getYearWeek } from './date'
+import { getDay, getMonth, getWeekRange, getYear, getWeeks } from './date'
 import { DateType } from '../types/utils'
 import { State } from '../types/store'
 
@@ -13,8 +13,8 @@ const formats: Formats = {
   MM: (date: Date) => pad(getMonth(date)),
   yy: (date: Date) => String(getYear(date)).substr(2),
   yyyy: (date: Date) => getYear(date),
-  w: (date: Date, locale) => getYearWeek(date, locale),
-  ww: (date: Date, locale) => getYearWeek(date, locale),
+  w: (date: Date, locale) => getWeeks(date, locale),
+  ww: (date: Date, locale) => getWeeks(date, locale),
 }
 
 function pad(val: string | number, len?: number) {
@@ -39,7 +39,7 @@ export function getFormatDate(
     // if (has(format, 'w') && isDate(dateStr)) {
     //   dateStr = getWeekRange(dateStr, locale.weekStart).start
     // }
-    getWeekRange(dateStr, locale.weekStart)
+    // getWeekRange(dateStr, locale.weekStart)
     return formatStr.replace(token, (val) => {
       return formats[val as 'dd'](new Date(dateStr.toString()), locale)
     })

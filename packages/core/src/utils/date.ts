@@ -154,7 +154,7 @@ export function isDisabledDate(state: State, date: string): string {
   return disabledDate && disabledDate(new Date(date)) ? 'disabled' : ''
 }
 
-export function getYearWeek(date: Date, locale: LocaleConfig): number {
+export function getWeeks(date: Date, locale: LocaleConfig): number {
   // const { year, month, day } = transformDateToObject(date)
   // const { yearStart, weekStart } = locale
   // const { start, end } = getWeekRange(date, weekStart)
@@ -167,24 +167,35 @@ export function getYearWeek(date: Date, locale: LocaleConfig): number {
   // const days = Math.round((YearEnd.valueOf() - YearStart.valueOf()) / msInADay)
   // const diff = (days + (YearStart.getDay() + 1 - 1)) / 7
   // if (diff <= 0) {
-  //   return getYearWeek(start, locale)
+  //   return getWeeks(start, locale)
   // }
   // return Math.ceil(diff)
   return 1
 }
 
-export function getWeeks<S = number>(weekdays: S[], weekStart: number): S[] {
+export function getWeekArray<S = number>(
+  weekdays: S[],
+  weekStart: number
+): S[] {
   return weekdays
     .slice(weekStart, weekdays.length)
     .concat(weekdays.slice(0, weekStart))
 }
 
 export function getWeekRange(date: Date, weekStart: number): WeekRange {
-  const weeks = getWeeks(defaultWeeks, weekStart)
+  const weeks = getWeekArray(defaultWeeks, weekStart)
   const startDiff = weeks.findIndex((week) => week === (date as Date).getDay())
   const endDiff = 6 - startDiff
-  console.log(startDiff)
-  console.log(endDiff)
+  console.log(
+    transformDateToObject(
+      new Date(Date.parse(date.toString()) - msOfADay * startDiff)
+    )
+  )
+  console.log(
+    transformDateToObject(
+      new Date(Date.parse(date.toString()) + msOfADay * endDiff)
+    )
+  )
   return [
     {
       year: 2021,
