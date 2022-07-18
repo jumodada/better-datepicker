@@ -1,4 +1,4 @@
-import { createState, removeState } from '../store'
+import { createState } from '../store'
 import { State } from '../types/store'
 import { createPicker } from './create-picker'
 import { BetterPicker, BetterPickerInstance } from '../types/core'
@@ -9,6 +9,7 @@ import { Off } from '../types/event'
 import { Bind } from '../utils/bind'
 import { getDate } from '../utils/date'
 import { findInputElement } from '../utils/findInputElement'
+import { extend } from '../utils/extend'
 
 export default function Picker(): BetterPicker {
   let state: State
@@ -54,11 +55,11 @@ export default function Picker(): BetterPicker {
     removePopover()
     offBody()
     offRef()
-    removeState(state.id)
+    state = null!
   }
 
   function create(options: Partial<State>): void {
-    state = Object.assign(createState(options), {
+    state = extend(createState(options), {
       create,
       update,
       destroyed,
@@ -77,7 +78,6 @@ export default function Picker(): BetterPicker {
   return function (options: Partial<State>): BetterPickerInstance {
     create(options)
     return {
-      id: state.id,
       state,
       getCurrentDate,
       update,

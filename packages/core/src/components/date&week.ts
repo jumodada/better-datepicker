@@ -89,6 +89,7 @@ export function Day(
       }),
     }
   }
+
   return {
     class: classNames('date'),
     children: [

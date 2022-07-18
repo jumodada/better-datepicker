@@ -32,6 +32,7 @@ export interface MonthType<T = unknown, U = unknown> {
   month: T
   'month-range': T | U
 }
+
 export interface YearType<T = unknown, U = unknown> {
   date: T
   'date-range': T
@@ -40,6 +41,7 @@ export interface YearType<T = unknown, U = unknown> {
   month: T
   'year-range': T | U
 }
+
 export interface DateType<T = unknown, U = unknown> {
   date: T
   'date-week': T
@@ -96,7 +98,6 @@ export interface Range extends RangeType<CellsData['date'] | null> {
 export type mode = 'date' | 'year' | 'month'
 
 export interface State {
-  id: number
   reference: HTMLInputElement | null
   popover: HTMLElement | null
   onChange?: Callback
@@ -133,5 +134,5 @@ export interface State {
 }
 
 export interface States {
-  [key: number]: State
+    [key: number]: State
 }

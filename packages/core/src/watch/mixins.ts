@@ -3,7 +3,6 @@ import { updatePicker } from '../picker/update-picker'
 import { getDate, isAfter } from '../utils/date'
 import { getFormatDate } from '../utils/format'
 import { useEffect } from '../reactive/effect'
-import { extend } from '../utils/extend'
 import { has } from '../utils/typeOf'
 
 function appendPopover(): void {
@@ -46,11 +45,11 @@ const hoverSelectedDate = useEffect(
 )
 
 const restartPicker = useEffect(
-  function (type) {
+  function (type, reference) {
     this.destroyed()
-    this.create(extend(this, { type }))
+    this.create({ reference, type })
   },
-  ['type']
+  ['type', 'reference']
 )
 
 const initial = useEffect(
@@ -72,10 +71,10 @@ const initial = useEffect(
 
 export default [
   initial,
+  restartPicker,
   appendPopover,
   updatePicker,
   dispatchDateChange,
   hoverSelectRange,
   hoverSelectedDate,
-  restartPicker,
 ]

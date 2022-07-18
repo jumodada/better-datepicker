@@ -1,37 +1,109 @@
-import { State, States } from '../types/store'
-import { initState } from './state'
-import { objectKeys } from '../utils/objectKeys'
+import {
+  getDateOfNextMonth,
+  getMonth,
+  getYear,
+  transformDateToObject,
+} from '../utils/date'
+import { CellsData, DateData, LocaleConfig, State } from '../types/store'
+import map from '../utils/for'
+import { reactive } from '../reactive'
 
-const Store = (function () {
-  let id = 0
-  const states: States = {}
+const createCellsData = (length: number): CellsData[] =>
+  map(
+    () => ({
+      status: 'none',
+      date: transformDateToObject(),
+    }),
+    length
+  )
 
-  function getState() {
-    return states[id]
-  }
+function rangeComponents(date: CellsData['date']): DateData {
+  return Object.assign(date, {
+    date: transformDateToObject(),
+    _date: createCellsData(42),
+    _month: createCellsData(12),
+    _year: createCellsData(12),
+  })
+}
 
-  function removeState(id: number) {
-    delete states[id]
-  }
+let locale: LocaleConfig = {
+  name: 'en',
+  weekStart: 0,
+  weekdays: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+  months: [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ],
+  yearFormat: 'yyyy',
+  weekFormat: 'yyyy-wwth',
+  yearStart: 1,
+}
 
-  function createState(options: Partial<State>): State {
-    return (states[id] = initState(options, id))
-  }
+export function pickerLocale(config: LocaleConfig): void {
+  locale = Object.assign({}, config)
+}
 
-  function runDestroyed(state: State) {
-    ;(state as State)?.destroyed?.()
-  }
+const date = new Date()
+const [startYear, startMonth] = [getYear(date), getMonth(date)]
 
-  function destroyed(partialStates?: State[]) {
-    if (partialStates) {
-      partialStates.forEach((state) => runDestroyed(states[state.id]))
-    } else {
-      objectKeys(states).forEach((key) => runDestroyed(states[key]))
-      id = 0
-    }
-  }
+let defaultOption: State = {
+  start: rangeComponents(transformDateToObject()),
+  end: rangeComponents(getDateOfNextMonth(startYear, startMonth)),
+  today: new Date(), //todo
+  placement: 'bottom',
+  placeholder: '',
+  type: 'date',
+  isRange: false,
+  isWeek: false,
+  zIndex: 2000,
+  unlinkPanels: false,
+  format: 'yyyy/MM/dd',
+  offset: 12,
+  mode: 'date',
+  insertTo: 'body',
+  binding: true,
+  disabled: false,
+  disabledDate: null,
+  themeColor: '',
+  rangeBgColor: '',
+  tdColor: '',
+  thColor: '',
+  style: {},
+  classes: [],
+  date: null,
+  visible: false,
+  locale,
+  reference: null,
+  popover: null,
+  hoverSelected: {
+    start: null,
+    end: null,
+    range: [],
+    status: 'complete',
+  },
+}
 
-  return { createState, getState, removeState, destroyed }
-})()
+function createOptions(options: Partial<State>): State {
+  const type = options.type ?? defaultOption.type
+  return Object.assign({}, defaultOption, options, {
+    type,
+  })
+}
 
-export const { createState, getState, removeState, destroyed } = Store
+export function changeDefaultOption(target: State): void {
+  defaultOption = Object.assign(defaultOption, target)
+}
+
+export function createState(options: Partial<State>): State {
+  return reactive(createOptions(options))
+}

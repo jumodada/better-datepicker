@@ -1,12 +1,12 @@
 import { has, isArray, isFunc, isString } from './typeOf'
 import { on } from './event'
 import {
+  _EventListener,
+  CreateElement,
   CreateElementOptions,
   eventHandler,
   eventType,
   Handler,
-  _EventListener,
-  CreateElement,
   PartialAtLeastOne,
 } from '../types/utils'
 import { State } from '../types/store'
@@ -21,6 +21,7 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
   return {
     event(val) {
       const { themeColor } = state
+
       function addListener(listener: _EventListener[] | Callback): void {
         if (isArray<{ name: eventType; handler: eventHandler }>(listener)) {
           listener.forEach((e) => on(el, e.handler, e.name, state))
@@ -28,6 +29,7 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
           on(el, listener, 'click', state)
         }
       }
+
       addListener(val)
       if (themeColor) {
         resetHoverColor(el, themeColor)
@@ -44,7 +46,7 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
       } else {
         effect(() => {
           setClasses(el, val())
-        })
+        }, state)
       }
     },
     style: (val) => {
@@ -53,7 +55,7 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
         if (isFunc(style)) {
           effect(() => {
             el.style[key] = style(state)
-          })
+          }, state)
         } else {
           el.style[key] = style as string
         }
@@ -65,11 +67,11 @@ function getHandler(el: HTMLElement, state: State): Partial<Handler> {
       } else {
         effect(() => {
           el.innerText = String(val.call(state))
-        })
+        }, state)
       }
     },
     watch(val) {
-      val.flat().forEach((v) => effect(v))
+      val.flat().forEach((v) => effect(v, state))
     },
   }
 }

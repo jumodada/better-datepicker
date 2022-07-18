@@ -1,7 +1,6 @@
 import { createDep } from './dep'
 import { queueWatcher } from './scheduler'
 import { Fn, UtilObject } from '../types/utils'
-import { getState } from '../store'
 import { State } from '../types/store'
 import { isFunc } from '../utils/typeOf'
 
@@ -35,8 +34,7 @@ export function trigger(target: UtilObject, key: keyof UtilObject): void {
   })
 }
 
-export function effect(fn: Fn): void {
-  const state = getState()
+export function effect(fn: Fn, state: State): void {
   fn = fn.bind(state)
   activeEffect = fn
   const res = fn()
@@ -63,7 +61,7 @@ export function useEffect(fn: Fn, ...depsArray: string[][]): Fn {
         activeEffect = run
         getter()
         return fn.name ? run : null
-      })
+      }, this)
     })
   }
 }
