@@ -14,7 +14,8 @@ module.exports = {
   rules: {
     'prefer-rest-params': 'off',
     semi: [0],
-    'no-extra-semi': 2,
-    '@typescript-eslint/no-var-requires': 0
+    'no-extra-semi': 'warn',
+    '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
 }
