@@ -6,6 +6,7 @@ import {
 } from '../utils/date'
 import { CellsData, DateData, LocaleConfig, State } from '../types/store'
 import map from '../utils/for'
+import { extend, merge, mergePrimitiveValues } from '../utils/extend'
 import { reactive } from '../reactive'
 
 const createCellsData = (length: number): CellsData[] =>
@@ -26,7 +27,7 @@ function rangeComponents(date: CellsData['date']): DateData {
   })
 }
 
-let locale: LocaleConfig = {
+const locale: LocaleConfig = {
   name: 'en',
   weekStart: 0,
   weekdays: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
@@ -50,16 +51,14 @@ let locale: LocaleConfig = {
 }
 
 export function pickerLocale(config: LocaleConfig): void {
-  locale = Object.assign({}, config)
+  extend(locale, config)
 }
 
 const date = new Date()
 const [startYear, startMonth] = [getYear(date), getMonth(date)]
 
-let defaultOption: State = {
-  start: rangeComponents(transformDateToObject()),
-  end: rangeComponents(getDateOfNextMonth(startYear, startMonth)),
-  today: new Date(), //todo
+const pickerConfig = {
+  today: new Date(),
   placement: 'bottom',
   placeholder: '',
   type: 'date',
@@ -78,32 +77,32 @@ let defaultOption: State = {
   rangeBgColor: '',
   tdColor: '',
   thColor: '',
-  style: {},
-  classes: [],
   date: null,
   visible: false,
-  locale,
   reference: null,
   popover: null,
-  hoverSelected: {
-    start: null,
-    end: null,
-    range: [],
-    status: 'complete',
-  },
 }
 
-function createOptions(options: Partial<State>): State {
-  const type = options.type ?? defaultOption.type
-  return Object.assign({}, defaultOption, options, {
-    type,
+function getDefaultOptions() {
+  return merge(pickerConfig, {
+    style: {},
+    classes: [],
+    locale,
+    hoverSelected: {
+      start: null,
+      end: null,
+      range: [],
+      status: 'complete',
+    },
+    start: rangeComponents(transformDateToObject()),
+    end: rangeComponents(getDateOfNextMonth(startYear, startMonth)),
   })
 }
 
-export function changeDefaultOption(target: State): void {
-  defaultOption = Object.assign(defaultOption, target)
+export function createState(options: Partial<State>): State {
+  return reactive(mergePrimitiveValues(getDefaultOptions(), options))
 }
 
-export function createState(options: Partial<State>): State {
-  return reactive(createOptions(options))
+export function changeDefaultOption(target: State): void {
+  extend(pickerConfig, target)
 }

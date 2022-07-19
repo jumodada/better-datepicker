@@ -4,10 +4,6 @@ const toString = Object.prototype.toString
 const typeOf = (val: unknown, typeName: keyof Types) =>
   has(toString.call(val), typeName)
 
-export function isNumber(val: unknown): val is number {
-  return typeOf(val, 'Number') && !Number.isNaN(val)
-}
-
 export function isObject<T = UtilObject>(val: unknown): val is T {
   return typeOf(val, 'Object')
 }
@@ -27,8 +23,8 @@ export function isString(val: unknown): val is string {
   return typeOf(val, 'String')
 }
 
-export function isBoolean(val: unknown): val is boolean {
-  return typeOf(val, 'Boolean')
+export function isNotObject(val: unknown): boolean {
+  return !(isObjectOrArray(val) || isFunc(val))
 }
 
 export function isArray<T = unknown>(val: unknown): val is T[] {

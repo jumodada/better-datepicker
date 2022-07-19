@@ -45,9 +45,9 @@ const hoverSelectedDate = useEffect(
 )
 
 const restartPicker = useEffect(
-  function (type, reference) {
+  function () {
     this.destroyed()
-    this.create({ reference, type })
+    this.create(this)
   },
   ['type', 'reference']
 )

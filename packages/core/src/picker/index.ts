@@ -38,7 +38,7 @@ export default function Picker(): BetterPicker {
   }
 
   function update(options: Partial<State>) {
-    state = Object.assign(state, options)
+    extend(state, options)
   }
 
   function removePopover(): void {
