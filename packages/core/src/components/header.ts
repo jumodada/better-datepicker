@@ -1,11 +1,7 @@
 import { isElementShow } from '../utils/element'
 import { isShow, toggleMonthMode, toggleYearMode } from '../method'
-import { State, RangeType } from '../types/store'
-import {
-  getDateOfNextMonth,
-  getDateOfPreMonth,
-  getTenYearTimeRange,
-} from '../utils/date'
+import { RangeType, State } from '../types/store'
+import { getDateOfNextMonth, getTenYearTimeRange } from '../utils/date'
 import { CreateElementRequiredOptions, StyleOption } from '../types/utils'
 import { Bind } from '../utils/bind'
 import { getFormatDate } from '../utils/format'
@@ -52,8 +48,8 @@ export function Header(
 
   function preMonth(): void {
     const child = state[type]
-    const { month, year } = getDateOfPreMonth(child)
-    ;[child.month, child.year] = [month, year]
+    // const { month, year } = getDateOfPreMonth(child)
+    // ;[child.month, child.year] = [month, year]
   }
 
   function preYearIcon(): CreateElementRequiredOptions {
@@ -139,6 +135,7 @@ export function Header(
       },
     }
   }
+
   return {
     class: ['header'],
     children: [
