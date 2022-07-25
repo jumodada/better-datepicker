@@ -104,4 +104,7 @@ export function createPicker(state: State): void {
     },
     state
   )
+  setInterval(() => {
+    console.log(state)
+  }, 3000)
 }

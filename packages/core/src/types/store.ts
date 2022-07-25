@@ -109,7 +109,7 @@ export interface State {
   hoverSelected: Range
   start: DateData
   end: DateData
-  today: Date
+  today: CellsData['date']
   date: string | string[] | null
   placement: Placement
   placeholder: string

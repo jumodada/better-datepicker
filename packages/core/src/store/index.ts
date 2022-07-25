@@ -1,8 +1,8 @@
 import {
+  dateToObject,
   getDateOfNextMonth,
   getMonth,
   getYear,
-  transformDateToObject,
 } from '../utils/date'
 import { CellsData, DateData, LocaleConfig, State } from '../types/store'
 import map from '../utils/for'
@@ -13,14 +13,14 @@ const createCellsData = (length: number): CellsData[] =>
   map(
     () => ({
       status: 'none',
-      date: transformDateToObject(),
+      date: dateToObject(),
     }),
     length
   )
 
 function rangeComponents(date: CellsData['date']): DateData {
-  return Object.assign(date, {
-    date: transformDateToObject(),
+  return extend(date, {
+    date: dateToObject(),
     _date: createCellsData(42),
     _month: createCellsData(12),
     _year: createCellsData(12),
@@ -58,7 +58,7 @@ const date = new Date()
 const [startYear, startMonth] = [getYear(date), getMonth(date)]
 
 const pickerConfig = {
-  today: new Date(),
+  today: dateToObject(),
   placement: 'bottom',
   placeholder: '',
   type: 'date',
@@ -94,7 +94,7 @@ function getDefaultOptions() {
       range: [],
       status: 'complete',
     },
-    start: rangeComponents(transformDateToObject()),
+    start: rangeComponents(dateToObject()),
     end: rangeComponents(getDateOfNextMonth(startYear, startMonth)),
   })
 }
