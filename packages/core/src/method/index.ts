@@ -23,6 +23,7 @@ export function getRangeModeListener(state: CellsData): _EventListener[] {
         const current = rangeClickEvent[hoverSelected.status as getRangeStatus]
         hoverSelected[current.plt] = state.date
         hoverSelected.status = current.status
+        ;[this.start.date, this.end.date] = hoverSelected.range
       },
     },
     {

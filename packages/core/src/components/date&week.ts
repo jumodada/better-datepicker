@@ -44,6 +44,7 @@ export function Day(
         const { hoverSelected } = state
         const isInCurrentRange = () =>
           child.status !== 'pre' && child.status !== 'next' && state.isRange
+
         return {
           name: 'td',
           children: [

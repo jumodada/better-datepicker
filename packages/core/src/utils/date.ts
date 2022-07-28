@@ -7,7 +7,11 @@ const msOfADay = 86400000
 
 const defaultWeeks = [0, 1, 2, 3, 4, 5, 6]
 
-export function objectToDate(date: CellsData['date']): Date {
+export function objectToDate(date: null): null
+export function objectToDate(date: CellsData['date']): Date
+export function objectToDate(date: CellsData['date'] | null): Date | null
+export function objectToDate(date: CellsData['date'] | null): Date | null {
+  if (!date) return null
   const { year, month, day } = date
   return new Date(year, month - 1, day)
 }
@@ -20,7 +24,7 @@ export function dateToTimestamp(date: CellsData['date']): number {
   return Date.parse(String(objectToDate(date)))
 }
 
-export function getDate(state: State): GetDateType {
+export function getDateFromState(state: State): GetDateType {
   const [startDate, endDate] = [
     objectToDate(state.start.date),
     objectToDate(state.end.date),
@@ -85,8 +89,8 @@ export function isAfter(
 }
 
 export function isSame(
-  source?: CellsData['date'],
-  target?: CellsData['date']
+  source?: CellsData['date'] | null,
+  target?: CellsData['date'] | null
 ): boolean {
   if (!source || !target) return false
   return dateToTimestamp(source) === dateToTimestamp(target)

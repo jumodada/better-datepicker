@@ -1,6 +1,6 @@
 import { appendChild } from '../utils/element'
 import { updatePicker } from '../picker/update-picker'
-import { getDate, isAfter } from '../utils/date'
+import { getDateFromState, isAfter } from '../utils/date'
 import { getFormatDate } from '../utils/format'
 import { useEffect } from '../reactive/effect'
 import { has } from '../utils/typeOf'
@@ -16,13 +16,16 @@ function appendPopover(): void {
   )
 }
 
-function dispatchDateChange(): void {
-  const date = getDate(this)
-  this.onChange?.(date)
-  if (this.binding && this.reference) {
-    this.reference.value = getFormatDate.call(this, date, this.format)
-  }
-}
+const dateChange = useEffect(
+  function () {
+    const date = getDateFromState(this)
+    this.onChange?.(date)
+    if (this.binding && this.reference) {
+      this.reference.value = getFormatDate(this.locale, date, this.format)
+    }
+  },
+  ['start.date', 'end.date']
+)
 
 const hoverSelectRange = useEffect(
   function (start, end) {
@@ -34,10 +37,7 @@ const hoverSelectRange = useEffect(
 
 const hoverSelectedDate = useEffect(
   function (status) {
-    const [start, end] = this.hoverSelected.range
     if (status === 'complete') {
-      this.start.date = start
-      this.end.date = end
       this.visible = false
     }
   },
@@ -74,7 +74,7 @@ export default [
   restartPicker,
   appendPopover,
   updatePicker,
-  dispatchDateChange,
+  dateChange,
   hoverSelectRange,
   hoverSelectedDate,
 ]

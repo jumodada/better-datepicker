@@ -20,7 +20,7 @@ const createCellsData = (length: number): CellsData[] =>
 
 function rangeComponents(date: CellsData['date']): DateData {
   return extend(date, {
-    date: dateToObject(),
+    date: null,
     _date: createCellsData(42),
     _month: createCellsData(12),
     _year: createCellsData(12),

@@ -67,7 +67,7 @@ export interface DateData {
   year: number
   month: number
   day: number
-  date: CellsData['date']
+  date: CellsData['date'] | null
   _date: CellsData[]
   _month: CellsData[]
   _year: CellsData[]
@@ -131,8 +131,4 @@ export interface State {
   rangeBgColor: string
   tdColor: string
   thColor: string
-}
-
-export interface States {
-    [key: number]: State
 }

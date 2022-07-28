@@ -1,8 +1,8 @@
 import { Formats } from '../types/core'
-import { has, isArray, isDate } from './typeOf'
-import { getDay, getMonth, getWeekRange, getYear, getWeeks } from './date'
+import { isArray } from './typeOf'
+import { getDay, getMonth, getWeeks, getYear } from './date'
 import { DateType } from '../types/utils'
-import { State } from '../types/store'
+import { LocaleConfig } from '../types/store'
 
 const token = /d{1,2}|M{1,2}|w{1,2}|yy(?:yy)?|"[^"]*"|'[^']*'/g
 
@@ -27,12 +27,12 @@ function pad(val: string | number, len?: number) {
 }
 
 export function getFormatDate(
-  this: State,
+  locale: LocaleConfig,
   date: DateType | DateType[],
   formatStr: string
 ): string | null {
-  const { locale } = this
   const separator = ' - '
+
   function formatParse(dateStr: DateType): string | null {
     if (!dateStr) return null
 

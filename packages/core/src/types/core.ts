@@ -9,7 +9,6 @@ export type GetDateType = (Date | null) | (Date | null)[]
 export type Callback = (...arg: any) => unknown
 
 export interface BetterPickerInstance {
-  getCurrentDate: () => GetDateType
   update: (options: any) => void
   destroyed: () => void
   clear: () => void

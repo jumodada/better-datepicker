@@ -23,7 +23,7 @@ const getRange = (year: number) => {
 }
 
 function format(date: string, state: State): string {
-  return getFormatDate.call(state, date, state.locale.yearFormat) as string
+  return getFormatDate(state.locale, date, state.locale.yearFormat) as string
 }
 
 export function Header(
@@ -42,14 +42,16 @@ export function Header(
 
   function nextMonth(): void {
     const child = state[type]
-    const { month } = getDateOfNextMonth(child)
-    child.month = month
+    const { month, year } = child
+    const { month: nextMonth } = getDateOfNextMonth(year, month)
+    child.month = nextMonth
   }
 
   function preMonth(): void {
     const child = state[type]
-    // const { month, year } = getDateOfPreMonth(child)
-    // ;[child.month, child.year] = [month, year]
+    const { month, year } = child
+    const { month: preMonth, year: preYear } = getDateOfNextMonth(year, month)
+    ;[child.month, child.year] = [preMonth, preYear]
   }
 
   function preYearIcon(): CreateElementRequiredOptions {

@@ -7,7 +7,6 @@ import { listenToScrollParents } from '../utils/listenToParents'
 import clickOutside from '../utils/clickoutside'
 import { Off } from '../types/event'
 import { Bind } from '../utils/bind'
-import { getDate } from '../utils/date'
 import { findInputElement } from '../utils/findInputElement'
 import { extend } from '../utils/extend'
 
@@ -31,10 +30,6 @@ export default function Picker(): BetterPicker {
     onBody(Bind(clickOutside, state))
     if (state) listenToScrollParents(state)
     createPicker(state)
-  }
-
-  function getCurrentDate() {
-    return getDate(state)
   }
 
   function update(options: Partial<State>) {
@@ -79,7 +74,6 @@ export default function Picker(): BetterPicker {
     create(options)
     return {
       state,
-      getCurrentDate,
       update,
       destroyed,
       clear,
