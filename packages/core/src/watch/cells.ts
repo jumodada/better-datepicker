@@ -20,7 +20,6 @@ export const updateDayCell = useEffect(
       monthStartDay(year, month, this.locale.weekStart),
       daysInMonth({ year, month }),
     ]
-    console.log(fd, days)
     dateCells.forEach((item, index) => {
       const idx = index + 1
       const currentIdx = idx - fd

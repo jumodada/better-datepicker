@@ -1,6 +1,6 @@
 import { appendChild } from '../utils/element'
 import { updatePicker } from '../picker/update-picker'
-import { getDateFromState, getWeekRange, isAfter } from '../utils/date'
+import { getDateFromState, isAfter } from '../utils/date'
 import { getFormatDate } from '../utils/format'
 import { useEffect } from '../reactive/effect'
 import { has } from '../utils/typeOf'
@@ -22,9 +22,6 @@ const dateChange = useEffect(
     this.onChange?.(date)
     if (this.binding && this.reference) {
       this.reference.value = getFormatDate(this.locale, date, this.format)
-    }
-    if (this.isWeek) {
-      this.hoverSelected.range = getWeekRange(date, this.locale.weekStart)
     }
   },
   ['start.date', 'end.date']
