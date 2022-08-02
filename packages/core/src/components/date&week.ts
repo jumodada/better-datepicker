@@ -49,9 +49,7 @@ export function Day(
           name: 'td',
           children: [
             {
-              text: () => {
-                return String(child.date.day)
-              },
+              text: () => String(child.date.day),
             },
           ],
           class: classNames('cell', {
@@ -63,12 +61,9 @@ export function Day(
             selected: () =>
               !isInCurrentRange() && isSame(child.date, state.start.date),
             selecting: () => isInCurrentRange() && child.status === 'selected',
-            inRange: () =>
-              isInCurrentRange() && isInRange(child.date, hoverSelected.range),
-            'range-start': () =>
-              isInCurrentRange() && isSame(child.date, hoverSelected.range[0]),
-            'range-end': () =>
-              isInCurrentRange() && isSame(child.date, hoverSelected.range[1]),
+            inRange: () => isInRange(child.date, hoverSelected.range),
+            'range-start': () => isSame(child.date, hoverSelected.range[0]),
+            'range-end': () => isSame(child.date, hoverSelected.range[1]),
           }),
           event: dateCellListener(child)[state.type as 'date'],
         }

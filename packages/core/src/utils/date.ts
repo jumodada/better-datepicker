@@ -55,7 +55,7 @@ export function daysInMonth({
   year: number
   month: number
 }): number {
-  return new Date(year, month, 0).getDate()
+  return new Date(year, month - 1, 0).getDate()
 }
 
 export function getTenYearTimeRange(year: number): number[] {
@@ -63,7 +63,7 @@ export function getTenYearTimeRange(year: number): number[] {
 }
 
 export function monthStartDay(year: number, month: number, start = 0): number {
-  let firstDate = new Date(year, month, 1).getDay()
+  let firstDate = new Date(year, month - 1, 1).getDay()
   if (firstDate === 0) firstDate = 7
   return firstDate - start
 }
@@ -94,14 +94,6 @@ export function isSame(
 ): boolean {
   if (!source || !target) return false
   return dateToTimestamp(source) === dateToTimestamp(target)
-}
-
-export function rangeSort(
-  min: CellsData['date'],
-  max: CellsData['date']
-): CellsData['date'][] {
-  const range = [min, max]
-  return isAfter(min, max) ? range : range.reverse()
 }
 
 export function isInRange<T = number>(
@@ -166,7 +158,7 @@ export function getWeekArray<S = number>(
 
 export function getWeekRange(date: Date, weekStart: number): WeekRange {
   const weeks = getWeekArray(defaultWeeks, weekStart)
-  const startDiff = weeks.findIndex((week) => week === (date as Date).getDay())
+  const startDiff = weeks.findIndex((week) => week === date.getDay())
   const endDiff = 6 - startDiff
   const getRange = (distance: number) =>
     new Date(Date.parse(date.toString()) + distance)
