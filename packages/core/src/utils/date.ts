@@ -128,26 +128,6 @@ export function isDisabledDate(state: State, date: string): string {
   return disabledDate && disabledDate(new Date(date)) ? 'disabled' : ''
 }
 
-export function getWeeks(date: Date, locale: LocaleConfig): number {
-  console.log(date)
-  // const { year, month, day } = dateToObject(date)
-  // const { yearStart, weekStart } = locale
-  // const { start, end } = getWeekRange(date, weekStart)
-  // if (month === 12 && day > 25) {
-  //   const nextYearStartDay = new Date(year + 1, 0, yearStart)
-  //   if (isAfter(end, nextYearStartDay)) return 1
-  // }
-  // const YearEnd = new Date(year, month - 1, day)
-  // const YearStart = new Date(year, 0, yearStart)
-  // const days = Math.round((YearEnd.valueOf() - YearStart.valueOf()) / msInADay)
-  // const diff = (days + (YearStart.getDay() + 1 - 1)) / 7
-  // if (diff <= 0) {
-  //   return getWeeks(start, locale)
-  // }
-  // return Math.ceil(diff)
-  return 1
-}
-
 export function getWeekArray<S = number>(
   weekdays: S[],
   weekStart: number
@@ -157,14 +137,34 @@ export function getWeekArray<S = number>(
     .concat(weekdays.slice(0, weekStart))
 }
 
-export function getWeekRange(date: Date, weekStart: number): WeekRange {
+function getWeekRange(date: CellsData['date'], weekStart: number): WeekRange {
+  const d = objectToDate(date)
   const weeks = getWeekArray(defaultWeeks, weekStart)
-  const startDiff = weeks.findIndex((week) => week === date.getDay())
+  const startDiff = weeks.findIndex((week) => week === d.getDay())
   const endDiff = 6 - startDiff
   const getRange = (distance: number) =>
-    new Date(Date.parse(date.toString()) + distance)
+    new Date(Date.parse(d.toString()) + distance)
   return [
     dateToObject(getRange(-msOfADay * startDiff)),
     dateToObject(getRange(msOfADay * endDiff)),
   ]
+}
+
+export function getWeeks(date: Date, locale: LocaleConfig): number {
+  const dateObj = dateToObject(date)
+  const { year, month, day } = dateObj
+  const { yearStart, weekStart } = locale
+  const [start, end] = getWeekRange(dateObj, weekStart)
+  if (month === 12 && day > 25) {
+    const nextYearStartDay = getDateObject(year + 1, 0, yearStart)
+    if (isAfter(end, nextYearStartDay)) return 1
+  }
+  const YearEnd = new Date(year, month - 1, day)
+  const YearStart = new Date(year, 0, yearStart)
+  const days = Math.round((YearEnd.valueOf() - YearStart.valueOf()) / msOfADay)
+  const diff = (days + (YearStart.getDay() + 1 - 1)) / 7
+  if (diff <= 0) {
+    return getWeeks(objectToDate(start), locale)
+  }
+  return Math.ceil(diff)
 }

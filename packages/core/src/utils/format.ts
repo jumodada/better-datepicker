@@ -33,13 +33,9 @@ export function getFormatDate(
 ): string | null {
   const separator = ' - '
 
-  function formatParse(dateStr: DateType): string | null {
+  function formatParse(dateStr?: DateType): string | null {
     if (!dateStr) return null
 
-    // if (has(format, 'w') && isDate(dateStr)) {
-    //   dateStr = getWeekRange(dateStr, locale.weekStart).start
-    // }
-    // getWeekRange(dateStr, locale.weekStart)
     return formatStr.replace(token, (val) => {
       return formats[val as 'dd'](new Date(dateStr.toString()), locale)
     })
