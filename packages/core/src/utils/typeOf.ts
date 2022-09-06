@@ -1,4 +1,4 @@
-import { Types, UtilObject } from '../types/utils'
+import { Types, UtilObject } from '../_types/utils'
 
 const toString = Object.prototype.toString
 const typeOf = (val: unknown, typeName: keyof Types) =>

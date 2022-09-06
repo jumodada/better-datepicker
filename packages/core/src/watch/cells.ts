@@ -1,4 +1,4 @@
-import { CellsData, ComponentStatus, State } from '../types/store'
+import { CellsData, ComponentStatus, State } from '../_types/store'
 import {
   daysInMonth,
   getDateObject,

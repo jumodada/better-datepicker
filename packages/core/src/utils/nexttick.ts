@@ -1,4 +1,4 @@
-import { Callback } from '../types/core'
+import { Callback } from '../_types/core'
 
 const callbacks: Callback[] = []
 let pending = false
@@ -11,6 +11,7 @@ export function flushCallbacks(): void {
     job()
   }
 }
+
 const p = Promise.resolve()
 
 export default function nextTick(cb: Callback): void {

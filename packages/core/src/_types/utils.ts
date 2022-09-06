@@ -82,12 +82,6 @@ export interface CreateElement {
   (...arg: any): PartialAtLeastOne<CreateElementOptions>
 }
 
-export type DynamicStyle = PartialAtLeastOne<{
-  display: Sub
-  color: Sub
-  background: Sub
-}>
-
 export type CreateElementRequiredOptions =
   PartialAtLeastOne<CreateElementOptions>
 

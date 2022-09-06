@@ -1,23 +1,23 @@
-import { isElementShow } from '../utils/element'
+import { isElementShow } from '../../utils/element'
 import {
   getRangeModeListener,
   selectYearOrMonth,
-  toggleToDayMode,
   toggleMonthMode,
-} from '../method'
-import { CellsData, RangeType, State } from '../types/store'
+  toggleToDayMode,
+} from '../action'
+import { CellsData, RangeType, State } from '../../_types/store'
 import {
   ComponentsType,
   createMonthOrYearComponentsFunction,
   CreateMonthOrYearComponentsOptions,
   MonthCellListener,
   YearCellListener,
-} from '../types/components'
-import { CreateElementRequiredOptions } from '../types/utils'
-import map from '../utils/for'
-import { getTenYearTimeRange } from '../utils/date'
-import { Bind } from '../utils/bind'
-import { extend } from '../utils/extend'
+} from '../../_types/components'
+import { CreateElementRequiredOptions } from '../../_types/utils'
+import map from '../../utils/for'
+import { getTenYearTimeRange } from '../../utils/date'
+import { Bind } from '../../utils/bind'
+import { extend } from '../../utils/extend'
 
 const rows = 3
 const cols = 4
@@ -71,6 +71,7 @@ export function YM(
     }
 
     const { children, listener } = components[componentName]
+
     function tBody(): CreateElementRequiredOptions {
       return {
         children: tr(),

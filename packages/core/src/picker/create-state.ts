@@ -4,7 +4,7 @@ import {
   getMonth,
   getYear,
 } from '../utils/date'
-import { CellsData, DateData, LocaleConfig, State } from '../types/store'
+import { CellsData, DateData, LocaleConfig, State } from '../_types/store'
 import map from '../utils/for'
 import { extend, merge, mergePrimitiveValues } from '../utils/extend'
 import { reactive } from '../reactive'
@@ -104,5 +104,5 @@ export function createState(options: Partial<State>): State {
 }
 
 export function changeDefaultOption(target: State): void {
-  extend(pickerConfig, target)
+    extend(pickerConfig, target)
 }

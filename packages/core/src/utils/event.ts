@@ -1,5 +1,5 @@
-import { _EventListener, eventType, Handler } from '../types/event'
-import { State } from '../types/store'
+import { _EventListener, eventType, Handler } from '../_types/event'
+import { State } from '../_types/store'
 import { isDisabledDate } from './date'
 import { isObject } from './typeOf'
 

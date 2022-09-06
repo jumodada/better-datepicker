@@ -1,12 +1,13 @@
 import { on } from './event'
-import { _Event } from '../types/event'
-import { State } from '../types/store'
+import { _Event } from '../_types/event'
+import { State } from '../_types/store'
 import { has } from './typeOf'
 
 export function resetHoverColor(el: HTMLElement, theme: string): void {
   function hover(e: _Event) {
     el.style.color = e.type === 'mouseenter' ? theme : ''
   }
+
   on(el, hover, 'mouseenter')
   on(el, hover, 'mouseleave')
 }

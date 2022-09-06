@@ -29,14 +29,3 @@ export interface Formats {
   w: FormatValidator<number, LocaleConfig>
   ww: FormatValidator<number, LocaleConfig>
 }
-
-export interface GetStatusFunctions {
-  (this: State, date: string, idx: number): string
-}
-
-export interface GetStatusFunctionsType {
-  year: GetStatusFunctions
-  month: GetStatusFunctions
-  date: GetStatusFunctions
-  'date-week': (date: Date) => void
-}

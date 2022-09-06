@@ -1,5 +1,5 @@
-import { State } from '../types/store'
-import { _Event } from '../types/event'
+import { State } from '../_types/store'
+import { _Event } from '../_types/event'
 
 export default function clickOutside(state: State, e: _Event): void {
   const { visible, reference, popover } = state

@@ -1,7 +1,7 @@
 import { reactive } from './index'
 import { isObjectOrArray } from '../utils/typeOf'
 import { track, trigger } from './effect'
-import { UtilObject } from '../types/utils'
+import { UtilObject } from '../_types/utils'
 
 const get = createGetter()
 

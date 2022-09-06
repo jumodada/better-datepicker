@@ -1,11 +1,11 @@
-import { CellsData, RangeType, State } from '../types/store'
-import { getRangeModeListener } from '../method'
-import { CreateElementRequiredOptions } from '../types/utils'
-import map from '../utils/for'
-import { getWeekArray, isInRange, isSame } from '../utils/date'
-import { DateCellListener } from '../types/components'
-import { classNames } from '../utils/attribute'
-import { isElementShow } from '../utils/element'
+import { CellsData, RangeType, State } from '../../_types/store'
+import { getRangeModeListener } from '../action'
+import { CreateElementRequiredOptions } from '../../_types/utils'
+import map from '../../utils/for'
+import { getWeekArray, isInRange, isSame } from '../../utils/date'
+import { DateCellListener } from '../../_types/components'
+import { classNames } from '../../utils/attribute'
+import { isElementShow } from '../../utils/element'
 
 const rowsCount = 6
 const colsCount = 7
@@ -33,6 +33,9 @@ export function Day(
         return {
           name: 'tr',
           children: td(rc),
+          class: classNames('tr', {
+            'week-selected': () => true,
+          }),
         }
       }, rowsCount)
     }

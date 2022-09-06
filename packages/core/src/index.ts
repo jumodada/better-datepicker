@@ -1,7 +1,7 @@
 import BD from './picker'
-import { BetterPickerInstance } from './types/core'
-import { changeDefaultOption, pickerLocale } from './store'
-import { State } from './types/store'
+import { BetterPickerInstance } from './_types/core'
+import { changeDefaultOption, pickerLocale } from './picker/create-state'
+import { State } from './_types/store'
 
 export function createDatePicker(
   options: Partial<State>

@@ -1,8 +1,8 @@
-import { Formats } from '../types/core'
+import { Formats } from '../_types/core'
 import { isArray } from './typeOf'
 import { getDay, getMonth, getWeeks, getYear } from './date'
-import { DateType } from '../types/utils'
-import { LocaleConfig } from '../types/store'
+import { DateType } from '../_types/utils'
+import { LocaleConfig } from '../_types/store'
 
 const token = /d{1,2}|M{1,2}|w{1,2}|yy(?:yy)?|"[^"]*"|'[^']*'/g
 

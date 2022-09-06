@@ -1,7 +1,7 @@
 import { createDep } from './dep'
 import { queueWatcher } from './scheduler'
-import { Fn, UtilObject } from '../types/utils'
-import { State } from '../types/store'
+import { Fn, UtilObject } from '../_types/utils'
+import { State } from '../_types/store'
 import { isFunc } from '../utils/typeOf'
 
 export let activeEffect: null | Fn = null

@@ -1,6 +1,6 @@
-import { CellsData, getRangeStatus, State } from '../types/store'
-import { RangeClickEvent } from '../types/components'
-import { _EventListener } from '../types/utils'
+import { CellsData, getRangeStatus, State } from '../_types/store'
+import { RangeClickEvent } from '../_types/components'
+import { _EventListener } from '../_types/utils'
 import { isElementShow } from '../utils/element'
 
 const rangeClickEvent: RangeClickEvent = {

@@ -1,6 +1,6 @@
-import { Rect, Transform } from '../types/utils'
+import { Rect, Transform } from '../_types/utils'
 import { isInBody } from '../utils/isInBody'
-import { State } from '../types/store'
+import { State } from '../_types/store'
 import { objectKeys } from '../utils/objectKeys'
 import { usePoppingAnimation } from './animation'
 

@@ -1,7 +1,7 @@
-import { CellsData, LocaleConfig, State } from '../types/store'
+import { CellsData, LocaleConfig, State } from '../_types/store'
 import map from './for'
-import { WeekRange } from '../types/utils'
-import { GetDateType } from '../types/core'
+import { WeekRange } from '../_types/utils'
+import { GetDateType } from '../_types/core'
 
 const msOfADay = 86400000
 
@@ -129,6 +129,7 @@ export function isDisabledDate(state: State, date: string): string {
 }
 
 export function getWeeks(date: Date, locale: LocaleConfig): number {
+  console.log(date)
   // const { year, month, day } = dateToObject(date)
   // const { yearStart, weekStart } = locale
   // const { start, end } = getWeekRange(date, weekStart)

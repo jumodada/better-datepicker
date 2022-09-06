@@ -1,5 +1,5 @@
 import nextTick from '../utils/nexttick'
-import { Fn } from '../types/utils'
+import { Fn } from '../_types/utils'
 
 const queue: Fn[] = []
 const map = new WeakMap()

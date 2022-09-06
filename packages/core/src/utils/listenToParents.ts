@@ -1,6 +1,6 @@
 import { getScrollParents } from './window'
 import { setPopoverLocation } from '../picker/update-picker'
-import { State } from '../types/store'
+import { State } from '../_types/store'
 import { on } from './event'
 
 export function listenToScrollParents(state: State): void {

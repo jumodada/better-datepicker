@@ -1,12 +1,12 @@
-import { State } from '../types/store'
+import { State } from '../_types/store'
 import { createElement, isElementShow } from '../utils/element'
-import { Header } from '../components/header'
-import { Day } from '../components/date&week'
-import { Month, Year } from '../components/month&year'
+import { Header } from './components/header'
+import { Day } from './components/date&week'
+import { Month, Year } from './components/month&year'
 import {
   createMonthOrYearComponentsFunction,
   PickerConfigMap,
-} from '../types/components'
+} from '../_types/components'
 import mixins from '../watch/mixins'
 import {
   panelLinkage,
@@ -15,7 +15,7 @@ import {
   updateYearCell,
 } from '../watch/cells'
 import { concat } from '../utils/extend'
-import { CreateElement, CreateElementRequiredOptions } from '../types/utils'
+import { CreateElement, CreateElementRequiredOptions } from '../_types/utils'
 
 function rangeComponent(
   child: createMonthOrYearComponentsFunction[]

@@ -8,13 +8,13 @@ import {
   eventType,
   Handler,
   PartialAtLeastOne,
-} from '../types/utils'
-import { State } from '../types/store'
+} from '../_types/utils'
+import { State } from '../_types/store'
 import { effect } from '../reactive/effect'
 import { setClasses } from './attribute'
-import { SvgName } from '../types/element'
+import { SvgName } from '../_types/element'
 import { resetHoverColor } from './theme'
-import { Callback } from '../types/core'
+import { Callback } from '../_types/core'
 import { objectKeys } from './objectKeys'
 
 function getHandler(el: HTMLElement, state: State): Partial<Handler> {
